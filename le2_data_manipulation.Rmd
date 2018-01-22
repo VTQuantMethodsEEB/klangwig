@@ -1,0 +1,350 @@
+---
+title: "Managing Data in R"
+output: ioslides_presentation
+author: Kate Langwig (input from BB and JD)
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T)
+```
+## Goals
+
+You should be able to
+
+-  read data into R
+- understand and control how R represents those data
+    - numbers, characters, factors, missing values
+- examine the data visually, numerically, textually, etc.
+
+## Representations
+
+Numeric and character types are fairly straightforward, and you rarely
+have to worry about when and whether R represents things as integers or *floating point*.
+
+You do need to know about **factors**, and to be aware when your
+variables are being treated as such. See lecture 1 for more about factors.
+
+## Missing values
+
+When you input data, you need to be aware of `NA` ("not available"). Your
+read function has an option called `na.strings` which you can use to
+communicate between R and your CSV files, for example. You need to know
+that
+
+- use `is.na()` to test for `NA` values, `na.omit()` to drop them, and the optional `na.rm` argument in some functions (`mean`, `sum`, `median` ...)
+
+## Changing representations
+
+- R has a big suite of functions for creating, testing and changing
+representations. 
+
+-These have names like `factor()`, `as.numeric()` and
+`is.character()`.
+
+## Examination
+
+You should think creatively, and early on, about how to check your data.
+Is it internally consistent? Are there extreme outliers? Are there
+typos? Are there certain values that really mean something else?
+
+An American Airlines memo about fuel reporting from the 1980s complained of multiple cases of:
+
+-   Reported departure fuel greater than aircraft capacity
+-   Reported departure fuel less than minimum required for trip
+-   Reported arrival fuel greater than reported departure fuel
+-   Difference between reported departure fuel and reported arrival fuel not within reasonable min/max bounds
+
+You should think about what you can test, and what you can fix if it's
+broken.
+
+```{r, eval=FALSE}
+
+See [The MMED data management lecture](http://lalashan.mcmaster.ca/theobio/mmed/index.php/Introduction_to_data_management_and_cleaning).
+
+```
+
+## Visualizing data with graphs
+Graphical approaches are really useful for data cleaning; we will
+discuss this more later on.
+
+To get you started here are just a few:
+
+- `hist`: will make a histogram plot
+
+## Example
+```{r batdat, echo=TRUE}
+batdat=read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
+head(batdat)  
+
+```
+
+## Example Cont. 
+```{r unique, echo=TRUE}
+unique(batdat$species)
+```
+
+## Example Cont. 
+```{r hist, echo=TRUE}
+hist(batdat$gd)
+```
+
+## Some other useful tools
+- `dim`: gives the dimensions of the dataframe
+- `str`: gives the structure of each variable
+- `glimpse`: a dyplr function, that allows for preview as much of each column as possible
+- `head`: get the first 6 rows
+- `tail`: get the last 6 rows
+
+
+## How do you clean data? 
+What R functions do you know that are useful for examination? What are
+your strategies?
+
+## Tidy(ing) data
+
+Hadley Wickham has defined a concept of [tidy
+data](http://www.jstatsoft.org/v59/i10/paper), and has recently
+introduced the `tidyr` package.
+
+-   Each variable is in a column
+-   Each observation is in a row
+-   "Long" rather than "wide" form
+-   Sometimes duplicates data
+-   Statistical modeling tools and graphical tools (especially the
+    **ggplot2** package) in R work best with long form
+    
+## An example of tidy data
+```{r, out.width = "800px",echo=F}
+knitr::include_graphics("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/tidy_pic.png")
+```
+
+
+## Putting your data in tidy format
+- Discerning what is a variable can be hard when making data files
+- For example, species in my bat dataset is usually a single variable
+- I usually also include a "count" column (the number of individuals at a site)
+- But what if I wanted to test the effect of the count of one species (e.g.MYSE)
+  on another? Now MYSE count is actually a variable.
+
+##Example with bat data
+```{r counts, echo=F}
+#batdat=read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
+#r1=read.csv("/Users/klangwig/Dropbox/WNS-EID Project/DATA/Kate's Data/reports/midwest_aggregated_data.csv")
+
+batdat=read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
+#batdat$site.date=paste(batdat$site,batdat$date,batdat$species,sep=".")
+#r1$site.date=paste(r1$site,r1$date,r1$species,sep=".")
+#batdat$count=r1$count[match(batdat$site.date,r1$site.date)]
+#batdat=cbind(batdat[1:10],batdat[12])
+#head(batdat)
+```
+
+What if I wanted to test how the count of MYSE influenced infection in MYLU? I need to MYSE to be a variable
+
+## Spread and Gather
+- the reshape2 package (also by Hadley Wickham) provides some useful tools for this kind of problem
+- You can find more information about using melt and cast here:https://www.statmethods.net/management/reshape.html
+
+## Here, we will use spread and gather
+```{r spread, echo=T}
+library(tidyr)
+batdat$lgdL=log10(batdat$gdL)#log the amount of fungus
+batcounts<-aggregate(count~species+site+date,data=batdat, FUN=mean) 
+#make a df of bat counts
+batcounts.wide<-spread(batcounts, species,count,convert=T) 
+#spread that dataframe
+```
+## What do these look like?
+```{r examine,echo=FALSE}
+head(batcounts)
+head(batcounts.wide)
+```
+
+## We can make identical dataframes for loads
+```{r loads, echo=F}
+batloads<-aggregate(lgdL~species+site+date,data=batdat, FUN=mean)
+batloads.wide<-spread(batloads, species,lgdL,convert=T)
+head(batloads)
+head(batloads.wide)
+```
+
+## Now, merge dataframes together for wide format
+```{r merging, echo=T}
+batwide=merge(batloads.wide,batcounts.wide,by=c("site","date"))
+#merge df together by site and date
+head(batwide)
+```
+
+## Here's another example (by Ben Bolker)
+ Look at some example data that comes with the tidyr package:
+
+```{r view}
+smiths
+```
+
+## Gather
+
+The default `gather()` operation squashes everything too far,
+including the subject name and time in the value column ...
+
+```{r gather1}
+gather(smiths)
+```
+
+## Gathering variables
+We can specify that we only want to gather the `age` and `weight` variables
+(however, we have to specify the name of key and value columns explicitly).
+```{r gather2}
+print(smelt <- gather(smiths, key="var", value="value",
+       c(age,weight)))
+```
+
+
+## Minus sign to omit
+Alternatively we could specify that we
+want to gather everything *but* the subject name and time variable:
+```{r gather3}
+gather(smiths, key="var", value="value",
+       -c(subject,time))
+```
+## Make a column for each subject (= a row for each measurement)
+
+```{r col_per_subj}
+spread(smelt, key=subject, value)
+```
+
+## Make a column for each value (= a row for each person):
+
+```{r col_per_value}
+spread(smelt, key=var, value)
+```
+
+## Take the mean for each variable:
+
+```{r aggregate1,message=FALSE}
+library(dplyr)
+smelt %>% group_by(var) %>% summarise(mean=mean(value, na.rm=T))
+```
+
+## Report how many values are in each mean:
+
+```{r mean_n1}
+smelt %>% group_by(var) %>% 
+    summarise(mean=mean(value,na.rm=TRUE),
+              n=length(na.omit(value)))
+```
+
+
+## So how do we create tidy datasets?
+ - Make your data as tidy as possible
+ - Learn to manipulate data in R and hardcode these changes into your scripts
+ - There is no perfect method - each dataset is unique
+ - Manipulating data in R is hard, sometimes harder than excel. But learning to do it SO worth it because you will save hours of time for each project you do. 
+
+## Tools
+
+#### base R
+
+-   `reshape`: wide-to-long and vice versa
+-   `merge`: join data frames
+-   `ave`: compute averages by group
+-   `subset`, `[`-indexing: select obs and vars
+-   `transform`: modify variables and create new ones
+-   `aggregate`: split-apply-summarize
+-   `split`, `lapply`, `do.call(rbind())`: split-apply-combine
+-   `sort`
+
+## The tidyverse
+
+-   `tidyr` package: `gather`, `spread`
+-   `dplyr` package:
+    -   `mutate`
+    -   `select`
+    -   `filter`
+    -   `group_by`
+    -   `summarise`
+    -   `arrange`
+
+
+## Managing Pipelines in R
+- Pipelines are ways of carefully recording and systematizing the steps you take to work with your data
+
+- The idea is that you should be able to delete any results of computer calculations and be able to quickly re-do them
+
+- Ideally your project will depend on:
+- Some data files
+- Some scripts
+- Something that tells you how these things go together (RMarkdown is helpful for this)
+
+## Advantages of this approach
+ - Clarity: we aren't confused about the 600 pages of information stored with our projects
+ 
+ - Reproducibility: we can always re-do something we did
+ 
+ - Flexibility : we can use different data and re-create the same thing
+ 
+## Spreadsheets
+- Spreadsheets are a useful (and obvious) tool for working with R
+- `read.csv` and `write.csv` are very useful commands for working with spreadsheets
+- when using `write.csv` use `row.names=F` to avoid line numbers
+- Importantly, spreadsheets are for storing data, NOT FOR MANIPULATING DATA
+
+- Your goal should be to take data from a spreadsheet and manipulate it entirely using scripts. 
+- Here is a hilarious link on spreadsheet addiction: http://www.burns-stat.com/documents/tutorials/spreadsheet-addiction/ 
+- The jist is: friends don't let friends use excel for statistics. 
+
+## Database
+- Your spreadsheet is a database (just because it isn't stored in microsoft access doesn't mean it isn't!)
+- "small" databases are usually considered to be fewer than 1000 observations of 10-20 vars
+- "medium" databases are about 1000 to 100,000 observations of about 10-50 vars. These are most helpful with data handling packages. 
+- "large" means millions of observations and potentially 1000s of variables. These may need to be stored in an external application. 
+
+## Working in Github
+- Git is version control system, with the original purpose of allowing groups to work collaboratively on software projects
+- Git manages the evolution of a set of files - called a repository
+- A repository is essentially a folder where you store your stuff
+- Version control works a bit like "Track Changes" in word, Git will track the changes we make to our code so we can return to previous versions
+- It also allows collaboration so I code look at your code and make changes - a bit like a more complicated version of Google Docs
+
+##Will this hurt?
+- Yes. 
+
+- But, I think this important enough that we NEED exposure to this in a course like this. 
+
+## But I only code alone! 
+- Before too long, we won't be able to publish anything without pushing to Git in publicly available repository.
+
+- Using Git has gotten easier. We used to have to use command line to communicate with Git, but now we can just use RStudio! 
+
+##Terminology
+
+- repository: A directory or storage space where your projects can live. Sometimes GitHub users shorten this to “repo.” (If you're cool like that.) It is usually a local folder on your computer. You can keep code files, text files, image files, you name it, inside a repository.
+
+- commit: This is the command that gives Git its power. When you commit, you are taking a “snapshot” of your repository at that point in time, giving you a checkpoint to which you can reevaluate or restore your project to any previous state.When you first start "commiting", it is important to remember this is taking the picture, not SENDING the picture. (Sending is called "pushing")
+
+##Terminology cont.
+
+- branch: How do multiple people work on a project at the same time without Git getting them confused? Usually, they “branch off” of the main project with their own versions full of changes they themselves have made. After they’re done, it’s time to “merge” that branch back with the “master,” the main directory of the project.
+
+- we'll return to this later, and for this week, primarily focus on working within our own repos.
+
+## Sending your files to our class repository
+
+- We have an "organization" account for our class
+- Normally, we would have to pay for private repositories, but I emailed github and they are giving us UNLIMITED private repositories. That's pretty awesome.
+- Why should we want things open-source? Why not? 
+
+## Installing Git
+ - I'll be absent. Email me when you've done this successfully!
+ 
+## Installing Git
+ - Just kidding. 
+ - Please try to start this before our next class. 
+ - Here is a link: http://happygitwithr.com/install-git.html#install-git
+ - Please follow instructions to get started with git. 
+ - (Full disclosure - I did the NOT recommended options of Github Desktop for Mac) because the command line makes me itchy. 
+ - Try to install github in the most scientific way possible - if one way doesn't work, try the next, and google your mistakes! 
+ 
+
+
+
