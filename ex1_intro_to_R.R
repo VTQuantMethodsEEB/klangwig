@@ -19,12 +19,20 @@ iris %>%
 iris.sub=subset(iris,Sepal.Length >5)
 aggregate(.~Species,FUN=mean, data=iris.sub)
 
+b1<-aggregate(Sepal.Length~Species,FUN=mean, data=iris.sub)
+
+
 #Here, I am making a report for an agency or IACUC.
 #We often have to report how many individuals we sampled. Here is a nifty way to do that without copying and pasting and formatting. 
 
 #play data
 dm<-read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
 #this file is in the datasets folder on canvas
+
+###selecting things###
+head(dm)
+dm[dm$site=="HORSESHOE BAY",]
+View(dm[dm$site=="HORSESHOE BAY",])
 
 #change date format
 dm$date=as.Date(dm$date, "%m/%d/%y")
