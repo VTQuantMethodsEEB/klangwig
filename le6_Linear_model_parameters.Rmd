@@ -1,0 +1,329 @@
+---
+title: "Linear model parameters"
+output: ioslides_presentation
+
+---
+
+```{r setup,echo=FALSE,message=FALSE}
+library(knitr)
+knit_hooks$set(basefig=function(before, options, envir) {
+                   if (before) {
+                       par(bty="l",las=1)
+                   } else { }
+               })
+opts_chunk$set(fig.width=6,fig.height=4,fig.align="center",tidy=FALSE)
+``` 
+
+## Model parameters: definitions
+
+- Parameters of a linear model typically characterize *differences* in means; differences per unit of change for continuous predictors, differences between groups (or between group averages) for categorical predictors
+- Interactions are **differences between differences**
+
+## Coding for categorical predictors: contrasts
+
+- What do the parameters of a linear model mean?  
+- Start with categorical variables, because they're potentially more confusing ("intercept and slope" isn't too hard)
+- Default R behaviour: *treatment contrasts*
+     - $\beta_1$ = expected value in baseline group (= first level of the factor variable, by default the first in alphabetical order);
+     - $\beta_i$ = expected difference between group $i$ and the first group.
+
+## Example
+
+
+The previously explored ant-colony example:
+
+Define data:
+
+```{r define_data1}
+forest <- c(9, 6, 4, 6, 7, 10)
+field  <- c(12, 9, 12, 10)
+ants <- data.frame(
+  place=rep(c("field","forest"),
+            c(length(field), length(forest))),
+  colonies=c(field,forest)
+)
+## utility function for pretty printing
+pr <- function(m) printCoefmat(coef(summary(m)),
+                        digits=3,signif.stars=FALSE)
+```
+
+---
+
+```{r coefmat1}
+pr(lm1 <- lm(colonies~place,data=ants))
+```
+
+- The `(Intercept)` row refers to $\beta_1$, which is the mean density in the "field" sites ("field" comes before "forest").
+- The `placeforest` row indicates we are looking at the effect of `forest` level of the `place` variable, i.e. the difference between "forest" and "field" sites.  (To know that "field" is the baseline level we must (1) remember, or look at `levels(ants$place)` or (2) notice which level is *missing* from the list of parameter estimates.)
+
+***
+
+R's behaviour may seem annoying at first -- it seems like the estimated values of the groups are what we're really interested in -- but it is really designed for testing *differences among groups*. To get the estimates per group, you could:
+
+- use a regression formula `colonies~place-1`, or equivalently `colonies~place+0`, to suppress the implicit intercept term:
+```{r coefmat0,echo=FALSE}
+pr(lm0 <- lm(colonies~place-1,data=ants))
+```
+
+When you use the `colonies~place-1` formula, the meanings of the parameters change: $\beta_1$ is the same (mean of "field"), but $\beta_2$ is 'mean of "field"' rather than ("(field)-(forest)").
+
+## Interpretation
+
+- Use the `predict` function:
+```{r predict,results="hide"}
+predict(lm1,newdata=data.frame(place=c("field","forest")),
+        interval="confidence")
+```
+- Use the `effects` package:
+```{r effects,message=FALSE,warning=FALSE,results="hide"}
+library("effects")
+summary(allEffects(lm1))
+```
+- Use the `lsmeans` package:
+```{r lsmeans,message=FALSE,warning=FALSE,results="hide"}
+library("lsmeans")
+lsmeans(lm1,specs=~place)
+```
+
+------
+
+Graphical summaries:
+
+```{r alleffects}
+plot(allEffects(lm1))
+```
+
+## More than two levels
+
+Some data on lizard perching behaviour (`brglm` package; Schoener 1970 *Ecology* **51**:408-418). 
+
+```{r echo=FALSE,message=FALSE}
+if (!file.exists("lizards.csv")) {
+   require("brglm")
+   data(lizards)
+   lizards <- transform(lizards,N=grahami+opalinus,
+                     gfrac=grahami/(grahami+opalinus))
+   write.csv(lizards,file="lizards.csv")
+}
+```
+```{r fakelizards}
+lizards <- read.csv("lizards.csv")
+```
+
+Response is number of *Anolis grahami* lizards found on perches in particular conditions.
+
+------
+
+```{r echo=FALSE,message=FALSE,fig.height=4,warning=FALSE}
+library(tidyr)
+library(dplyr)
+library("ggplot2"); theme_set(theme_bw()+
+                    theme(panel.spacing=grid::unit(0,"lines")))
+mliz <- lizards %>%
+    select(grahami,height,diameter,light,time) %>%
+    gather(variable,value,-grahami)
+
+ggplot(mliz,aes(x=value,y=grahami))+geom_boxplot(,fill="lightgray")+
+  facet_wrap(~variable,scale="free_x",nrow=1)+
+  geom_hline(yintercept=mean(lizards$grahami),colour="red",lwd=1,alpha=0.4)
+```
+
+-----
+
+Start with the `time` variable.
+
+If we leave the factors alphabetical then $\beta_1$="early", $\beta_2$="late"-"early", $\beta_3$="midday"-"early".  Change the order of the levels:
+```{r reordertime}
+lizards <- mutate(lizards,
+        time=factor(time,
+            levels=c("early","midday","late")))
+```
+
+This just swaps the definitions of $\beta_2$ and $\beta_3$.
+
+## Choosing contrasts
+ - There are multiple ways to tweak with your R output to give you the type of constrast you want
+ - e.g. you might want know the deviation from late, not from early
+ - Or you want want successive differences among levels
+ 
+## Using relevel
+We can use relevel to change our reference to help understand our contrasts
+```{r relevel}
+levels(lizards$time)
+lizards$time <- relevel(lizards$time, ref = "late" )
+pr(lm(grahami~time,data=lizards))
+```
+
+```{r relevel - rearrange, echo=F}
+lizards <- mutate(lizards,
+                 time=factor(time,
+                             levels=c("early","midday","late")))
+``` 
+
+## Using MASS package
+There are other options for contrasts such as `MASS::contr.sdif()`,
+which gives the successive differences between levels.
+```{r lizardsdif,message=FALSE}
+library("MASS")
+pr(lm(grahami~time,data=lizards,contrasts=list(time=contr.sdif)))
+```
+You might have particular contrasts in mind (e.g. "control" vs. all other treatments, then "low" vs "high" within treatments), in which case it is probably worth learning how to set contrasts.
+
+## Multiple treatments and interactions
+
+## Additive model
+- Additive models say that each variable has an additive (or subtractive?) effect across the entire range of both variables
+- They are often easier to understand than interactive models because each variable doesn't change across each value of the other variable
+- For example, if the number of ant colonies increases with observers, field/forest will change the intercept but not the slope of line in an additive model
+- [ DRAW]
+- this is probably easiest to understand when you have a mixture of continous and categorical variables
+
+## Categorical variables
+Consider the `light` variable in addition to `time`.
+```{r lizardTL1}
+pr(lmTL1 <- lm(grahami~time+light,data=lizards))
+```
+
+$\beta_1$ is the intercept ("early","shady"); $\beta_2$ and $\beta_3$ are the differences from the baseline level ("early","shady") of the *first* variable (`time`); $\beta_4$ is the difference from the baseline level ("shady") of the *second* variable (`light`). Because additive models just change the intercept, this is all we need to know to draw the lines [DRAW]. 
+
+## Graphical interpretation
+
+```{r lizardcontrasts1,echo=FALSE}
+library("grid")
+pp <- with(lizards,expand.grid(time=levels(time),light=levels(light)))
+pp$grahami <- predict(lmTL1,newdata=pp)
+cc <- as.list(plyr::rename(coef(lmTL1),c(`(Intercept)`="int")))
+labelpos <- with(cc,
+  list(x=c(1,2,3,1),xend=c(1,2,3,1),
+      y=c(int,int,int,int),
+      yend=c(int,int+timemidday,int+timelate,int+lightsunny)))
+xpos <- -0.1
+ggplot(pp,aes(x=time,y=grahami,colour=light))+geom_point()+
+  geom_line(aes(group=light))+
+  annotate("segment",x=labelpos$x,xend=labelpos$xend,y=labelpos$y,
+           yend=labelpos$yend,alpha=0.5,
+           arrow=arrow(length = unit(0.3,"cm"),ends="both"))+
+  annotate("text",x=with(labelpos,(x+xend)/2)+xpos,y=with(labelpos,(y+yend)/2),
+label=paste0("beta[",1:4,"]"),parse=TRUE)+
+  annotate("segment",x=labelpos$x[1],xend=labelpos$x[3],y=labelpos$y[1],
+           yend=labelpos$y[1],alpha=0.3,lty=2)
+```
+
+## Getting P-values from comparisons
+- can use relevel to change baseline to make multiple comparisons (same as Tukey test)
+- can also use lsmeans to change levels and make pairwise comparisons
+  
+```{r relevelforp}
+lizards$time <- relevel(lizards$time, ref = "late" )
+pr(lmTL1 <- lm(grahami~time+light,data=lizards))
+```
+
+Now all p-values are to the new baseline - late, shady
+
+
+```{r relevel - rearrangeAGAIN, echo=F}
+lizards <- mutate(lizards,
+                 time=factor(time,
+                             levels=c("early","midday","late")))
+``` 
+
+
+## Other ways of doing multiple comparisons
+ - We can also use lsmeans (which uses the multicomp package) to assist in multiple comparisons
+ 
+- [Go to code for example]
+
+## Interaction model
+
+```{r lizardTL2}
+pr(lmTL2 <- lm(grahami~time*light,data=lizards))
+```
+
+Parameters $\beta_1$ to $\beta_4$ have the same meanings as before.
+Now we also have $\beta_5$ and $\beta_6$, labelled "timemidday:lightsunny" and "timelate:lightsunny", which describe the difference between the expected mean value of these treatment combinations based on the additive model (which are $\beta_1 + \beta_2 + \beta_4$ and $\beta_1 + \beta_3 + \beta_4$ respectively) and their actual values.
+
+## In human words...
+ - the interaction tells us how lizard behavior varies with both the effect of time of day and with sun levels
+ - this model says that the effect of sun isn't the same at all timepoints
+ - it is not just that lizards uniformly decrease perching when it is sunny - when it is sunny, at midday, lizards decrease perching behavior a lot relative to early/shady conditions
+
+## Releveling the interactive model
+- Again, releveling is useful for getting intuition about how each variable changes relative to a specific time
+```{r relevelforpinteractions}
+lizards$time <- relevel(lizards$time, ref = "midday" )
+pr(lmTL2 <- lm(grahami~time*light,data=lizards))
+```
+Now we can see how sunniness influences lizards during midday more easily
+
+
+```{r relevel - rearrangeAGAIN2, echo=F, results=F}
+lizards <- mutate(lizards,
+                 time=factor(time,
+                             levels=c("early","midday","late")))
+pr(lmTL2 <- lm(grahami~time*light,data=lizards))
+
+``` 
+
+## Graphical version
+
+```{r lizardcontrasts2,echo=FALSE}
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length=n+1)
+  hcl(h=hues, l=65, c=100)[1:n]
+}
+pp2 <- pp
+pp2$grahami <- predict(lmTL2,newdata=pp)
+cc <- as.list(plyr::rename(coef(lmTL2),c(`(Intercept)`="int",
+        `timemidday:lightsunny`="midsunny",`timelate:lightsunny`="latesunny")))
+labelpos <- with(cc,
+  list(x=c(1,2,3,1,2,3),xend=c(1,2,3,1,2,3),
+      y=c(int,int,int,int,int+lightsunny+timemidday,int+lightsunny+timelate),
+      yend=c(int,int+timemidday,int+timelate,int+lightsunny,
+             int+timemidday+lightsunny+midsunny,int+timelate+lightsunny+latesunny)))
+xpos <- -0.1
+ggplot(pp2,aes(x=time,y=grahami,colour=light))+geom_point()+
+  geom_line(aes(group=light))+
+  annotate("segment",x=1:2,xend=2:3,
+           y=with(cc,c(int+lightsunny,int+timemidday+lightsunny)),
+           yend=with(cc,c(int+timemidday+lightsunny,int+timelate+lightsunny)),
+           colour=gg_color_hue(2)[2],lty=2)+
+  annotate("segment",x=labelpos$x,xend=labelpos$xend,y=labelpos$y,
+           yend=labelpos$yend,alpha=0.5) +
+           ## arrow=arrow(length = unit(0.3,"cm"),ends="both"))+
+  annotate("text",x=with(labelpos,(x+xend)/2)+xpos,y=with(labelpos,(y+yend)/2),
+label=paste0("beta[",1:6,"]"),parse=TRUE)+
+  annotate("segment",x=rep(labelpos$x[1],2),
+                     xend=rep(labelpos$x[3],2),
+                     y=labelpos$yend[c(1,4)],
+                     yend=labelpos$yend[c(1,4)],alpha=0.3,lty=2)
+```
+
+
+
+## More graphics
+
+```{r load,echo=FALSE,include=FALSE}
+library(dotwhisker)
+```
+```{r dwplot_liz1}
+dwplot(list(additive=lmTL1,interaction=lmTL2))+
+    geom_vline(xintercept=0,lty=2)
+```
+
+## Effects plot
+
+```{r}
+plot(allEffects(lmTL2))
+```
+
+Session info:
+```{r}
+sessionInfo()
+```
+
+Other refs
+- http://sas-and-r.blogspot.com/2010/10/example-89-contrasts.html
+- [`gmodels::fit.contrast()`](http://hosho.ees.hokudai.ac.jp/~kubo/Rdoc/library/gmodels/html/fit.contrast.html) (show parameter estimates based on re-fitting models with new contrasts), [`rms::contrast.rms()`](http://hosho.ees.hokudai.ac.jp/~kubo/Rdoc/library/rms/html/contrast.html) (ditto, for `rms`-based fits)
+- http://www.ats.ucla.edu/stat/r/library/contrast_coding.htm
+- Crawley *Statistical Computing: An Introduction to Data Analysis
+using S-PLUS*, chapter 18
