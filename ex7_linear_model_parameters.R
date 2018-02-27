@@ -39,7 +39,7 @@ pr(lm0 <- lm(colonies~place-1,data=ants))
 predict(lm1,newdata=data.frame(place=c("field","forest")),
         interval="confidence")
 
-#you can also predictions to your dataframe
+#you can also add predictions to your dataframe
 ants$yhat=predict(lm1)
 head(ants)
 
@@ -48,7 +48,8 @@ lm2 <- lm(colonies~observers, data = ants)
 summary(lm2)
 
 #note - this model isn't significant so we don't need to predict it, but pretend it is...
-new.ants = expand.grid(place = c("field","forest"), observers = seq(0:10))
+new.ants = expand.grid(place = c("field","forest"), observers = seq(1:10))
+
 new.ants$yhat=predict(lm2, newdata = new.ants)
 View(new.ants)
 
@@ -109,6 +110,8 @@ lizards <- mutate(lizards,
                   time=factor(time,
                               levels=c("early","midday","late")))
 
+library("MASS")
+pr(lm(grahami~time,data=lizards,contrasts=list(time=contr.sdif)))
 
 ## Multiple treatments and interactions
 ## Categorical variables
@@ -150,7 +153,7 @@ pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 
 ## Using lsmeans
 # we can add the interaction for all pairwise comparisons
-lsm2<-lsmeans(lmTL1,pairwise~time*light)
+lsm2<-lsmeans(lmTL2,pairwise~time*light)
 lsm2
 
 ##plotting the interactive model
@@ -162,6 +165,13 @@ ggplot(pp2,aes(x=time,y=grahami,colour=light))+geom_point()+
   geom_line(aes(group=light))
 
 ##more graphics
+
+lizards <- mutate(lizards,
+                  time=factor(time,
+                              levels=c("early","midday","late")))
+
+pr(lmTL2 <- lm(grahami~time*light,data=lizards))
+
 library(dotwhisker)
 
 dwplot(list(additive=lmTL1,interaction=lmTL2))+
