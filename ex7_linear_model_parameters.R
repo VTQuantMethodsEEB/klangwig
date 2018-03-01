@@ -161,8 +161,16 @@ lsm2
 pp2 <- pp
 pp2$grahami <- predict(lmTL2,newdata=pp)
 
+
 ggplot(pp2,aes(x=time,y=grahami,colour=light))+geom_point()+
   geom_line(aes(group=light))
+
+###ADD RAW data to plot###
+ggplot(pp2,aes(x=time,y=grahami,colour=light))+
+  geom_point()+
+  geom_line(aes(group=light))+
+  geom_point(data=lizards, aes(x=time,y=grahami,colour = light))
+
 
 ##more graphics
 
@@ -178,5 +186,7 @@ dwplot(list(additive=lmTL1,interaction=lmTL2))+
   geom_vline(xintercept=0,lty=2)
 
 plot(allEffects(lmTL2))
+
+
 
 
