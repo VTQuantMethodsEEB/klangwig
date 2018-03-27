@@ -13,6 +13,7 @@ batdat=read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/github/klang
 head(batdat)
 batdat$lgdL=log10(batdat$gdL)
 
+
 g1=ggplot(data=batdat,aes(x=species,y=lgdL,color=site))+
   geom_point(size=2) #this adds points to graph
 g1
@@ -67,7 +68,7 @@ g1
 
 g1=ggplot(data=batdat,aes(x=nspecies,y=lgdL))+
   geom_boxplot()+
-  geom_point(aes(color=site),size=2,shape=1,stroke=1)+
+  geom_point(aes(color=site),size=2,shape=1,stroke=1)+#shape specifies donut, and stroke changes thickness
   ylab(expression(log[10]~fungal~loads))+
   xlab("")+
   scale_colour_viridis(discrete = T)+
@@ -153,7 +154,7 @@ batdat$date.new=as.Date(batdat$date, "%m/%d/%y")
 
 g3=ggplot(data=batdat,aes(x=date.new,y=count,color=nspecies,shape=site))+
   geom_point(size=2)+
-  geom_line()+
+  geom_line()
 g3
 #now we have lines, but the date axis is ridiculous
 

@@ -100,7 +100,7 @@ tt
 #imagine we did an experiment where we cut down the trees in the forest, and then re-surveyed our plots
 forest_pre=forest
 forest_post=c(9+2,  6+1,  4+1,  6+1,  7+1, 10+1)
-#forest_post=c(9+2,  6+1,  4+1,  6+1,  7+1, 10+1)
+# forest_post=c(9+4,  6+1,  4-1,  6+3,  7+1, 10-1)
 
 
 ttp<- t.test(forest_pre,forest_post,paired=T)
@@ -125,10 +125,16 @@ ttp
 
 #####Shapiro-Wilk Test#######
 #Are our data normally distributed?##
+l1=lm(colonies~place,data=ants)
+resid(l1)
+
 swt<-shapiro.test(ants$colonies)
+swt
 
 swt_field<-shapiro.test(field)
 swt_forest<-shapiro.test(forest)
+swt_field
+swt_forest
 
 #####Correlation Tests#####
 #Pearsons - for linear data
@@ -152,6 +158,7 @@ east <- c(10,1)
 west <- c(1,8)
 pin=rbind(east,west)
 colnames(pin)=c("condor","no.condor")
+pin
 fisher.test(pin)
 
 ##fisher exact test's can be useful for quick sample size calculations##
@@ -174,6 +181,7 @@ forest_treat
 
 ##paired
 ww<-wilcox.test(forest_pre,forest_post,paired=T)
+print(ww)
 
 ##unpaired
 ww2<-wilcox.test(forest,field)

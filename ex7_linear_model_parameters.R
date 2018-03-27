@@ -158,8 +158,10 @@ lsm2
 
 ##plotting the interactive model
 
+pp <- with(lizards,expand.grid(time=levels(time),light=levels(light)))
+
 pp2 <- pp
-pp2$grahami <- predict(lmTL2,newdata=pp)
+pp2$grahami <- predict(lmTL2,newdata=pp2)
 
 
 ggplot(pp2,aes(x=time,y=grahami,colour=light))+geom_point()+
