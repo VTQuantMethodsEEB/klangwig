@@ -9,6 +9,11 @@ liz = read.csv("lizards.csv")
 g1 = glm(N~time,data=liz, family="poisson");
 summary(g1)
 
+library(effects)
+plot(allEffects(g1))
+library(lsmeans)
+lsmeans(g1, pairwise~time)
+
 ###BINOMIAL##
 bat = read.csv("bat_data.csv")
 head(bat)
