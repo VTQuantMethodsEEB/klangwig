@@ -32,6 +32,8 @@ Anova(g2)
 Anova(g3)
 Anova(g4)
 Anova(g5)
+#this will give the same thing
+anova(g1a, test = "Chisq")
 
 #species and date are equally significant - select one
 g1a = glm (gd~species+date, data = bat, family = binomial)
@@ -58,7 +60,6 @@ g1a = glm (gd~species+date+site+count, data = bat, family = binomial)
 g1b = glm (gd~species+date+site+temp, data = bat, family = binomial)
 Anova(g1a)
 Anova(g1b)
-
 #Okay - we must have our best model now because count and temperature aren't significant
 #Is that true? What are some of the issues with this?
 
@@ -76,6 +77,7 @@ l2 = glm.nb(grahami~height+diameter+light*time,data = liz)
 Anova(l2)
 #now height is significant! The structure of the other variables makes a difference!
 pr(l2)
+pr(l1)
 
 ##Likelihood Ratio Tests###
 
