@@ -2,9 +2,18 @@
 
 #run to the bottom of ex10_glms
 #day and light conditions for lizards
+##utility function for pretty printing
+pr <- function(m) printCoefmat(coef(summary(m)),
+                               digits=3,signif.stars=FALSE)
+
 
 q1 = glm.nb(N~time*light,data=liz)
 summary(q1)
+pr(q1)
+
+q1a = glm.nb(N~light,data=liz)
+summary(q1a)
+pr(q1a)
 
 library(effects)
 plot(allEffects(q1))

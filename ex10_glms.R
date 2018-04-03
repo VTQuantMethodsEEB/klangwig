@@ -18,6 +18,7 @@ lsmeans(g1, pairwise~time)
 bat = read.csv("bat_data.csv")
 head(bat)
 bat$date = as.Date(bat$date, "%m/%d/%y")
+str(bat$date)
 #if you have a PC, it may be this:
 #bat$date = as.Date(bat$date, "%m/%d/%Y")
 
@@ -38,11 +39,13 @@ predict(g2,newdata = dat.new)
 
 #much more sensible output
 dat.new$yhat  = predict(g2,type="response",newdata = dat.new)
-
+bat$yhat2 = predict(g2,type="response")
+head(dat.new)
 
 plot1=ggplot(data=bat,aes(x=date,y=gd,color=species))+
   geom_point(size=2,shape =1) +
-  geom_line(data=dat.new, aes(x=date,y=yhat,col = species))
+  #geom_line(data=dat.new, aes(x=date,y=yhat,col = species))+
+  geom_line(aes(x=date,y=yhat2,col = species))
 plot1
 
 #what if we have aggregated data?
@@ -66,7 +69,6 @@ plot1=ggplot(data=b1,aes(x=date,y=gd,color=species))+
 plot1
 
 #ses and confidence intervals from binomial data
-
 
 #binomial proportion confidence interval
 head(b1)
@@ -94,7 +96,7 @@ ilink <- family(g2)$linkinv
 dat.new <- transform(dat.new, Fitted = ilink(fit), Upper = ilink(fit + (2 * se.fit)),
                 Lower = ilink(fit - (2 * se.fit)))
 #fitted should be the same as yhat
-
+head(dat.new)
 #plot the output
 plot1=ggplot(data=bat,aes(x=date,y=gd,color=species))+
   geom_point(size=2,shape =1) +
@@ -137,4 +139,7 @@ library(MASS)
 g7 = glm.nb(N~time,data=liz)
 summary(g7)
 
+#quasi-poisson
+#g8 = glm(N~time,data=liz, family = "quasipoisson")
+#summary(g8)
 
