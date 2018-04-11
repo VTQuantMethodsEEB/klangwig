@@ -16,6 +16,7 @@ q0 <- (ggplot(sleepstudy, aes(Days, Reaction, colour = Subject))
        + geom_point())  ## points only, use later
 print(q0+geom_line())
 
+#run models
 lm2 <- lmer(Reaction~Days + (1|Subject),data=sleepstudy) ## rand intercept
 lm3 <- lmer(Reaction~Days + (Days|Subject),data=sleepstudy) ## rand slopes and intercepts
 
@@ -31,7 +32,7 @@ summary(lm2)
 180 - 18 - 1
 #161
 t.value = 13.02
-p.value = 2*pt(t.value, df = 180, lower=FALSE)
+p.value = 2*pt(t.value, df = 161, lower=FALSE)
 p.value
 #a good rule of thumb is that if you have a lot of data, you want a t-value > 2
 
@@ -67,6 +68,7 @@ bat = subset(bat, species!="SUBSTRATE")
 gm1 = glmer(gd~species + (1|site),data=bat, family = "binomial")
 summary(gm1)
 #the GLM version of this will give us p-values
+library(car)
 Anova(gm1)
 
 gm2 = glmer(gd~species*year + (1|site),data=bat, family = "binomial")
