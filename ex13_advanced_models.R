@@ -4,6 +4,7 @@
 library(MASS)
 
 #new packages
+#install.packages("lmtest")
 library(lmtest)
 #install.packages("pscl")
 library(pscl)
@@ -75,9 +76,13 @@ f1 = lm(SppRichness ~ Temp, data = mos)
 summary(f1)
 #autocorrelation plot
 acf(resid(f1))
+#this says - what is the correlation b/t 1 v2, 1 v 3, 1 v4, etc. 
+#we worry about things above the line
 
 #which of the residuals pairs are significantly higher?
 pacf(resid(f1))
+#this says what is the correlation b/t 1 v 2, 1 v3 (accounting for correlation between 1 & 2), and so on
+#we worry about POSITIVE lines that cross the blue
 
 #which of the models are best?
 #we can use an AR model

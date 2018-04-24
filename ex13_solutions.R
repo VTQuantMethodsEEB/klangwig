@@ -10,6 +10,7 @@ g.zinf2 <- zeroinfl(opalinus ~ time,
                     data = liz)
 
 lrtest(g.zinf1,g.zinf2)
+AIC(g.zinf1,g.zinf2)
 
 ##predict model
 head(liz)
