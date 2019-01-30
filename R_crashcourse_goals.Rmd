@@ -1,0 +1,107 @@
+---
+title: "R crash course goals"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Goals
+
+Things to be able to do:
+
+###1) read in your data
+
+```{r}
+batdat = read.csv("bat_data.csv")
+#or 
+#batdat = read.csv("Users/klangwig/Dropbox/teaching/bat_data.csv")
+
+```
+
+###2) load and install packages 
+```{r}
+
+#install.packages("ggplot2") #install a package (or use GUI system)
+
+library(ggplot2) #load a package before use
+```
+
+###3) get help
+```{r}
+?"unique"
+```
+
+
+###4) examine your data
+
+```{r, results='hide'}
+unique(batdat$species)
+str(batdat)
+head(batdat)
+tail(batdat)
+dim(batdat)
+names(batdat)
+nrow(batdat)
+ncol(batdat)
+```
+
+###5) do a calculation with your data 
+
+```{r, results='hide'}
+log(batdat$gdL)
+log10(batdat$gdL)
+3+3
+batdat$temp + 10
+```
+
+###6) make a new column - data$log.weight = log10(data$weight )
+```{r}
+batdat$log.loads = log10(batdat$gdL) #make a new column that is the log of this column
+
+```
+
+###7) subset data - using subset(), or square brackets []
+```{r}
+#using subset
+MYSE.dat = subset(batdat, species=="MYSE") #a factor/character, so need == and quotes
+dim(MYSE.dat) #what are the dimensions of the new data frame?
+
+warm.temps = subset(batdat, temp>6) #a number, so no quotes
+dim(warm.temps)
+
+#same thing using square brackets (say "where")
+MYSE.dat = batdat[batdat$species=="MYSE",]
+dim(MYSE.dat)
+
+warm.temps = batdat[batdat$temp>6,]
+```
+
+###8) use aggregate or table to summarize some data
+```{r}
+bat.summary = aggregate(log.loads~species, FUN=mean, data = batdat) #aggregate data using the mean to give fungal loads by species
+bat.summary
+```
+
+###9) make a histogram of a column in your data
+```{r}
+hist(batdat$log.loads)
+```
+
+###10) write out a dataframe
+```{r}
+write.csv(bat.summary, "bat.summary.csv",row.names = F)
+
+```
+  
+###11) save script, close R **without saving workspace**
+  
+###12) re-open R, repeat the same thing by re-running your script after clearing your workspace
+
+
+###Helpful links:  
+https://greggilbertlab.sites.ucsc.edu/teaching/rtransition/
+
+https://www.statmethods.net/
+
