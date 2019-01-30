@@ -1,5 +1,5 @@
 
-##putting package officer through some tests
+###putting package officer through some tests
 rm(list=ls()) # clears workspace
 
 #simplifying code with pipes
@@ -26,7 +26,11 @@ b1<-aggregate(Sepal.Length~Species,FUN=mean, data=iris.sub)
 #We often have to report how many individuals we sampled. Here is a nifty way to do that without copying and pasting and formatting. 
 
 #play data
+#example with directory
 dm<-read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
+#this file is in my project folder so I can read it in without calling the directory
+dm<-read.csv("bat_data.csv")
+
 #this file is in the datasets folder on canvas
 
 ###selecting things###
@@ -105,5 +109,5 @@ my_doc <- read_docx() %>% #create a word document
   body_add_par(value = "Wisconsin Sampling Report", style = "heading 1") %>% 
   body_add_par("Table 1. Summary of samples collected in Wisconsin by species.", style = "Normal") %>% #add a caption to your table
   body_add_flextable(ft)%>% #add your flex table (ft) to your report
-  print(target = "/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/WI_sampling_report.docx") #output the file
+  print(target = "WI_sampling_report.docx") #output the file
 

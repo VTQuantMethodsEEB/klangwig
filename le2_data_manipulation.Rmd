@@ -1,12 +1,33 @@
 ---
 title: "Managing Data in R"
-output: ioslides_presentation
-author: Kate Langwig (input from BB and JD)
+author: "KEL - Quantitative Methods"
+output:
+  ioslides_presentation: default
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = T)
 ```
+## Housekeeping
+
+- You need some data for this class (assignment one)
+- If you still do not have data, and do not have a plan to acquire data (e.g. chatting with your advisor, surfing dryad, using some from a cool paper you recently read), we need to speak about your options ASAP.
+- Please email me klangwig@vt.edu if you are worried about this.
+
+- **I need your github username turned in before next class**
+
+## Change in Assignment
+
+- Please turn in your GitHub name and the paragraph about your data on canvas. 
+    + There is a text entry box to do this under the "assignments" tab. (Don't send me via email or a canvas message.)
+
+- You can turn in your code and **data file** from assignment 1 using GitHub on Thursday. 
+
+## Optional Code session?
+- For those new to R, would this be helpful?
+
+      
 ## Goals
 
 You should be able to
@@ -52,16 +73,10 @@ An American Airlines memo about fuel reporting from the 1980s complained of mult
 -   Reported departure fuel greater than aircraft capacity
 -   Reported departure fuel less than minimum required for trip
 -   Reported arrival fuel greater than reported departure fuel
--   Difference between reported departure fuel and reported arrival fuel not within reasonable min/max bounds
+
 
 You should think about what you can test, and what you can fix if it's
 broken.
-
-```{r, eval=FALSE}
-
-See [The MMED data management lecture](http://lalashan.mcmaster.ca/theobio/mmed/index.php/Introduction_to_data_management_and_cleaning).
-
-```
 
 ## Visualizing data with graphs
 Graphical approaches are really useful for data cleaning; we will
@@ -128,15 +143,9 @@ knitr::include_graphics("/Users/klangwig/Dropbox/teaching/quant grad course/lect
 
 ##Example with bat data
 ```{r counts, echo=F}
-#batdat=read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
-#r1=read.csv("/Users/klangwig/Dropbox/WNS-EID Project/DATA/Kate's Data/reports/midwest_aggregated_data.csv")
 
 batdat=read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
-#batdat$site.date=paste(batdat$site,batdat$date,batdat$species,sep=".")
-#r1$site.date=paste(r1$site,r1$date,r1$species,sep=".")
-#batdat$count=r1$count[match(batdat$site.date,r1$site.date)]
-#batdat=cbind(batdat[1:10],batdat[12])
-#head(batdat)
+
 ```
 
 What if I wanted to test how the count of MYSE influenced infection in MYLU? I need to MYSE to be a variable
@@ -200,14 +209,7 @@ print(smelt <- gather(smiths, key="var", value="value",
 ```
 
 
-## Minus sign to omit
-Alternatively we could specify that we
-want to gather everything *but* the subject name and time variable:
-```{r gather3}
-gather(smiths, key="var", value="value",
-       -c(subject,time))
-```
-## Make a column for each subject (= a row for each measurement)
+## Make a column for each subject (= a row for each measurement) using Spread
 
 ```{r col_per_subj}
 spread(smelt, key=subject, value)
@@ -264,8 +266,36 @@ smelt %>% group_by(var) %>%
     -   `group_by`
     -   `summarise`
     -   `arrange`
+    
+## Group by, Mutate, and Summarise
+ - `group_by` is my favorite tidyverse command which has cut my need to write loops in half
+ - `group_by` allows you to do calculations on groups of things, for example, by species or year
+ 
+```{r group_by example}
+batdat %>% 
+  group_by(species) %>% 
+    summarise(mean.fungal.loads=mean(lgdL,na.rm=TRUE))
+```
 
+##Summarise versus Mutate
+ - `summarise` creates a new dataframe 
+ - `mutate` does a calculation where it add a new column to your existing dataframe
+ 
+```{r mutate example}
+batdat_with_sample_size = batdat %>% 
+  #create a new dataframe  called batdat_with_sample_size
+    group_by(site,species,date) %>% 
+  #you can group_by multiple things
+    mutate(sample.size=length(swab_id))
+#this adds a column to the dataframe
+```
+##What does our dataframe look like now?
+```{r looking at new dataframe}
+head(batdat_with_sample_size[c(1,6,7,8,12)])
+#this is just showing a few columns for effect
+```
 
+ 
 ## Managing Pipelines in R
 - Pipelines are ways of carefully recording and systematizing the steps you take to work with your data
 
@@ -274,7 +304,7 @@ smelt %>% group_by(var) %>%
 - Ideally your project will depend on:
 - Some data files
 - Some scripts
-- Something that tells you how these things go together (RMarkdown is helpful for this)
+- Something that tells you how these things go together (RMarkdown is helpful for this), at minimum a README file
 
 ## Advantages of this approach
  - Clarity: we aren't confused about the 600 pages of information stored with our projects
@@ -290,7 +320,7 @@ smelt %>% group_by(var) %>%
 - Importantly, spreadsheets are for storing data, NOT FOR MANIPULATING DATA
 
 - Your goal should be to take data from a spreadsheet and manipulate it entirely using scripts. 
-- Here is a hilarious link on spreadsheet addiction: http://www.burns-stat.com/documents/tutorials/spreadsheet-addiction/ 
+- Avoid spreadsheet addiction: http://www.burns-stat.com/documents/tutorials/spreadsheet-addiction/ 
 - The jist is: friends don't let friends use excel for statistics. 
 
 ## Database
@@ -304,15 +334,17 @@ smelt %>% group_by(var) %>%
 - Git manages the evolution of a set of files - called a repository
 - A repository is essentially a folder where you store your stuff
 - Version control works a bit like "Track Changes" in word, Git will track the changes we make to our code so we can return to previous versions
-- It also allows collaboration so I code look at your code and make changes - a bit like a more complicated version of Google Docs
+- It also allows collaboration so I can look at your code and make changes - a bit like a more complicated version of Google Docs
 
 ##Will this hurt?
-- Yes. 
+- Maybe! 
 
-- But, I think this important enough that we NEED exposure to this in a course like this. 
+- But, I think this important enough that we NEED exposure to this. This is the future! 
 
 ## But I only code alone! 
-- Before too long, we won't be able to publish anything without pushing to Git in publicly available repository.
+- You need to carefully document your steps if the only person you are sharing code with is the future version of yourself
+
+- In addition, most journals require publicly available data and code  - open code is the norm, not the exception.
 
 - Using Git has gotten easier. We used to have to use command line to communicate with Git, but now we can just use RStudio! 
 
@@ -324,9 +356,9 @@ smelt %>% group_by(var) %>%
 
 ##Terminology cont.
 
-- branch: How do multiple people work on a project at the same time without Git getting them confused? Usually, they “branch off” of the main project with their own versions full of changes they themselves have made. After they’re done, it’s time to “merge” that branch back with the “master,” the main directory of the project.
+- branch: How do multiple people work on a project at the same time without Git getting them confused? Usually, they “branch off” of the main project with their own versions full of changes they themselves have made. After they’re done, it’s time to “merge” that branch back with the “master,” the main directory of the project. Because we'll be working within our own repos, we don't need to worry too much about branching but is good to know for future.
 
-- we'll return to this later, and for this week, primarily focus on working within our own repos.
+- push: This is how you upload your file to GitHub. Remember, you need to both commit and push for your file to be sent to GitHub. 
 
 ## Sending your files to our class repository
 
@@ -342,7 +374,6 @@ smelt %>% group_by(var) %>%
  - Please try to start this before our next class. 
  - Here is a link: http://happygitwithr.com/install-git.html#install-git
  - Please follow instructions to get started with git. 
- - (Full disclosure - I did the NOT recommended options of Github Desktop for Mac) because the command line makes me itchy. 
  - Try to install github in the most scientific way possible - if one way doesn't work, try the next, and google your mistakes! 
  
 

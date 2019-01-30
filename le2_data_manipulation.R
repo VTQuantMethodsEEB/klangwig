@@ -6,7 +6,6 @@ library(dplyr)
 
 #using the bat data - read
 batdat=read.csv("bat_data.csv") # you will need to have the bat data file in the directory you are using
-#note, I've updated this since the previous lecture
 
 head(batdat)  
 unique(batdat$species)
@@ -34,10 +33,7 @@ gather(smiths)
 #collect the vars we want
 print(smelt <- gather(smiths, key="var", value="value",
                       c(age,weight)))
-#collect the vars we want by telling what we DO NOT want
-#minus sign
-gather(smiths, key="var", value="value",
-       -c(subject,time))
+
 
 ## Make a column for each subject (= a row for each measurement)
 spread(smelt, key=subject, value)
@@ -53,3 +49,33 @@ smelt %>% group_by(var) %>%
   summarise(mean=mean(value,na.rm=TRUE),
             n=length(na.omit(value)))
 
+## Group by, Mutate, and Summarise
+batdat %>% 
+  group_by(species) %>% 
+  summarise(mean.fungal.loads=mean(lgdL,na.rm=TRUE))
+#this gives you a summary table, it doesn't change batdat
+
+#if you want to call this table something you would need to assign it
+fungal.load.table = batdat %>% 
+  group_by(species) %>% 
+  summarise(mean.fungal.loads=mean(lgdL,na.rm=TRUE))
+
+fungal.load.table
+
+##Summarise versus Mutate
+batdat_with_sample_size = batdat %>% 
+  #create a new dataframe  called batdat_with_sample_size
+  group_by(site,species,date) %>% 
+  #you can group_by multiple things
+  mutate(sample.size=length(swab_id))
+#this adds a column to the dataframe
+batdat_with_sample_size
+
+##we could have also just added this column to batdat
+batdat = batdat %>% 
+  #create a new dataframe  called batdat_with_sample_size
+  group_by(site,species,date) %>% 
+  #you can group_by multiple things
+  mutate(sample.size=length(swab_id))
+#this adds a column to the dataframe
+batdat

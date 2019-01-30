@@ -74,6 +74,7 @@ plot(Temp~Year,data=mos,ylab="Temp",xlab="Year",col=2)
 
 f1 = lm(SppRichness ~ Temp, data = mos)
 summary(f1)
+
 #autocorrelation plot
 acf(resid(f1))
 #this says - what is the correlation b/t 1 v2, 1 v 3, 1 v4, etc. 

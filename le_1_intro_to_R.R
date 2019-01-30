@@ -16,6 +16,7 @@ x + 17
 y <- x + 17
 y
 
+#[switch to lecture]
 #exploring values
 num <- 3
 str(num) 
@@ -38,7 +39,8 @@ print(species)
 #now that is a missing value because "myse" wasn't one of our original factors
 #an easy solution is to change text to a character
 species<-as.factor(c("epfu","mylu","mylu","mysee"))
-species<-as.character(species)
+species<-as.character(c("epfu","mylu","mylu","mysee"))
+
 species[species=="mysee"]="myse"
 print(species)
 
@@ -56,6 +58,7 @@ w <- c(0, 1, 1, 2, 4)
 v+w
 2*w #2 is the scalar
 
+#[back to lecture]
 #lists
 L <- list(1:3, "Apple tree", TRUE)
 str(L)
@@ -80,6 +83,8 @@ mean(x)
 #produced an NA because there is a missing value
 mean(x, na.rm=T)
 
+#[switch to lecture]
+
 #matrices
 m <- matrix(c(1, 3, 0, 1), nrow=2)
 print(m)
@@ -95,6 +100,7 @@ mydata
 head(mydata)
 #what did I call those variables again?
 names(mydata)
+
 #add a new column that is just height and weight
 mydata$sum <-  mydata$height + mydata$weight
 head(mydata)
@@ -134,9 +140,19 @@ InsectSprays[InsectSprays$spray=="A"&InsectSprays$count<10,]
 #compare this with or which is the | symbol (that a straight line, not an I)
 InsectSprays[InsectSprays$spray=="A" | InsectSprays$count<10,]
 
+?as.Date
+
+
 #example of read.csv
 r2=read.csv("/Users/klangwig/Dropbox/Contact rate MS/Network graph/Network data/enviro_master.csv")
 #you will need to change this to match your directory
+
+#date example
+head(r2)
+unique(r2$date)
+r2$date2 = as.Date(r2$date, "%m/%d/%y" )
+?julian
+unique(julian(r2$date2))
 
 #example of install
 #install.packages("ggplot2")

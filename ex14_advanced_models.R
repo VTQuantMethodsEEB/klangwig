@@ -36,6 +36,7 @@ sim.data <- as.data.frame(cbind(x=x, y=y))
 #now we can calculate the PGLS model with Pagel's lambda fixed at 1
 #apparently this assumes an ornstein-uhlenbeck model of evolution
 fit1 <- gls(y ~ x, data=sim.data, correlation=corPagel(1, phy, fixed=TRUE))
+summary(fit1)
 
 #we can also calculate the PGLS model with Pagel's lambda fixed at 0 (=OLS)
 fit0 <- gls(y ~ x, data=sim.data, correlation=corPagel(0, phy, fixed=TRUE))

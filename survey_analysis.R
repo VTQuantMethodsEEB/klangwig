@@ -29,3 +29,10 @@ r=ggplot(data=tab, aes(x=topic,y=score))+
   theme_bw() + 
   theme(axis.title=element_text(size=23),axis.text=element_text(size=10,angle = 45),panel.grid = element_blank(), axis.line=element_line(),legend.position=c(.9,.55),legend.text = element_text(size=12,face="italic"))
 print(r)
+
+#formal analyses
+l1 = lm(score~topic,data = sur)
+summary(l1)
+library(lsmeans)
+lsmeans(l1, specs = "topic", contr = "pairwise")
+
