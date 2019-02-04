@@ -160,8 +160,9 @@ g3
 
 #http://ggplot2.tidyverse.org/reference/scale_date.html
 
-  g3=ggplot(data=batdat,aes(x=date.new,y=count,color=nspecies,shape=site))+
+g3=ggplot(data=batdat,aes(x=date.new,y=count,color=nspecies,shape=site))+
     geom_point(size=2)+
     geom_line()+
     scale_x_date(date_breaks = "2 months", date_labels = "%m/%Y",limits = as.Date(c('2015-01-01','2016-05-01')) )
   g3
+  
