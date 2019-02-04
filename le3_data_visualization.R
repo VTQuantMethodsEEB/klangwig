@@ -10,6 +10,8 @@ library(viridis)
 
 
 batdat=read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/github/klangwig/bat_data.csv") 
+#or
+batdat=read.csv("bat_data.csv") 
 head(batdat)
 batdat$lgdL=log10(batdat$gdL)
 
