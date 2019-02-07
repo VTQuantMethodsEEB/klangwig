@@ -39,3 +39,10 @@ Thursday:
 lecture: ex3_data_manipulation.pptx
 code: use code from Tuesday for example
 
+Week 4
+------------------
+Tuesday: 
+lecture: 
+code: none
+
+Thursday: discussion on reading
