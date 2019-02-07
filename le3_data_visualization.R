@@ -37,8 +37,15 @@ g1=ggplot(data=batdat,aes(x=species,y=lgdL))+
   geom_boxplot()+
   geom_point(aes(color=site)) #now assign color here so we don't have seperate boxes
 g1
+
+g1=ggplot(data=batdat,aes(x=species,y=lgdL))+
+  geom_boxplot()+
+  geom_jitter(aes(shape=site))#+
+  #geom_point() #now assign color here so we don't have seperate boxes
+g1
 #now we can look at it in more compact form, but still see the data come from multiple sites
 
+#stopped here!
 
 #we only need "species" because we are using the 4 letter codes, but these are unnecessary
 batdat$species=as.character(batdat$species)
