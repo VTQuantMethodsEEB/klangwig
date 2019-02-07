@@ -43,6 +43,6 @@ Week 4
 ------------------
 Tuesday: 
 lecture: 
-code: none
+code: 
 
 Thursday: discussion on reading
