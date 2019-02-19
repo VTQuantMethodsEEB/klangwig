@@ -43,7 +43,7 @@ Week 4
 ------------------
 Tuesday: 
 lecture: le4_statistical_philosphy
-code: 
+code: code just to make examples in lecture - none assigned
 
 Thursday: discussion on reading
 
