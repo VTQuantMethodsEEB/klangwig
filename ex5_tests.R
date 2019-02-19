@@ -8,6 +8,7 @@ rm(list=ls())
 
 forest <- c(9, 6, 4, 6, 7, 10)
 field  <- c(12, 9, 12, 10)
+mean(field) - mean(forest)
 
 ants <- data.frame(
   place=rep(c("field","forest"),
@@ -24,7 +25,7 @@ theme_set(theme_bw())
 
 ###Look at the data (with stat_sum() to visualize overlapping data points; 
 #jittering is also a possibility, but stat_sum() is prettier).  
-ggplot(ants,aes(place,colonies))+
+ggplot(ants,aes(x = place,y = colonies))+
   stat_sum(aes(size=..n..),colour="darkgray")+
   #aes(size=..n..) tells stat_sum() to use the number of overlapping points, not the proportion of points within a category, as the summary statistic
   scale_size_area(breaks=1:2,max_size=4)+
@@ -35,7 +36,8 @@ ggplot(ants,aes(place,colonies))+
 #with jitter
 ggplot(ants,aes(place,colonies))+
   geom_point(aes(place,jitter(colonies,factor=1.5)),shape=2,size=3)+
-#jitter uses factor to control the amount of the jitter, shape specifies triangles, and size is the size of the points
+#jitter uses factor to control the amount of the jitter, 
+  #shape specifies triangles, and size is the size of the points
   geom_boxplot(fill=NA)
 
 ##how to write your own permutation test##
@@ -100,8 +102,9 @@ tt
 #imagine we did an experiment where we cut down the trees in the forest, and then re-surveyed our plots
 forest_pre=forest
 forest_post=c(9+2,  6+1,  4+1,  6+1,  7+1, 10+1)
-# forest_post=c(9+4,  6+1,  4-1,  6+3,  7+1, 10-1)
 
+#try changing this - what happens?
+#forest_post=c(9+2,  6+1,  4+1,  6+1,  7+1, 10+1)
 
 ttp<- t.test(forest_pre,forest_post,paired=T)
 ttp
@@ -125,15 +128,16 @@ ttp
 
 #####Shapiro-Wilk Test#######
 #Are our data normally distributed?##
-l1=lm(colonies~place,data=ants)
-resid(l1)
+#The null hypothesis is that the data are normally distributed
+#P<0.05 indicates NOT normal
 
 swt<-shapiro.test(ants$colonies)
 swt
 
 swt_field<-shapiro.test(field)
-swt_forest<-shapiro.test(forest)
 swt_field
+
+swt_forest<-shapiro.test(forest)
 swt_forest
 
 #####Correlation Tests#####
@@ -166,11 +170,13 @@ east <- c(4,0)
 west <- c(0,4)
 pin=rbind(east,west)
 colnames(pin)=c("condor","no.condor")
+pin
 fisher.test(pin)
 
 ###wilcoxon signed-rank test####
 forest_pre=forest
 forest_post=c(9+2,  6+1,  4+1,  6+1,  7+1, 10+1)
+
 
 forest_treat <- data.frame(
   trmt=rep(c("forest_pre","forest_post"),
@@ -181,7 +187,7 @@ forest_treat
 
 ##paired
 ww<-wilcox.test(forest_pre,forest_post,paired=T)
-print(ww)
+ww
 
 ##unpaired
 ww2<-wilcox.test(forest,field)

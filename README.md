@@ -42,7 +42,16 @@ code: use code from Tuesday for example
 Week 4
 ------------------
 Tuesday: 
-lecture: 
+lecture: le4_statistical_philosphy
 code: 
 
 Thursday: discussion on reading
+
+Week 5
+--------------------
+Tuesday: 
+lecture: le_5_tests.ppt
+code: ex5_tests
+
+Thursday:
+code:ex5_tests
