@@ -55,3 +55,17 @@ code: ex5_tests
 
 Thursday:
 code:ex5_tests
+
+Week 6
+------------------------
+Tuesday:
+lecture: le6_rev_distributions.pptx
+code: ex6_rev_distributions.R
+handout:Handout_Week6_Distributions.pdf (In "readings" folder")
+
+Thursday:
+lecture & solutions & assignment: ex6_rev_distributions.pptx
+code: ex6_rev_distributions.R
+READING ASSIGNMENT & QUIZ: 
+(1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
+(2) Week6_Felsenstein 1985 Am Nat

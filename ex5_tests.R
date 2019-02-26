@@ -50,11 +50,13 @@ res <- NA ## set aside space for results
 #you always need to do something like this when you run a "for" loop
 #you could also write res <- numeric(1000), which would give you a list of 1000 0's
 #the important thing to have a vector already named "res"
+comb_ff = c(field,forest)
+sample(comb_ff,5, replace=T)
 
-for (i in 1:1000) {
+for (i in 1:10000) {
   colonyboot <- sample(c(field,forest)) ## scramble
   ## pick out forest & field samples
-  forestboot <- colonyboot[1:length(forest)] #this says assign the first four colonies to forest
+  forestboot <- colonyboot[1:length(forest)] #this says assign the first six colonies to forest
   fieldboot <- colonyboot[(length(forest)+1):length(colonyboot)] #assign the rest of the colonies to field
   ## compute & store difference in means
   res[i] <- mean(fieldboot)-mean(forestboot) #calculate the difference in the field means and the forest means
@@ -63,6 +65,7 @@ for (i in 1:1000) {
 
 #what is our observed mean difference?
 obs <- mean(field)-mean(forest)
+obs
 
 hist(res,col="gray",las=1,main="")
 abline(v=obs,col="red")
@@ -70,7 +73,7 @@ abline(v=obs,col="red")
 ##so how do we get our p-value?
 res[res>=obs]
 length(res[res>=obs])
-20/1000
+225/10000
 mean(res>=obs)        
 #using mean(permutations>=obs)) is a trick to calculate the proportion: 
 #the logical statement returns a logical (FALSE/TRUE) vector, which then gets converted to a 0/1 vector when you ask R to take the mean, 
