@@ -98,9 +98,12 @@ yhats=predict(l2,newdata=dat.new,interval = "confidence")
 
 ##ggplot2##
 head(mtcars)
+library(ggplot2)
 r=ggplot(data=mtcars, aes(x=wt, y=mpg))+ 
   geom_point()+
   stat_smooth(method = "lm")+
   theme_bw() + 
   theme(axis.title=element_text(size=20),axis.text=element_text(size=10),panel.grid = element_blank(), axis.line=element_line(),legend.position="top",legend.title=element_blank())
 print(r)
+
+
