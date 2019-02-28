@@ -22,6 +22,7 @@ dbinom(1,25, 0.2)
 pnorm(q = 19, mean = 17, sd =3)
 
 #what is the probability a lizard weighs MORE than 19 grams?
+1 - pnorm(q = 19, mean = 17, sd =3)
 pnorm(q = 19, mean = 17, sd =3, lower.tail = F)
 
 #what is the probability that no more than 1 bat is infected?

@@ -69,3 +69,13 @@ code: ex6_rev_distributions.R
 READING ASSIGNMENT & QUIZ: 
 (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
 (2) Week6_Felsenstein 1985 Am Nat
+
+Week 7
+------------------------
+Tuesday: No class
+- Use this time to read
+- (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
+- (2) Week6_Felsenstein 1985 Am Nat
+-Make sure to complete quiz!
+
+Thursday: Phylogenies with Dr. Uyeda
