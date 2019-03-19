@@ -32,9 +32,13 @@ summary(l2)
 head(mtcars)
 
 par(mfrow=c(2,2))  # set 2 rows and 2 column plot layout
-#what is the influence of dispersion on MPG?
+#what is the influence of displacement on MPG?
 mod_1 <- lm(mpg ~ disp, data=mtcars)  # linear model
 plot(mod_1)
+
+hist(resid(mod_1))
+shapiro.test(resid(mod_1))
+hist(mtcars$mpg)
 
 ## Correlation plots
 ##examine collinearity among variables
@@ -75,11 +79,13 @@ ants <- data.frame(
 )
 
 ants
+
 ##check car package##Anova###
 l2 = aov(colonies~place, data = ants);summary(l2)
 l2 = lm(colonies~place, data = ants);anova(l2)
 
 summary(l2); l2
+l2 = aov(colonies~place, data = ants);summary(l2)
 TukeyHSD(l2)
 
 
