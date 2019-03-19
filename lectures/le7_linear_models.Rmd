@@ -213,7 +213,7 @@ plot(mod_1)
 
 ## Default plots in R - leverage of points
 
-- The plot on the bottom left examines which points have the greatest influence on the regression. I do not recommend removing "real" outlier points but you should examine you results with and without them to see how much they influence your inference.
+- The plot on the bottom right examines which points have the greatest influence on the regression. I do not recommend removing "real" outlier points but you should examine you results with and without them to see how much they influence your inference.
 ```{r, echo=FALSE}
 par(mfrow=c(2,2))  # set 2 rows and 2 column plot layout
 mod_1 <- lm(mpg ~ disp, data=mtcars)  # linear model
