@@ -85,6 +85,7 @@ library(dplyr);library(tidyr)
 mliz <- lizards %>%
   select(grahami,height,diameter,light,time) %>%
   gather(variable,value,-grahami)
+mliz
 
 ggplot(mliz,aes(x=value,y=grahami))+
   geom_boxplot(fill="lightgray")+
@@ -136,13 +137,21 @@ ggplot(pp,aes(x=time,y=grahami,colour=light))+
 
 #what are the p-values giving us?
 ## Other ways of doing multiple comparisons
+pr(lmTL1 <- lm(grahami~time+light,data=lizards))
 
 library(lsmeans)
 library(multcompView)
 lsmeans(lmTL1, specs = "time", contr = "pairwise")
 
 lsm1<-lsmeans(lmTL1,pairwise~time)
-cld(lsm1,by = NULL, Letters = "ABCDEFGHIJ") 
+
+#lsmeans isn't working for some, try emmeans
+#syntax is similiar
+library(emmeans)
+lsm1<-emmeans(lmTL1,pairwise~time)
+cld(lsm1)
+cld(lsm1$emmeans)
+cld(lsm1, Letters = "ABCDEFGHIJ") 
 
 ## Interactive Models ##
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
