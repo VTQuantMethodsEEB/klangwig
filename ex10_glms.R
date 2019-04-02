@@ -13,6 +13,10 @@ library(effects)
 plot(allEffects(g1))
 library(lsmeans)
 lsmeans(g1, pairwise~time)
+library(emmeans)
+emmeans(g1, pairwise~time)
+emmeans(g1, pairwise~time, type="response")
+
 
 ###BINOMIAL##
 bat = read.csv("bat_data.csv")
@@ -32,7 +36,8 @@ g2 = glm(gd~date+species,data=bat, family="binomial");
 summary(g2)
 
 #What does this tell us?
-dat.new=expand.grid(date=seq(from = min(bat$date),to = max(bat$date),length.out = 100),species = unique(bat$species))
+dat.new=expand.grid(date=seq(from = min(bat$date),to = max(bat$date),length.out = 100),
+                    species = unique(bat$species))
 
 #weird output if we don't use "response:
 predict(g2,newdata = dat.new)
@@ -41,6 +46,8 @@ predict(g2,newdata = dat.new)
 dat.new$yhat  = predict(g2,type="response",newdata = dat.new)
 bat$yhat2 = predict(g2,type="response")
 head(dat.new)
+
+head(bat)
 
 plot1=ggplot(data=bat,aes(x=date,y=gd,color=species))+
   geom_point(size=2,shape =1) +
@@ -63,9 +70,9 @@ summary(g2);summary(g3)
 #these are identical
 
 #sometimes plotting the aggregated data looks better too
-plot1=ggplot(data=b1,aes(x=date,y=gd,color=species))+
-  geom_point(size=2,shape =1) +
-  geom_line(data=dat.new, aes(x=date,y=yhat,col = species))
+plot1=ggplot(data=b1,aes(x=date,y=gd,color=species))+ #aggregated data file
+  geom_point(size=2,shape =1) + #add real data points to plot
+  geom_line(data=dat.new, aes(x=date,y=yhat,col = species)) #plot smooth lines from dat.new
 plot1
 
 #ses and confidence intervals from binomial data
@@ -93,13 +100,16 @@ dat.new = cbind(dat.new, preds[1:2])#bind together se's and fitted points on you
 #get the inverse link function for your glm
 ilink <- family(g2)$linkinv
 #back transform the CIs (not the SEs!)
-dat.new <- transform(dat.new, Fitted = ilink(fit), Upper = ilink(fit + (2 * se.fit)),
+dat.new <- transform(dat.new, 
+                     Fitted = ilink(fit), 
+                     Upper = ilink(fit + (2 * se.fit)),
                 Lower = ilink(fit - (2 * se.fit)))
 #fitted should be the same as yhat
 head(dat.new)
 #plot the output
 plot1=ggplot(data=bat,aes(x=date,y=gd,color=species))+
   geom_point(size=2,shape =1) +
+  facet_wrap(~species)+
   geom_line(data=dat.new, aes(x=date,y=yhat,col = species))+
   geom_ribbon(data = dat.new, aes(ymin = Lower, ymax = Upper, x = date,y=yhat),
               fill = "steelblue2", alpha = 0.2) 
