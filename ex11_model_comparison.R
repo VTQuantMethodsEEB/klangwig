@@ -32,8 +32,6 @@ Anova(g2)
 Anova(g3)
 Anova(g4)
 Anova(g5)
-#this will give the same thing
-anova(g1a, test = "Chisq")
 
 #species and date are equally significant - select one
 g1a = glm (gd~species+date, data = bat, family = binomial)
@@ -66,19 +64,7 @@ Anova(g1b)
 g1.new = glm (gd~count*temp, data = bat, family = binomial)
 Anova(g1.new)
 pr(g1.new)
-#testing null model weirdness
-bat.trim = bat[!is.na(bat$temp),]
-bat.trim = bat.trim[!is.na(bat.trim$count),]
-t1 = glm (gd~count*temp, data = bat.trim, family = binomial)
-t2 = glm (gd~count+temp, data = bat.trim, family = binomial)
-t3 = glm (gd~count, data = bat.trim, family = binomial)
-t4 = glm (gd~1, data = bat.trim, family = binomial,subset = )
-summary(t4)
-anova(t4,t1,test = "Chisq")
-logLik(t3)
-logLik(t4)
-AIC(t1,t2,t3,t4)
-drop1(t1,t2,test="Chisq")
+
 
 ##BACKWARDS STEPWISE##
 liz = read.csv("lizards.csv")
