@@ -76,7 +76,7 @@ R's behaviour may seem annoying at first -- it seems like the estimated values o
 pr(lm0 <- lm(colonies~place-1,data=ants))
 ```
 
-When you use the `colonies~place-1` formula, the meanings of the parameters change: $\beta_1$ is the same (mean of "field"), but $\beta_2$ is 'mean of "field"' rather than ("(field)-(forest)").
+When you use the `colonies~place-1` formula, the meanings of the parameters change: $\beta_1$ is the same (mean of "field"), but $\beta_2$ is 'mean of "forest"' rather than ("(field)-(forest)").
 
 ## Interpretation using `predict`
 
@@ -282,3 +282,18 @@ plot(allEffects(lmTL2))
 - [`gmodels::fit.contrast()`](http://hosho.ees.hokudai.ac.jp/~kubo/Rdoc/library/gmodels/html/fit.contrast.html) (show parameter estimates based on re-fitting models with new contrasts), [`rms::contrast.rms()`](http://hosho.ees.hokudai.ac.jp/~kubo/Rdoc/library/rms/html/contrast.html) (ditto, for `rms`-based fits)
 - http://www.ats.ucla.edu/stat/r/library/contrast_coding.htm
 
+
+##Assignment
+
+- *PART 1*
+1. Make a univariate linear model for one of your hypotheses
+2. Examine the assumptions of linearity (using tests or diagnostic plots)
+3. Plot the relationship in ggplot using stat_smooth
+
+- *PART 2*
+1. Make a linear model (with more than one variable) for one of your hypotheses. Articulate which hypothesis you are testing.
+
+2. Use an interactive model and an additive model. Explain what hypothesis each of these is testing, and what the R output is telling you about your data.
+(Hint: you can use lsmeans, effects, relevel, or predict to help you.) You should include this explanation in either your README or in your code.
+
+3. Plot your model (e.g. using predict) and overlay the model on top of the underlying data. See code for example to plot both model and data (on github).

@@ -97,8 +97,11 @@ anova(l1,l2,l3,l4)
 #anova works slightly differently depending on which models we are comparing
 h1 = glm(grahami~light*time,data = liz, family = poisson)
 h2 = glm(grahami~light+time,data = liz, family = poisson)
+#DRAW ATTENTION TO THIS! NEED TO RE-ORDER!
 #with a regular glm, we need to specify LRT
 anova(h1,h2, test = "LRT")
+anova(h2,h1, test = "LRT")
+
 #the nice thing is if we use the wrong test, it will tell us!
 anova(h1,h2, test = "F")
 

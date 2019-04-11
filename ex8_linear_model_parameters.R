@@ -141,6 +141,7 @@ pr(lmTL1 <- lm(grahami~time+light,data=lizards))
 
 library(lsmeans)
 library(multcompView)
+library(multcomp)
 lsmeans(lmTL1, specs = "time", contr = "pairwise")
 
 lsm1<-lsmeans(lmTL1,pairwise~time)
@@ -149,9 +150,11 @@ lsm1<-lsmeans(lmTL1,pairwise~time)
 #syntax is similiar
 library(emmeans)
 lsm1<-emmeans(lmTL1,pairwise~time)
+pairs(lsm1)
 cld(lsm1)
 cld(lsm1$emmeans)
-cld(lsm1, Letters = "ABCDEFGHIJ") 
+CLD(lsm1$emmeans, Letters = "ABCDEFGHIJ")
+cld(lsm1$emmeans, Letters = "ABCDEFGHIJ") 
 
 ## Interactive Models ##
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
@@ -174,7 +177,8 @@ pp2 <- pp
 pp2$grahami <- predict(lmTL2,newdata=pp2)
 
 
-ggplot(pp2,aes(x=time,y=grahami,colour=light))+geom_point()+
+ggplot(pp2,aes(x=time,y=grahami,colour=light))+
+  geom_point()+
   geom_line(aes(group=light))
 
 ###ADD RAW data to plot###

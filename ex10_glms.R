@@ -13,6 +13,7 @@ library(effects)
 plot(allEffects(g1))
 library(lsmeans)
 lsmeans(g1, pairwise~time)
+
 library(emmeans)
 emmeans(g1, pairwise~time)
 emmeans(g1, pairwise~time, type="response")

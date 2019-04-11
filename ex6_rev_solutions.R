@@ -13,7 +13,7 @@ seeds.not.eaten = rbinom(1000,size=1,p = .98)
 seeds.sprouted = rbinom(n = seeds.not.eaten,size=1, p=.01 )
 sum(seeds.sprouted)
 
-#100 days
+#100 days #this isn't right - need to iteratively draw
 sum(rbinom(n = seeds.not.eaten,size=100, p=.01 ))
 
 #squid

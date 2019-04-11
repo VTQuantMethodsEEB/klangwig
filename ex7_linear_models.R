@@ -1,3 +1,4 @@
+
 ##linear models lecture##
 ##week 6###
 
@@ -63,8 +64,9 @@ library(arm)
 dev.off()
 
 ## Basic tools
-l2 <- lm(colonies~observers*place, data = ants)
+l2 <- lm(colonies~observers, data = ants)
 summary(l2)
+plot(l2)
 
 #coefplot(l2)
 
@@ -94,12 +96,14 @@ ga = glht(l2, linfct = mcp(place = "Tukey"))
 summary(ga)
 
 ## Plotting
-
+summary(l2)
 yhats=predict(l2,interval = "confidence")
 #note this gives a value for each value of your existing dataset
 ?predict.lm
 #can specificy newdata frame to predict
-dat.new=expand.grid(place=c("playground","field","forest"))
+#dat.new=expand.grid(place=c("playground","field","forest"))
+dat.new=data.frame(observers=seq(1:10))
+
 yhats=predict(l2,newdata=dat.new,interval = "confidence")
 
 ##ggplot2##

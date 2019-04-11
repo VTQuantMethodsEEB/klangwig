@@ -2,8 +2,8 @@
 title: "Linear models lecture"
 author: "Kate Langwig (input from BB and JD)"
 output:
-  beamer_presentation: default
   ioslides_presentation: default
+  beamer_presentation: default
 ---
 
 # Introduction
