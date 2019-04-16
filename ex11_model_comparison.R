@@ -95,8 +95,8 @@ anova(l1,l3)
 anova(l1,l2,l3,l4)
 
 #anova works slightly differently depending on which models we are comparing
-h1 = glm(grahami~light*time,data = liz, family = poisson)
-h2 = glm(grahami~light+time,data = liz, family = poisson)
+h1 = glm(grahami~light*time,data = liz, family = poisson); summary(h1)
+h2 = glm(grahami~light+time,data = liz, family = poisson); summary(h2)
 #DRAW ATTENTION TO THIS! NEED TO RE-ORDER!
 #with a regular glm, we need to specify LRT
 anova(h1,h2, test = "LRT")
@@ -120,6 +120,7 @@ AIC(h1,h2,h3,h4,h5)
 
 #tabular
 aictab(cand.set=list(h1,h2,h3,h4,h5),modnames=c("h1","h2","h3","h4","h5"))#AIC table
+aictab(cand.set=list(h1,h2,h3,h4,h5),modnames=c("h1","h2","h3","h4","h5"), second.ord = F)#AIC table
 
 #this function will give a nice AIC table, but calculating weights and delta AIC is very straightforward
 

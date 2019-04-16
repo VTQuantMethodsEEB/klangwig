@@ -33,14 +33,17 @@ summary(lm2)
 #161
 t.value = 13.02
 p.value = 2*pt(t.value, df = 161, lower=FALSE)
+#draw from the t distribution to get the probability (p-value) at your calculated t-value
 p.value
 #a good rule of thumb is that if you have a lot of data, you want a t-value > 2
 
 #what are diffs between the models above?
 pp <- expand.grid(Days=0:9,Subject=levels(sleepstudy$Subject))
+#create a new data frame with all the stuff for each subjuet
 pp2 <- cbind(pp,Reaction=predict(lm2,newdata=pp))
+#make a new dataframe, pp2, and predict lm2
 pp3 <- cbind(pp,Reaction=predict(lm3,newdata=pp))
-
+#make a new dataframe, pp2, and predict lm3
 
 print(q0
       + geom_line(data=pp2)
@@ -110,3 +113,15 @@ r=ggplot(data=newdat, aes(x=year,y=yhat,col=species))+
 print(r)
 
 #yikes
+
+#negative binomial example with mixed models#
+#ex12_nb_mixed
+
+liz = read.csv("lizards.csv")
+
+library(lme4)
+
+## run mixed model
+m.nb <- glmer.nb(N ~ time*light + (1|height), data=liz)
+#look at mixed model
+summary(m.nb)
