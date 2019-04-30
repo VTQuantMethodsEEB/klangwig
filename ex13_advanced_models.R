@@ -1,4 +1,5 @@
 #ex13_advanced_models
+#covers zero-inflated and time series models
 
 #load packages
 library(MASS)
