@@ -1,5 +1,4 @@
 
-###putting package officer through some tests
 rm(list=ls()) # clears workspace
 
 #simplifying code with pipes

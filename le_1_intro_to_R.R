@@ -111,19 +111,26 @@ View(mydata)
 #selecting example
 # InsectSprays is a built-in data set in R
 class(InsectSprays)
-head(InsectSprays)
 names(InsectSprays)
+
+#this gives the first 6 rows in the dataframe
+head(InsectSprays)
+
 
 
 # Select a subset of InsectSprays containing only the first list element
 InsectSprays[1]
+#this gives you just the count column
 
+# Select the first row of InsectSprays
 InsectSprays[1,]
-# Select the first column of InsectSprays
+
+# Select part of the first column of InsectSprays
 InsectSprays[, 1]
 
 # Select part of the first column of InsectSprays
 InsectSprays[1:10, 1]
+
 
 # Select the first row of InsectSprays
 InsectSprays[1,]
@@ -143,14 +150,17 @@ InsectSprays[InsectSprays$spray=="A" | InsectSprays$count<10,]
 ?as.Date
 
 
-#example of read.csv
-r2=read.csv("/Users/klangwig/Dropbox/Contact rate MS/Network graph/Network data/enviro_master.csv")
+#example of read.csv with directory
+r2<-read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/github/klangwig/bat_data.csv")
+#this file is in my project folder so I can read it in without calling the directory
+r2=read.csv("bat_data.csv")
 #you will need to change this to match your directory
 
 #date example
 head(r2)
 unique(r2$date)
-r2$date2 = as.Date(r2$date, "%m/%d/%y" )
+r2$date2 = as.Date(r2$date, "%m/%d/%y")
+unique(r2$date2)
 ?julian
 unique(julian(r2$date2))
 

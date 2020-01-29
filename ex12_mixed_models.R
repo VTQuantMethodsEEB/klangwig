@@ -1,3 +1,6 @@
+
+rm(list=ls()) # clears workspace
+
 #ex12_mixed_models
 ##load important packages##
 library(ggplot2)
@@ -113,6 +116,26 @@ r=ggplot(data=newdat, aes(x=year,y=yhat,col=species))+
 print(r)
 
 #yikes
+
+##what if we want to predict categorical
+newdat2 = expand.grid(species = unique(bat$species),
+                     site = unique(bat$site)
+)
+newdat2$yhat = predict(gm1,newdata= newdat2,re.form=NA,type="response")
+#note - I use response to transform from logit space to response variable space
+#I used re.form to drop random effects because I don't care about the site effects
+
+#let's plot the prediction
+r=ggplot(data=newdat2, aes(x=species,y=yhat))+ 
+geom_point(color="red")  +
+geom_point(data = bat, aes(x = species, y = gd),size=3, shape = 1)+
+  ylab("Pd Prevalence")+
+  xlab("Year")+
+  coord_cartesian(ylim=c(-0.1,1.1))+
+  theme_bw() + 
+  theme(axis.title=element_text(size=23),axis.text=element_text(size=15),panel.grid = element_blank(), axis.line=element_line(),legend.position=c(.9,.55),legend.text = element_text(size=12,face="italic"))
+print(r)
+
 
 #negative binomial example with mixed models#
 #ex12_nb_mixed

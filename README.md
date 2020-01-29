@@ -79,3 +79,16 @@ Tuesday: No class
 -Make sure to complete quiz!
 
 Thursday: Phylogenies with Dr. Uyeda
+
+Week 8
+---------------------
+Tuesday: 
+lecture: le_7_linear_models
+code: ex7_linear_models
+
+Thursday:
+lecture: ex7_assignment
+code: use code from Tuesday
+
+Week 9
+----------------------

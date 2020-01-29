@@ -1,6 +1,7 @@
 #le2_data_manipulation  
 
 #load important packages##
+library(tidyverse)
 library(tidyr)
 library(dplyr)
 
@@ -13,41 +14,83 @@ hist(batdat$gd)
 
 batdat$lgdL=log10(batdat$gdL)#log the amount of fungus
 batcounts<-aggregate(count~species+site+date,data=batdat, FUN=mean)  #make a df of bat counts
+
+#starting with the "old" way - using spread
 batcounts.wide<-spread(batcounts, species,count,convert=T) #spread that dataframe
 
 head(batcounts)
 head(batcounts.wide)
 
 batloads<-aggregate(lgdL~species+site+date,data=batdat, FUN=mean)
-batloads.wide<-spread(batloads, species,lgdL,convert=T)
 head(batloads)
+
+batloads.wide<-spread(batloads, species,lgdL,convert=T)
 head(batloads.wide)
 
+#can merge together but duplicates columns
 batwide=merge(batloads.wide,batcounts.wide,by=c("site","date"))
 head(batwide)
+#now we have a dataframe with columns for counts and for loads
 
-# Look at some example data that comes with the tidyr package:
+# Or "match" and keep in long format
+batloads
+batcounts
+#create a unique row id - in this case it is the species, site, and date which denote the entries we want to match
+batloads$unique.row.id = paste(batloads$species,batloads$site,batloads$date)
+batcounts$unique.row.id = paste(batcounts$species,batcounts$site,batcounts$date)
+#dataframe you are bringing to first, and the one you matching from second
+batloads$count = batcounts$count[match(batloads$unique.row.id,batcounts$unique.row.id)]
 
-smiths
-gather(smiths)
-#collect the vars we want
-print(smelt <- gather(smiths, key="var", value="value",
-                      c(age,weight)))
+# Look at some example data that comes with the tidyr package
+# "New' way using 'pivot_wider'
+fish_encounters
 
+#let's say we want a new df where each row is a station
+fish_encounters %>%
+  pivot_wider(names_from = station, values_from = seen)
 
-## Make a column for each subject (= a row for each measurement)
-spread(smelt, key=subject, value)
+#we didn't include 0's at statins where we didn't observe fish so we can substitute those in
+# Fill in missing values
+fish_encounters %>%
+  pivot_wider(
+    names_from = station,
+    values_from = seen,
+    values_fill = list(seen = 0)
+  )
 
-## Make a column for each value (= a row for each person):
-spread(smelt, key=var, value)
+#what if we have a wide dataframe and want to make it "tidy"
+head(relig_income)
+relig_income %>%
+  pivot_longer(-religion, names_to = "income", values_to = "count")
+#the minus sign says don't include the column religion
+#now you have a variable income and a count of the number of people that were in that income class
 
-## Take the mean for each variable:
-smelt %>% group_by(var) %>% summarise(mean=mean(value, na.rm=T))
+head(billboard)
 
-## Report how many values are in each mean:
-smelt %>% group_by(var) %>% 
-  summarise(mean=mean(value,na.rm=TRUE),
-            n=length(na.omit(value)))
+billboard %>% 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+
+billboard %>% 
+  pivot_longer (
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    names_prefix = "wk",
+    names_ptypes = list(week = integer()),
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+#we can also smush our bat data back together
+head(batcounts.wide)
+
+#we want both site and date to be columns
+batcounts.wide %>%
+  pivot_longer(-c(site,date), names_to = "species", values_to = "count")
+
 
 ## Group by, Mutate, and Summarise
 batdat %>% 
@@ -67,7 +110,7 @@ batdat_with_sample_size = batdat %>%
   #create a new dataframe  called batdat_with_sample_size
   group_by(site,species,date) %>% 
   #you can group_by multiple things
-  mutate(sample.size=length(swab_id))
+  mutate(sample.size=n())
 #this adds a column to the dataframe
 batdat_with_sample_size
 
