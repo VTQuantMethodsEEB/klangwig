@@ -16,6 +16,9 @@ head(batdat)
 batdat$lgdL=log10(batdat$gdL)
 
 
+g1 = ggplot(data=batdat, aes(x = species, y = lgdL, color=site))+
+  geom_point(size=2)
+
 g1=ggplot(data=batdat,aes(x=species,y=lgdL,color=site))+
   geom_point(size=2) #this adds points to graph
 g1
@@ -40,8 +43,8 @@ g1
 
 g1=ggplot(data=batdat,aes(x=species,y=lgdL))+
   geom_boxplot()+
-  geom_jitter(aes(shape=site))#+
-  #geom_point() #now assign color here so we don't have seperate boxes
+  #geom_jitter(aes(shape=site))#+
+  geom_point(aes(color=site), alpha = 0.2) #now assign color here so we don't have seperate boxes
 g1
 #now we can look at it in more compact form, but still see the data come from multiple sites
 

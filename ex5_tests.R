@@ -73,7 +73,7 @@ abline(v=obs,col="red")
 ##so how do we get our p-value?
 res[res>=obs]
 length(res[res>=obs])
-225/10000
+230/10000
 mean(res>=obs)        
 #using mean(permutations>=obs)) is a trick to calculate the proportion: 
 #the logical statement returns a logical (FALSE/TRUE) vector, which then gets converted to a 0/1 vector when you ask R to take the mean, 
@@ -89,9 +89,10 @@ mean(res>=obs)
 mean(abs(res)>=abs(obs))
 
 ###########t-tests####################
-#one-sample t-test
+#one-sample t-test - is the mean equal to 0?
 tt_one <- t.test(field)
 tt_one
+
 
 #true student t-test
 tt <- t.test(colonies~place,data=ants,var.equal=TRUE)
