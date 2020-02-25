@@ -5,9 +5,6 @@ rbinom(n = 10,size = number.of.bats,prob = 0.48)/number.of.bats
 #this says "draw randomly from a normal distribution", with ten trials (sites) of 100 bats, 
 #each with a probability of being infected equal to 48%
 
-curve (dnorm,-5,5)
-curve(pnorm,-5,5)
-
 #density distributions
 ?dbinom
 dbinom(x=1,size = 25, prob = 0.2)

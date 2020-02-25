@@ -64,8 +64,9 @@ code: ex6_rev_distributions.R
 handout:Handout_Week6_Distributions.pdf (In "readings" folder")
 
 Thursday: No class Feb 2020!
-lecture & solutions & assignment: ex6_rev_distributions.pptx
-code: ex6_rev_distributions.R
+lecture & solutions : ex6_solutions.pptx
+code: ex6_rev_distributions.R / ex6_rev_solutions.R
+
 READING ASSIGNMENT & QUIZ: 
 (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
 (2) Week6_Felsenstein 1985 Am Nat
