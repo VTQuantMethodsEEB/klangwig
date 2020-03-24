@@ -61,7 +61,18 @@ corrplot(cor(mtcars[, -1])) #give me everything but what is being predicted (mpg
 #=> - gear, am
 #=> - hp, carb
 #- dark blue = bad
-
+#One way to measure multicollinearity is the variance inflation factor (VIF), 
+#assesses how much the variance of an estimated regression coefficient increases if your predictors are correlated. 
+#If no factors are correlated, the VIFs will all be 1
+#> 8-10 is cause for concern (sometimes ppl say even lower) 
+vif(mod2)
+library(fmsb)
+#this tells us that some of the predictors are highly correlated with some other things in the model
+#cyl and disp are really bad
+#which ones? 
+M <- cor(mtcars)
+M
+#which one to remove to both scientific and practical
 dev.off()
 
 ## Basic tools
