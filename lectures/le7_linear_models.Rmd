@@ -5,6 +5,11 @@ output:
   ioslides_presentation: default
   beamer_presentation: default
 ---
+# Welcome to Online QMEE
+- Please turn on your camera and mute your mic when you aren't talking
+- You can use the raise hand buttons as well as the emotions buttons
+- Please raise your hand or interrupt if you have a question
+- Zoom sessions will be recorded for later review
 
 # Introduction
  
@@ -70,105 +75,6 @@ input variable (parameter) associated with a single predictor variable
     - Might be able to use a linear model! 
      - $Y = a + bX + cX^2$ is linear in $a$ and $b$ (the unknowns)
 
-- see code
-
-
-## Interpreting multi-parameter variables is hard
- 
-- We can get a $p$ value for the variable as a whole (e.g. is place important?)
-- But we can only get errors on the parameters (e.g. field / forest)
-  - there are also different ways to parameterize (*contrasts*)
-- Think clearly about the *scientific* questions you have for this variable
-- If you're just trying to control for it, just put it in and then ignore it!
-- If you do have a clear scientific question, you should be able to
-construct *contrasts* in such a way that you can test it.
-- You can do pairwise comparisons to test each pair of variables for differences and make an `aabbc` list
- 
-## Interactions
- 
-- Interactions allow the value of one predictor to affect the
-relationship between another predictor and the response variable
-- Interpreting *main effects* in the presence
-of interactions is tricky
-- Your estimate of the effect of variable $B$ is no longer constant
-- You need to pick a fixed point, or average in some way
-- Example: $Y = a + b_1 X_1 + b_2 X_2 + b_{12} X_1*X_2$
-- The response to $X_1$ is $Y = (a+b_2 X_2) + (b_1+b_{12}X_2) X_1$  
-the response to $X_1$ *depends on* the value of $X_2$.
- 
-## An experimental example
- 
-- You want to know whether a drug treatment changes the
-	metabolism of some rabbits
-- You're using adult, prime-aged rabbits and keeping them under
-	controlled conditions, so you don't expect their metabolism to
-	change *without* the drug.
-    - What's wrong here?
-    
-## An experimental example
- 
-- You want to know whether a drug treatment changes the
-	metabolism of some rabbits
-- You're using adult, prime-aged rabbits and keeping them under
-	controlled conditions, so you don't expect their metabolism to
-	change *without* the drug.
-    - What's wrong here?
-
-- You also introduce some control rabbits and treat them exactly the
-same, including giving them fake pills. You find no significant
-change in the metabolism of the control rabbits through time
-    - There is still a problem...
- 
-## Testing interactions
-
-- Time is an important factor
- 
-- Use an *interaction*:
-$$
-M = a + B_x X + B_t t + B_{xt} Xt
-$$
-- The interaction term $B_{xt}$ represents the *difference in the response* between the two groups.
-- It asks: **did the treatment group change differently than the control group**?
-
-- Could also write:
-$$
-M = a + B_1 trmt + B_2 time + B_{3} trmt*time
-$$
-- [Draw plot here]
-
-## Interactions and parameters
-
-- We can use CIs, and coefficient plots, and get a pretty good idea what's
-going on
-- In more complicated cases, interaction terms may have many parameters 
-- These have all the interpretation problems of other multi-parameter
-variables
-- Think about "differences in differences"
-
-## Interactions: example
-
-- Bear road-crossing
-- Predictor variables: sex (categorical), road type (categorical: major/minor), road length (continuous)
-- Two-way interactions
-- What does these models look like?
-     - sex $\times$ road length: "are females more sensitive to amount of road than males?"
-	 - sex $\times$ road type: "do females vary behaviour between road type more than males?"
-	 - road type $\times$ road length: "does amount of road affect crossings differently for different road types?"
-
-## Statistical philosophy
- 
- - Don't just accept the null hypothesis
-    - Don't throw out predictors you wanted to test because
-		they're not significant
-	- Don't throw out interactions you wanted to test because
-		they're not significant
-	- Think carefully about your hypotheses and construct interactions if appropriate
-    - 	There are techniques to deal with multiple predictors e.g.
-		lasso regression, AIC, step-wise regression (although this violates above)
-     - 	There are ways to estimate main effects in the presence of
-		interactions (google "sum-to-zero contrasts" or "orthogonal
-		interactions")
- 
 ## Diagnostics
  
 - Because the linear model is sensitive (sometimes!) to
@@ -181,8 +87,7 @@ assumptions, it is good to evaluate them
 		**residuals** look Normal?)
 		- What test would I use for this?
   - Independence (no autocorrelation)
-    - current value is independent of the previous (historic) values 
-    - we will discuss this more later in the semester - important for time series data
+    - current value is independent of the previous (historic) values - important for time series data
 - Normality is the **least important** of these assumptions
  
 ## Default plots in R

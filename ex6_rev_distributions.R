@@ -1,8 +1,8 @@
 ##Examples from distributions lecture##
 
-number.of.bats = 100
+number.of.bats = 1000
 rbinom(n = 10,size = number.of.bats,prob = 0.48)/number.of.bats
-#this says "draw randomly from a normal distribution", with ten trials (sites) of 100 bats, 
+#this says "draw randomly from a binomial distribution", with ten trials (sites) of 100 bats, 
 #each with a probability of being infected equal to 48%
 
 #density distributions

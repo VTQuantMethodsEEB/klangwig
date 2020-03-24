@@ -20,14 +20,8 @@ lm(colonies~observers, data = ants)
 summary(l1)
 #[now write out equations]
 
-## Multi-parameter variables 
-## Interactions
 
-
-l2 <- lm(colonies~observers*place, data = ants)
-summary(l2)
-
-##diagnostic plots
+##Diagnostic plots
 ## Diagnostic plots in code...
 
 head(mtcars)
@@ -39,6 +33,8 @@ plot(mod_1)
 
 hist(resid(mod_1))
 shapiro.test(resid(mod_1))
+#null hypothesis is that the sample comes from a normally distributed population
+#p < 0.05 is not normal
 hist(mtcars$mpg)
 
 ## Correlation plots
