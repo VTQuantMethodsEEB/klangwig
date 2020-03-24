@@ -1,3 +1,4 @@
+rm(list=ls())
 
 ##linear models lecture##
 ##week 6###
@@ -19,6 +20,8 @@ l1 <- lm(colonies~observers, data = ants)
 lm(colonies~observers, data = ants)
 summary(l1)
 #[now write out equations]
+# y (number of colonies) = ax +b
+# y (number of colonies) = 0.1007x + 8.3087
 
 
 ##Diagnostic plots
@@ -46,6 +49,10 @@ summary(mod2)
 #this says mpg by all vars
 
 library(corrplot)
+## corrplot 0.84 loaded
+M <- cor(mtcars)
+corrplot(M, method = "circle")
+corrplot(M, method = "number")
 corrplot(cor(mtcars[, -1])) #give me everything but what is being predicted (mpg)
 #be careful with vars that are dark blue
 #=> Interpreted from plot.
@@ -55,8 +62,6 @@ corrplot(cor(mtcars[, -1])) #give me everything but what is being predicted (mpg
 #=> - hp, carb
 #- dark blue = bad
 
-
-library(arm)
 dev.off()
 
 ## Basic tools
@@ -79,10 +84,11 @@ ants <- data.frame(
 ants
 
 ##check car package##Anova###
-l2 = aov(colonies~place, data = ants);summary(l2)
+l2 = aov(colonies~place, data = ants);
+summary(l2)
 l2 = lm(colonies~place, data = ants);anova(l2)
-
 summary(l2); l2
+
 l2 = aov(colonies~place, data = ants);summary(l2)
 TukeyHSD(l2)
 
@@ -97,8 +103,8 @@ yhats=predict(l2,interval = "confidence")
 #note this gives a value for each value of your existing dataset
 ?predict.lm
 #can specificy newdata frame to predict
-#dat.new=expand.grid(place=c("playground","field","forest"))
-dat.new=data.frame(observers=seq(1:10))
+dat.new=expand.grid(place=c("playground","field","forest"))
+#dat.new=data.frame(observers=seq(1:10))
 
 yhats=predict(l2,newdata=dat.new,interval = "confidence")
 
