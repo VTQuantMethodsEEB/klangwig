@@ -1,9 +1,9 @@
 ---
 title: "Linear model parameters"
 output:
-  slidy_presentation: default
   ioslides_presentation: default
   beamer_presentation: default
+  slidy_presentation: default
 ---
 
 ```{r setup,echo=FALSE,message=FALSE}
@@ -208,7 +208,7 @@ label=paste0("beta[",1:4,"]"),parse=TRUE)+
 
 ## What are the p-values?
 ```{r lizardPvalues}
-pr(lmTL2 <- lm(grahami~time*light,data=lizards))
+pr(lmTL2 <- lm(grahami~time+light,data=lizards))
 ```
 The p-values tell us the difference from the baseline level, not from each other
 
@@ -224,8 +224,60 @@ lsmeans(lmTL1, specs = "time", contr = "pairwise")
 
 ```{r lizardlsmeansPvaluesABClist}
 lsm1<-lsmeans(lmTL1,pairwise~time)
-cld(lsm1,by = NULL, Letters = "ABCDEFGHIJ") 
+CLD(lsm1,by = NULL, Letters = "ABCDEFGHIJ") 
 ```
+
+
+## Interactions
+
+- Interactions allow the value of one predictor to affect the
+relationship between another predictor and the response variable
+- Interpreting *main effects* in the presence
+of interactions is tricky
+- Your estimate of the effect of variable $B$ is no longer constant
+- You need to pick a fixed point, or average in some way
+- Example: $Y = a + b_1 X_1 + b_2 X_2 + b_{12} X_1*X_2$
+- The response to $X_1$ is $Y = (a+b_2 X_2) + (b_1+b_{12}X_2) X_1$  
+the response to $X_1$ *depends on* the value of $X_2$.
+
+
+## An example
+
+- You think that the number of lizards on a perch on a sunny day might depend on the time day
+- For example, on a very sunny day, there might be fewer lizards perching at noon; whereas on a cloudy day, the number of lizards might be highest at noon
+
+## Testing interactions
+
+- Time is an important factor
+
+- Use an *interaction*:
+$$
+M = a + B_x X + B_t t + B_{xt} Xt
+$$
+- The interaction term $B_{xt}$ represents the *difference in the response* between the two groups.
+- It asks: **does the number of lizards perching depend on time of day and light?**
+
+
+- Could also write:
+$$
+M = a + B_1 light + B_2 time + B_{3} light*time
+$$
+- [Draw plot here]
+## Treatment and interactions
+- We previously discussed the wrong construction of linear models to compare drug treatments in mutant and non-mutant mice (erroneous interactions)
+- You want to know whether a drug that significantly reduces neuronal firing affects mutant or control mice differently
+- You find that the drug sig. decreases neuronal firing in mutant mice
+- The drug doesn't decrease sig. dec neuronal firing in non-mutants
+- You need mouse_type*trmt to understand whether the treatment affects mice differently!
+
+## Interactions and parameters
+
+- We can use CIs, and coefficient plots, and get a pretty good idea what's
+going on
+- In more complicated cases, interaction terms may have many parameters 
+- These have all the interpretation problems of other multi-parameter
+variables
+- Think about "differences in differences"
 
 ## Interaction model
 

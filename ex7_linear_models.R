@@ -50,7 +50,7 @@ summary(mod2)
 
 library(corrplot)
 ## corrplot 0.84 loaded
-M <- cor(mtcars)
+M <- cor(mtcars)#correlation matrix
 corrplot(M, method = "circle")
 corrplot(M, method = "number")
 corrplot(cor(mtcars[, -1])) #give me everything but what is being predicted (mpg)
@@ -66,7 +66,6 @@ corrplot(cor(mtcars[, -1])) #give me everything but what is being predicted (mpg
 #If no factors are correlated, the VIFs will all be 1
 #> 8-10 is cause for concern (sometimes ppl say even lower) 
 vif(mod2)
-library(fmsb)
 #this tells us that some of the predictors are highly correlated with some other things in the model
 #cyl and disp are really bad
 #which ones? 
