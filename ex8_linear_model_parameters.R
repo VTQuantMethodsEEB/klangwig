@@ -23,7 +23,10 @@ head(ants)
 lm1 <- lm(colonies~place, data = ants)
 summary(lm1)
 
+
 pr(lm1 <- lm(colonies~place,data=ants))
+#change level
+ants$place = relevel(ants$place, ref="forest")
 
 #- The `(Intercept)` row refers to $\beta_1$, 
 #which is the mean density in the "field" sites ("field" comes before "forest").

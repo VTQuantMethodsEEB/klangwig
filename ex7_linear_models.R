@@ -128,4 +128,6 @@ r=ggplot(data=mtcars, aes(x=wt, y=mpg))+
   theme(axis.title=element_text(size=20),axis.text=element_text(size=10),panel.grid = element_blank(), axis.line=element_line(),legend.position="top",legend.title=element_blank())
 print(r)
 
-
+#if you are running an anova - e.g. you have categories - you'll want:
+#stat_summary(fun="mean", colour = "red", size = 2)+
+  
