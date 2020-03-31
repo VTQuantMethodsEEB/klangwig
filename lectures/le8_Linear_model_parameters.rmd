@@ -181,7 +181,9 @@ Consider the `light` variable in addition to `time`.
 pr(lmTL1 <- lm(grahami~time+light,data=lizards))
 ```
 
-$\beta_1$ is the intercept ("early","sunny"); $\beta_2$ and $\beta_3$ are the differences from the baseline level ("early") of the *first* variable (`time`) in the *baseline* level of the other parameter(s) (`light`="shady"); $\beta_4$ is the difference from the baseline level ("sunny") of the *second* variable (`light`) in the *baseline* level of `time` ("early").
+- $\beta_1$ is the intercept ("early","shady"); 
+- $\beta_2$ and $\beta_3$ are the differences from the baseline level ("early") of the *first* variable (`time`) in the *baseline* level of the other parameter(s) (`light`="shady"); 
+- $\beta_4$ is the difference from the baseline level ("sunny") of the *second* variable (`light`) in the *baseline* level of `time` ("early").
 
 ## Graphical interpretation
 
@@ -215,16 +217,17 @@ The p-values tell us the difference from the baseline level, not from each other
 ## Assessing differences among pairs of variable levels
 
 ```{r lizardlsmeansPvalues}
-library(lsmeans)
+library(emmeans)
 library(multcompView)
-lsmeans(lmTL1, specs = "time", contr = "pairwise")
+library(multcomp)
+emmeans(lmTL1, specs = "time", contr = "pairwise")
 ```
 
 ## Getting an ABCDEF.. list
 
 ```{r lizardlsmeansPvaluesABClist}
-lsm1<-lsmeans(lmTL1,pairwise~time)
-CLD(lsm1,by = NULL, Letters = "ABCDEFGHIJ") 
+lsm1<-emmeans(lmTL1,pairwise~time)
+cld(lsm1$emmeans,by = NULL, Letters = "ABCDEFGHIJ") 
 ```
 
 
@@ -262,7 +265,7 @@ $$
 $$
 M = a + B_1 light + B_2 time + B_{3} light*time
 $$
-- [Draw plot here]
+
 ## Treatment and interactions
 - We previously discussed the wrong construction of linear models to compare drug treatments in mutant and non-mutant mice (erroneous interactions)
 - You want to know whether a drug that significantly reduces neuronal firing affects mutant or control mice differently
@@ -285,8 +288,17 @@ variables
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 ```
 
-Parameters $\beta_1$ to $\beta_4$ have the same meanings as before.
-Now we also have $\beta_5$ and $\beta_6$, labelled "timemidday:lightsunny" and "timelate:lightsunny", which describe the difference between the expected mean value of these treatment combinations based on the additive model (which are $\beta_1 + \beta_2 + \beta_4$ and $\beta_1 + \beta_3 + \beta_4$ respectively) and their actual values.
+- Parameters $\beta_1$ to $\beta_4$ have the same meanings as before.
+- $\beta_5$ and $\beta_6$, labelled "timemidday:lightsunny" and "timelate:lightsunny" describe the difference between the expected mean value of these treatment combinations based on the additive model 
+
+
+## Interaction model cont
+
+```{r lizardTL2_cont}
+pr(lmTL2 <- lm(grahami~time*light,data=lizards))
+```
+- num lizards when sunny at midday = $\beta_1 + \beta_2 + \beta_4$ + $\beta_5$
+- num lizards when sunny at late =  $\beta_1 + \beta_3 + \beta_4$ + $\beta_6$
 
 ## Graphical version
 

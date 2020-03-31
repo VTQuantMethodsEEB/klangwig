@@ -65,10 +65,8 @@ library(effects)
 summary(allEffects(lm1))
 
 #lsmeans
-library(lsmeans)
-#this package will be deprecated soon
-#it is being replaced by emmeans
-lsmeans(lm1,specs = ~place)
+library(emmeans)
+emmeans(lm1,specs = ~place)
 #this is still a useful vignette:
 #https://cran.r-project.org/web/packages/lsmeans/vignettes/using-lsmeans.pdf
 
@@ -142,19 +140,14 @@ ggplot(pp,aes(x=time,y=grahami,colour=light))+
 ## Other ways of doing multiple comparisons
 pr(lmTL1 <- lm(grahami~time+light,data=lizards))
 
-library(lsmeans)
+library(emmeans)
 library(multcompView)
 library(multcomp)
-lsmeans(lmTL1, specs = "time", contr = "pairwise")
+emmeans(lmTL1, specs = "time", contr = "pairwise")
 
-lsm1<-lsmeans(lmTL1,pairwise~time)
 
-#lsmeans isn't working for some, try emmeans
-#syntax is similiar
-library(emmeans)
 lsm1<-emmeans(lmTL1,pairwise~time)
 pairs(lsm1)
-cld(lsm1)
 cld(lsm1$emmeans)
 CLD(lsm1$emmeans, Letters = "ABCDEFGHIJ")
 cld(lsm1$emmeans, Letters = "ABCDEFGHIJ") 
@@ -166,9 +159,9 @@ pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 lizards$time <- relevel(lizards$time, ref = "midday" )
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 
-## Using lsmeans
+## Using emmeans
 # we can add the interaction for all pairwise comparisons
-lsm2<-lsmeans(lmTL2,pairwise~time*light)
+lsm2<-emmeans(lmTL2,pairwise~time*light)
 lsm2
 
 ##plotting the interactive model
