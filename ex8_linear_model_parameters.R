@@ -83,6 +83,7 @@ lizards <- read.csv("lizards.csv")
 library("ggplot2"); theme_set(theme_bw()+
                                theme(panel.spacing=grid::unit(0,"lines")))
 library(dplyr);library(tidyr)
+library(tidyverse)
 mliz <- lizards %>%
   select(grahami,height,diameter,light,time) %>%
   gather(variable,value,-grahami)
@@ -144,9 +145,8 @@ library(emmeans)
 library(multcompView)
 library(multcomp)
 emmeans(lmTL1, specs = "time", contr = "pairwise")
-
-
 lsm1<-emmeans(lmTL1,pairwise~time)
+
 pairs(lsm1)
 cld(lsm1$emmeans)
 CLD(lsm1$emmeans, Letters = "ABCDEFGHIJ")

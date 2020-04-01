@@ -98,3 +98,10 @@ code: use code from Tuesday
 
 Week 9
 ----------------------
+Tuesday: 
+lecture: le8_Linear_model_parameters
+code: ex8_linear_model_parameters
+
+Thursday:
+lecture: le8_Linear_model_parameters (last slide has assignment)
+code: use code from Tuesday
