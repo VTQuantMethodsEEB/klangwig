@@ -1,3 +1,5 @@
+rm(list=ls()) # clears workspace
+
 ##Week 10##
 
 ###1. GLMS###
@@ -6,6 +8,7 @@
 
 liz = read.csv("lizards.csv")
 
+unique(liz$time)
 g1 = glm(N~time,data=liz, family="poisson");
 summary(g1)
 
@@ -21,6 +24,7 @@ emmeans(g1, pairwise~time, type="response")
 bat = read.csv("bat_data.csv")
 head(bat)
 bat$date = as.Date(bat$date, "%m/%d/%y")
+#2/27/2015
 str(bat$date)
 #if you have a PC, it may be this:
 #bat$date = as.Date(bat$date, "%m/%d/%Y")
@@ -50,8 +54,8 @@ head(bat)
 
 plot1=ggplot(data=bat,aes(x=date,y=gd,color=species))+
   geom_point(size=2,shape =1) +
-  #geom_line(data=dat.new, aes(x=date,y=yhat,col = species))+
-  geom_line(aes(x=date,y=yhat2,col = species))
+  geom_line(data=dat.new, aes(x=date,y=yhat,col = species))#+
+  #geom_line(aes(x=date,y=yhat2,col = species))
 plot1
 
 #what if we have aggregated data?

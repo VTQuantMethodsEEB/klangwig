@@ -168,3 +168,82 @@ pr(n2)
 #the best model has a p-value of 0.1!
 
 
+###ADVANCED - K-FOLD CROSS-VALIDATION###
+library(pROC)
+
+nreps<-1000
+num.in.each.fold = nrow(bat)/5
+Folds<-c(rep(1, num.in.each.fold), rep(2, num.in.each.fold), rep(3, num.in.each.fold), rep(4, num.in.each.fold), rep(5, num.in.each.fold))
+bat$Prob<-NA
+AUC<-rep(NA, nreps)
+for(j in 1:length(AUC)) {
+bat$Fold<-sample(Folds, replace=F) #this says - assign a group (e.g. a fold) to each observation
+#Test 1
+model_LOGISTIC = glm(gd~species+site,family=binomial(),data=bat[bat$Fold!=1,] )
+summary(model_LOGISTIC)
+bat$Prob[bat$Fold==1] = predict(model_LOGISTIC, newdata=bat[bat$Fold==1,], type="response", re.form=NA)
+
+#Test 2
+model_LOGISTIC = glm(gd~species+site,family=binomial(),data=bat[bat$Fold!=2,] )
+summary(model_LOGISTIC)
+bat$Prob[bat$Fold==2] = predict(model_LOGISTIC, newdata=bat[bat$Fold==2,], type="response", re.form=NA)
+
+#Test 3
+model_LOGISTIC = glm(gd~species+site,family=binomial(),data=bat[bat$Fold!=3,] )
+summary(model_LOGISTIC)
+bat$Prob[bat$Fold==3] = predict(model_LOGISTIC, newdata=bat[bat$Fold==3,], type="response", re.form=NA)
+
+#Test 4
+model_LOGISTIC = glm(gd~species+site,family=binomial(),data=bat[bat$Fold!=4,] )
+summary(model_LOGISTIC)
+bat$Prob[bat$Fold==4] = predict(model_LOGISTIC, newdata=bat[bat$Fold==4,], type="response", re.form=NA)
+
+#Test 5
+model_LOGISTIC = glm(gd~species+site,family=binomial(),data=bat[bat$Fold!=5,] )
+summary(model_LOGISTIC)
+bat$Prob[bat$Fold==5] = predict(model_LOGISTIC, newdata=bat[bat$Fold==5,], type="response", re.form=NA)
+#Get AUC
+AUC[j]<-as.numeric(auc(roc(response = bat$gd, predictor = bat$Prob, plot=FALSE, ci=TRUE)))
+print(paste(j, AUC[j], sep=":"))
+}
+
+#Plot the ROC curve and get the AUC estimate 
+ROC<-roc(response = bat$gd, predictor = bat$Prob, plot=TRUE, ci=TRUE, legacy.axes=TRUE)
+ROC$auc
+#Area under the curve: 0.7275
+#95% CI: 0.6885-0.7664 (DeLong)
+# The AUC can be defined as the probability that the fit model will score a randomly drawn 
+#positive sample higher than a randomly drawn negative sample
+
+hist(AUC, main = NA)
+mean(AUC) #0.73 
+abline(v=mean(AUC), lty=2)
+summary(AUC)
+lil<-0.025
+big<-0.975
+quantile(AUC, c(lil, big))
+#2.5%     97.5% 
+#0.72 0.74
+Data<-as.data.frame(AUC); head(Data)
+b=ggplot(data=Data, aes(AUC)) +
+  geom_histogram(binwidth = 0.005) +
+  geom_vline(xintercept = mean(AUC), linetype="dashed") +
+  xlab("AUC")+
+  ylab("Number of iterations")+
+  theme_bw()+
+  theme(panel.grid = element_blank(),axis.title=element_text(size=15),
+        axis.text=element_text(size=10), axis.line=element_line(),
+        legend.position = "none", legend.text = element_text(size=20,face="italic"),strip.text = element_text(size=25,face="italic"))
+b
+
+#plot output from single run
+plot.roc(ROC)
+a=ggroc(ROC, size=1, legacy.axes = TRUE) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed") +
+  xlab("1-Specificity")+
+  ylab("Sensitivity")+
+  theme_bw()+
+  theme(panel.grid = element_blank(),axis.title=element_text(size=15),
+        axis.text=element_text(size=10), axis.line=element_line(),
+        legend.position = "none", legend.text = element_text(size=20,face="italic"),strip.text = element_text(size=25,face="italic"))
+a
