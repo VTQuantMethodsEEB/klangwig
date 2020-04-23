@@ -93,6 +93,7 @@ anova(l1,l2)
 anova(l1,l3)
 #can look at all 3
 anova(l1,l2,l3,l4)
+anova(l4,l3)
 
 #anova works slightly differently depending on which models we are comparing
 h1 = glm(grahami~light*time,data = liz, family = poisson); summary(h1)
@@ -100,7 +101,8 @@ h2 = glm(grahami~light+time,data = liz, family = poisson); summary(h2)
 #DRAW ATTENTION TO THIS! NEED TO RE-ORDER!
 #with a regular glm, we need to specify LRT
 anova(h1,h2, test = "LRT")
-anova(h2,h1, test = "LRT")
+anova(h2,h1, test = "LRT") #this is correct!Order from least complicated to most complicated
+
 
 #the nice thing is if we use the wrong test, it will tell us!
 anova(h1,h2, test = "F")
@@ -171,8 +173,8 @@ pr(n2)
 ###ADVANCED - K-FOLD CROSS-VALIDATION###
 library(pROC)
 
-nreps<-1000
-num.in.each.fold = nrow(bat)/5
+nreps<-1000 # setting my reps
+num.in.each.fold = nrow(bat)/5 #dividing by the total number of folds I want 
 Folds<-c(rep(1, num.in.each.fold), rep(2, num.in.each.fold), rep(3, num.in.each.fold), rep(4, num.in.each.fold), rep(5, num.in.each.fold))
 bat$Prob<-NA
 AUC<-rep(NA, nreps)

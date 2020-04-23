@@ -54,7 +54,7 @@ print(q0
 #the dashed lines are nested and the solid line are not!
 
 
-##NOW FOR A GLM##
+##NOW FOR A GLMM##
 bat = read.csv("bat_data.csv")
 head(bat)
 
@@ -148,3 +148,4 @@ library(lme4)
 m.nb <- glmer.nb(N ~ time*light + (1|height), data=liz)
 #look at mixed model
 summary(m.nb)
+
