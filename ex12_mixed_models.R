@@ -97,7 +97,7 @@ r=ggplot(data=newdat, aes(x=year,y=yhat,col=species))+
   geom_point(data = bat, aes(x = jitter(year), y = gd),size=3, shape = 1)+
   ylab("Pd Prevalence")+
   xlab("Year")+
-  coord_cartesian(ylim=c(-0.1,1.1))+
+  coord_cartesian(ylim=c(-0.1,1.1))+ #zoom in
   theme_bw() + 
   theme(axis.title=element_text(size=23),axis.text=element_text(size=15),panel.grid = element_blank(), axis.line=element_line(),legend.position=c(.9,.55),legend.text = element_text(size=12,face="italic"))
 print(r)

@@ -51,3 +51,19 @@ points(pi_o~log10(dose),col="red") #actual points
 resid.sq = (resid(dose.nls)^2)
 mse = mean(resid.sq)
 print(mse)
+
+##GAM##
+pred.dens = seq(1,10, length.out=10) #create prey density
+rates = c(.1,0.4,.5,.6,.5,.7,.8,.82,.825,.8257) #make up some capture rates
+pred.dat = data.frame(pred.dens,rates) 
+
+library(mgcv)
+a <- gam(rates~s(pred.dens),data=pred.dat, method="REML")
+summary(a)
+#Using summary with the model object will give you the significance of the smooth term
+#and the variance explained.
+#edf - estimated degrees of freedom, larger means more wiggle, values closer to 1 are closer to linear
+#gam.check(a)
+plot(a,pages=1,seWithMean=TRUE) #
+pred <- predict.gam(a)
+
