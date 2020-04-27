@@ -13,3 +13,6 @@ pwr.t.test(n=20,d = 0.5, sig.level =0.05)
 
 ##see this for more info
 #https://www.statmethods.net/stats/power.html
+
+##example of power analysis simulation##
+##TO ADD FOR THURSDAY
