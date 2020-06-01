@@ -7,7 +7,7 @@ Kate Langwig
 GitHub Documents
 ----------------
 
-This repository contains the course documents for Working with Ecological and Evolutionary Data. The files you'll need are given week by week. 
+This repository contains the course documents for Quantitative Methods in Ecology and Evolution. The files you'll need are given week by week. 
 
 Week 1
 -------------------
@@ -105,3 +105,66 @@ code: ex8_linear_model_parameters
 Thursday:
 lecture: le8_Linear_model_parameters (last slide has assignment)
 code: use code from Tuesday
+
+Week 10
+-----------------------
+Tuesday:
+lecture: le10_glms.pptx
+code: ex10_glms.R
+
+datasets: bat_data.csv; lizards.csv
+
+Thursday:
+lecture: ex10_glm_assignment.pptx
+code: use code from Tuesday
+
+
+Week 11
+-----------------------
+Tuesday: 
+lecture: le111_model_selection.pptx
+code: ex11_model_comparison.R
+
+reading: Week11_Bolker et al ms information theoretic.pdf
+
+Thursday:
+lecture: le11_assignment.pptx
+code: Use code from Tuesday
+
+Week 12
+------------------------
+Tuesday:
+lecture: le12_mixed_models.pptx
+code: ex12_mixed_models.R
+
+reading: Week12_Bolker 2008 TREE.pdf
+
+Thursday:
+lecture: assignment at end of Tuesday lecture
+code: use same as Tuesday for example
+
+Week 13
+--------------------------
+Extended topics week!
+
+lecture:
+le13_advanced_models_combined.pptx
+
+code:
+zero-inflated models
+- ex_zero_inflated_models.R
+
+power analyses
+- ex_power_analyses.R 
+
+time-series models
+- ex_time_series_models.R
+
+non-linear models (mainly least squares examples)
+- ex_nls_models
+
+phylogenetic models using gls
+- ex_phylogenetic_gls_models
+
+
+
