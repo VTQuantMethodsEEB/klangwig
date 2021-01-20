@@ -3,6 +3,7 @@ rm(list=ls()) # clears workspace
 
 
 #load packages
+#you may need to install if you don't have these yet
 library(tidyverse)
 library(reshape2)
 
