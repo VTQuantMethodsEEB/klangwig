@@ -1,6 +1,12 @@
 
 rm(list=ls()) # clears workspace
 
+
+#load packages
+library(tidyverse)
+library(reshape2)
+
+
 #simplifying code with pipes
 #http://blog.revolutionanalytics.com/2014/07/magrittr-simplifying-r-code-with-pipes.html
 #introduce this idea on Thursday
@@ -38,7 +44,14 @@ dm[dm$site=="HORSESHOE BAY",]
 View(dm[dm$site=="HORSESHOE BAY",])
 
 #change date format
-dm$date=as.Date(dm$date, "%m/%d/%y")
+unique(dm$date)
+#what does this look like? 
+#If the year is two-digits 'y' should be lowercase
+#If the year is four-digits 'Y' should be uppercase
+dm$date=as.Date(dm$date, "%m/%d/%y") 
+#if you have a pc, this line may be:
+#dm$date=as.Date(dm$date, "%m/%d/%Y") 
+
 dm=subset(dm, date > as.Date("2016-04-01") )
 #use only data from dates past april 1 2016
 
@@ -54,35 +67,23 @@ f1=aggregate(tally~site+date+species,FUN=sum,data=dm)
 f1=f1[order(f1$site,f1$date),];f1 
 head(f1)
 
+#More advanced R users....
 #although long format is great for data manipulation, it's not always awesome for reports.
-#Here is how you would do a wide table. 
-#I want a table with a column for each species, site, and date, and rows for the number of individuals sampled.
-dm$site_date=paste(dm$site,dm$date,sep="_")
-#tables are a bit annoying to work with, so I use trick that concatenates site and date (by paste) so I can aggregate on a single variable
-#i'm using the _ (underscore) to separate because number of site names do have periods, spaces, and the dates have dashes
-tab1=table(dm$site_date,dm$species); tab1
+#Here is how you would do a wide table using tidyverse. 
+#We will go through tidyverse in more detail next week, but here is a quick intro
 
-#tables aren't an awesome format, so turn them into a data frame
-mat1=as.data.frame.matrix(tab1) ; mat1
-#create a new column for date
-mat1$date=NA 
+v1 = dm %>% #this says take the dm and make a new dataframe called v1
+  group_by(site,date,species)%>% #group by site, date, and species
+  summarise(N = n()) #make a new dataset that counts the number of observations in each group
 
-#force tables into dataframes for manipulation
-mydf <- cbind(rownames(mat1), mat1)
-#this says bring the first column and the rest of the table together
-rownames(mydf) <- NULL
-#we don't need the row names in a data frame so get rid of them
-colnames(mydf)
-colnames(mydf) <- c("SITE","EPFU","MYLU","PESU","SUBSTRATE","DATE")
-mydf
+v1 #this should look identical to the table you made with aggregate
 
-#we don't want the dates as part of the site name, so lets break them out
-library(reshape2)
-x=colsplit(mydf$SITE,"_",c("sitename","date"));x 
-#this splits site and date into multiple columns, splitting on the period.
-mydf$DATE=x$date
-mydf$SITE=x$sitename
-mydf
+mydf = v1 %>%
+  pivot_wider(names_from = species, values_from = N,values_fill = 0) 
+#pivot_wider is a tidyverse function that changes data from long to wide format
+
+head(mydf)
+
 
 ##MAKE THE TABLE PRETTY
 #make the flex table
