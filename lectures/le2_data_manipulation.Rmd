@@ -15,12 +15,11 @@ knitr::opts_chunk$set(echo = T)
 
 - **I need your github username turned in before next class**
 
-## Change in Assignment
+## Assignment Reminder
 
 - Please turn in your GitHub name and the paragraph about your data on canvas. 
-    + There is a text entry box to do this under the "assignments" tab. (Don't send me via email or a canvas message.)
+    + There is a text entry box to do this under the "assignments" tab. (You don't need to send me an email or a canvas message.)
 
-- You can turn in your code and **data file** from assignment 1 using GitHub on Thursday. 
 
       
 ## Goals
@@ -32,6 +31,31 @@ You should be able to
     - numbers, characters, factors, missing values
 - examine the data visually, numerically, textually, etc.
 
+##Getting Started with Data
+- Save files as .csv
+
+- IMPORTANT – saving an excel file as a CSV means that you will lose some data
++ For example, if you used excel to calculate a formula, the formula will be gone as R will just store this as plain text
+- DON’T USE EXCEL TO DO CALCULATIONS – JUST ADD THIS TO YOUR CODE IN R
+- Use smart column names. R can’t handle spaces in your column names, so get rid of those. Also don’t use a bunch of capitals unnecessarily because it slows down your coding. e.g. use “species” not “Species”
+- There are packages that allow you to read in .xls files (gdata in JD), but I think using .csv is easier
+
+## Making your excel file
+- Excel files should have a list of column names at the top only and variable values
+
+- Your excel file should not look like your field data sheet
+
+## What is wrong with this entry?
+```{r, out.width = "800px",echo=F}
+knitr::include_graphics("bad_excel_pic.png")
+```
+
+## Corrected entry
+```{r, out.width = "800px",echo=F}
+knitr::include_graphics("corrected_datasheet.png")
+```
+
+
 ## Representations
 
 Numeric and character types are fairly straightforward, and you rarely
@@ -39,6 +63,17 @@ have to worry about when and whether R represents things as integers or *floatin
 
 You do need to know about **factors**, and to be aware when your
 variables are being treated as such. See lecture 1 for more about factors.
+
+## Dates
+
+Working with dates can be a bit frustrating because as time units get larger, they become more variable. For example, at what day does the 75th percentile of the month fall?
+
+An important note – macs and windows machines often handle dates differently and the default is different in excel. 
+
+One a mac the default is mo/day/two digit year – e.g. 01/13/18 is January 13, 2018, but on a PC the default is “01/13/2018”. This can result in some frustration between people sharing scripts!
+
+Typically, dates will be loaded in as factors. If you want them to be dates, you need to tell R this. 
+
 
 ## Missing values
 
@@ -148,8 +183,10 @@ batdat=read.csv("~/Dropbox/teaching/quant grad course/github/klangwig/bat_data.c
 What if I wanted to test how the count of MYSE influenced infection in MYLU? I need to MYSE to be a variable
 
 ## Spread and Gather - "Old"" way
-- the reshape2 package (also by Hadley Wickham) provides some useful tools for this kind of problem
-- You can find more information about using melt and cast here:https://www.statmethods.net/management/reshape.html
+- `spread` and `gather` have now been replaced by the more intuitive `pivot`
+- These are in the notes as an example only
+- We won't go through them and I encourage you to switch to `pivot`
+- In the R file, go to line 44
 
 ## Here, we will use spread and gather
 ```{r spread, echo=T}
@@ -160,6 +197,7 @@ batcounts<-aggregate(count~species+site+date,data=batdat, FUN=mean)
 batcounts.wide<-spread(batcounts, species,count,convert=T) 
 #spread that dataframe
 ```
+
 ## What do these look like?
 ```{r examine,echo=FALSE}
 head(batcounts)
@@ -248,11 +286,14 @@ billboard
 ## We want week to be temporal data, but it has letters in it
 - We want names to be a variable called "week" and the values to be a variable called "rank"
 - We want to remove NAs because not all songs stay on the charts for 76 weeks
+
+## Billboard
 ```{r billboard_longer}
 billboard %>% 
   pivot_longer(
     cols = starts_with("wk"), 
     names_to = "week", 
+    names_prefix = "wk",
     values_to = "rank",
     values_drop_na = TRUE
   )
@@ -266,7 +307,6 @@ billboard %>%
     cols = starts_with("wk"), 
     names_to = "week", 
     names_prefix = "wk",
-    names_ptypes = list(week = integer()),
     values_to = "rank",
     values_drop_na = TRUE
 )

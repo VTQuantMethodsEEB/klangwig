@@ -16,7 +16,7 @@ batdat$lgdL=log10(batdat$gdL)#log the amount of fungus
 batcounts<-aggregate(count~species+site+date,data=batdat, FUN=mean)  #make a df of bat counts
 
 #starting with the "old" way - using spread
-batcounts.wide<-spread(batcounts, species,count,convert=T) #spread that dataframe
+batcounts.wide<-spread(batcounts, species,count,convert=T) #spread the dataframe
 
 head(batcounts)
 head(batcounts.wide)
@@ -53,28 +53,33 @@ fish_encounters %>%
 # Fill in missing values
 fish_encounters %>%
   pivot_wider(
-    names_from = station,
-    values_from = seen,
-    values_fill = list(seen = 0)
+    names_from = station, #make the column names based on the unique values of the station column
+    values_from = seen, #fill in these columns based on data in the 'seen' column
+    values_fill = list(seen = 0) #if there isn't a value in seen, give it a zero (the fish wasn't observed)
   )
 
 #what if we have a wide dataframe and want to make it "tidy"
-head(relig_income)
+head(relig_income) #welp this is awful
+
 relig_income %>%
-  pivot_longer(-religion, names_to = "income", values_to = "count")
+  pivot_longer(-religion, names_to = "income", values_to = "count") 
 #the minus sign says don't include the column religion
+#make all of the other column names rows in a column called 'income'
+#make another column called 'count' and associate the values in each of the income classes with that count
 #now you have a variable income and a count of the number of people that were in that income class
 
 head(billboard)
+#this is a dataset of songs and their ranking
 
 billboard %>% 
   pivot_longer(
-    cols = starts_with("wk"), 
-    names_to = "week", 
-    values_to = "rank",
-    values_drop_na = TRUE
+    cols = starts_with("wk"), #take all the cols that start with 'wk' 
+    names_to = "week", #stack them in a column called "week"
+    values_to = "rank",#the values that were in those columns before should be stored in column called rank
+    values_drop_na = TRUE #get rid of the NAs - it means they weren't on the chart. Alternatively could be '101'
   )
 
+#we probably want week to be an integer, not a character
 billboard %>% 
   pivot_longer (
     cols = starts_with("wk"), 
