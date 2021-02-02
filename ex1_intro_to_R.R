@@ -4,6 +4,8 @@ rm(list=ls()) # clears workspace
 
 #load packages
 #you may need to install if you don't have these yet
+#install.packages("tidyverse")
+
 library(tidyverse)
 library(reshape2)
 
@@ -23,6 +25,9 @@ iris %>%
 
 #this is the same as
 iris.sub=subset(iris,Sepal.Length >5)
+
+
+
 aggregate(.~Species,FUN=mean, data=iris.sub)
 
 b1<-aggregate(Sepal.Length~Species,FUN=mean, data=iris.sub)
@@ -41,6 +46,7 @@ dm<-read.csv("bat_data.csv")
 
 ###selecting things###
 head(dm)
+
 dm[dm$site=="HORSESHOE BAY",]
 View(dm[dm$site=="HORSESHOE BAY",])
 
@@ -63,7 +69,12 @@ names(dm)
 dm$tally=1
 #this is a trick to "count" the number individuals sampled by summing with aggregate
 #this creates a long format dataframe.
+View(dm)
 f1=aggregate(tally~site+date+species,FUN=sum,data=dm)
+#or
+f1=aggregate(gdL~site+date+species,FUN=mean,data=dm)
+
+
 #long
 f1=f1[order(f1$site,f1$date),];f1 
 head(f1)

@@ -166,5 +166,11 @@ non-linear models (mainly least squares examples)
 phylogenetic models using gls
 - ex_phylogenetic_gls_models
 
+#Week 15
+##examined SIR models, denoted changes in number of cases
+##updated code lines 122-138
+##check on fittings, update with new data
+
+
 
 

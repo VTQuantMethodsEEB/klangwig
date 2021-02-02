@@ -85,7 +85,6 @@ billboard %>%
     cols = starts_with("wk"), 
     names_to = "week", 
     names_prefix = "wk",
-    names_ptypes = list(week = integer()),
     values_to = "rank",
     values_drop_na = TRUE
   )

@@ -16,7 +16,7 @@ head(batdat)
 batdat$lgdL=log10(batdat$gdL)
 
 
-g1 = ggplot(data=batdat, aes(x = species, y = lgdL, color=site))+
+ggplot(data=batdat, aes(x = species, y = lgdL, color=site))+
   geom_point(size=2)
 
 g1=ggplot(data=batdat,aes(x=species,y=lgdL,color=site))+
