@@ -173,7 +173,14 @@ non-linear models (mainly least squares examples)
 phylogenetic models using gls
 - ex_phylogenetic_gls_models
 
+#Week 14
+--------------------------
+- extended topics
+- project assistance
+
+
 #Week 15
+--------------------------
 - peer review 
 
 
