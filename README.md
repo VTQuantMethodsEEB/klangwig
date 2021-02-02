@@ -63,7 +63,8 @@ lecture: le6_rev_distributions.pptx
 code: ex6_rev_distributions.R
 handout:Handout_Week6_Distributions.pdf (In "readings" folder")
 
-Thursday: No class Feb 2020!
+
+Thursday: No class Feb 2021!
 lecture & solutions : ex6_solutions.pptx
 code: ex6_rev_distributions.R / ex6_rev_solutions.R
 
@@ -77,19 +78,17 @@ Tuesday: No class
 - Use this time to read
 - (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
 - (2) Week6_Felsenstein 1985 Am Nat
-- (3) Vote!
+
 -Make sure to complete quiz!
 
 Thursday: Phylogenies with Dr. Uyeda
-
-Spring Break
--------------------------
 
 
 Week 8
 ---------------------
 Tuesday: 
 lecture: le_7_linear_models
+(2021 lecture will be recorded in advance. No need to login for class.)
 code: ex7_linear_models
 
 Thursday:
@@ -119,7 +118,7 @@ lecture: ex10_glm_assignment.pptx
 code: use code from Tuesday
 
 
-Week 11
+Week 11 - part 1
 -----------------------
 Tuesday: 
 lecture: le111_model_selection.pptx
@@ -130,6 +129,14 @@ reading: Week11_Bolker et al ms information theoretic.pdf
 Thursday:
 lecture: le11_assignment.pptx
 code: Use code from Tuesday
+
+Week 11 - part 2
+-----------------------
+Tuesday: Spring Break Day, No class!
+Thursday: Discussion
+Readings: 
+Week11_Bolker et al ms information theoretic.pdf
+Week11_Cade_2015_MultiModelAveraging.pdf
 
 Week 12
 ------------------------
@@ -167,9 +174,7 @@ phylogenetic models using gls
 - ex_phylogenetic_gls_models
 
 #Week 15
-##examined SIR models, denoted changes in number of cases
-##updated code lines 122-138
-##check on fittings, update with new data
+- peer review 
 
 
 
