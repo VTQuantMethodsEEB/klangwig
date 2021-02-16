@@ -43,6 +43,7 @@ hist(mtcars$mpg)
 ## Correlation plots
 ##examine collinearity among variables
 ##which pairs are correlated?
+dev.off()
 library(car)
 mod2 <- lm(mpg ~ ., data=mtcars)
 summary(mod2)
@@ -54,7 +55,7 @@ M <- cor(mtcars)#correlation matrix
 corrplot(M, method = "circle")
 corrplot(M, method = "number")
 corrplot(cor(mtcars[, -1])) #give me everything but what is being predicted (mpg)
-#be careful with vars that are dark blue
+#be careful with vars that are dark blue and dark red
 #=> Interpreted from plot.
 #=> Correlated pairs: 
 #=> - disp, cyl, hp, wt
@@ -71,7 +72,7 @@ vif(mod2)
 #which ones? 
 M <- cor(mtcars)
 M
-#which one to remove to both scientific and practical
+#which one to remove is both scientific and practical
 dev.off()
 
 ## Basic tools
@@ -82,6 +83,8 @@ plot(l2)
 #coefplot(l2)
 
 ## Multiple comparisons
+
+#create a dataset with 3 places - forest, field, playground
 forest <- c(9, 6, 4, 6, 7, 10)
 field  <- c(12, 9, 12, 10)
 playground <- c(1,0,3,2,1)
@@ -96,23 +99,40 @@ ants
 ##check car package##Anova###
 l2 = aov(colonies~place, data = ants);
 summary(l2)
-l2 = lm(colonies~place, data = ants);anova(l2)
-summary(l2); l2
+#aov fits an lm, but the main diff is the way summary prints out
+#this type of summary output is a more traditional way of displaying results
+#of an ANOVA; it doesn't tell us about differences between each parameter
+#just the overall effect of the variable 'place'
+l2 = lm(colonies~place, data = ants)
+l2 #this is not very useful
+summary(l2) #this is our bread and butter output
+#but it is giving us the comparison to field only!
+#it is telling how forest and playround differ from field
+#forest has -3.75 ant colonies on average less than field (we know this from permutations)
+#playground has - 9.35 fewer ant colonies than field
+#this does not tell us about the difference between forest and playground
+#although we can guestimate basedon the standard errors
+anova(l2)
+#we can get the overall variable level effect
+#using 'anova()' on our model object gives the same output as 'aov'
 
 l2 = aov(colonies~place, data = ants);summary(l2)
 TukeyHSD(l2)
-
+#this will give us all the differences from eachother
+#with a Tukey p-value adjustment
+#it only works on aov objects
 
 library(multcomp)
 ga = glht(l2, linfct = mcp(place = "Tukey"))
 summary(ga)
+#this package gives us another way of analyzing this
 
 ## Plotting
 summary(l2)
 yhats=predict(l2,interval = "confidence")
 #note this gives a value for each value of your existing dataset
 ?predict.lm
-#can specificy newdata frame to predict
+#can specificy newdata frame to predict - will go through in detail
 dat.new=expand.grid(place=c("playground","field","forest"))
 #dat.new=data.frame(observers=seq(1:10))
 
@@ -129,5 +149,16 @@ r=ggplot(data=mtcars, aes(x=wt, y=mpg))+
 print(r)
 
 #if you are running an anova - e.g. you have categories - you'll want:
-#stat_summary(fun="mean", colour = "red", size = 2)+
+#stat_summary(fun="mean", colour = "red", size = 1)+
   
+r=ggplot(data=ants, aes(x=place, y=colonies))+ 
+  geom_point()+
+  stat_summary(fun.data = "mean_se", colour="red", size=1)+ 
+  #these are the means and SEs- should be similar to anova output
+  #for non-parametric bootstrapped confidence limits instead:
+  #stat_summary(fun.data = "mean_cl_boot", colour="red", size=1)+ 
+  #bootstrapping means to sample randomly, but replace the values
+  #e.g. put them back in the jar
+  theme_bw() + 
+  theme(axis.title=element_text(size=20),axis.text=element_text(size=10),panel.grid = element_blank(), axis.line=element_line(),legend.position="top",legend.title=element_blank())
+print(r)

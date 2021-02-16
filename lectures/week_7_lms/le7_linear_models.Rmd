@@ -5,12 +5,6 @@ output:
   ioslides_presentation: default
   beamer_presentation: default
 ---
-# Welcome to Online QMEE
-- Please turn on your camera and mute your mic when you aren't talking
-- You can use the raise hand buttons as well as the emotions buttons
-- Please raise your hand or interrupt if you have a question
-- Zoom sessions will be recorded for later review
-
 # Introduction
  
 ## History
@@ -45,7 +39,7 @@ to distinguish it from the *generalized* linear model (`glm`)
      - In other words, the difference between our model *predictions*
        and our observations is Normal
      - *not* assuming the marginal distribution is Normal (e.g. a histogram of an input variable)
-     - (Go to board for residual drawing)
+     - (Go to board/paper for residual drawing)
 - Predictor variables are independent
 
 ## Machinery
@@ -222,7 +216,8 @@ more generally.
 ## Assignment
 
 - Make a univariate linear model for one of your hypotheses
-- Examine the assumptions of linearity (using tests or diagnostic plots)
-- Plot the relationship in ggplot using stat_smooth
+- Examine the assumptions of linearity (using tests and diagnostic plots)
+- Explain what these are telling you (it's okay if they aren't normal, but tell me why)
+- Plot the relationship in ggplot using stat_smooth or stat_summary
 - You can hold off on submitting this assignment (which will be done via github) until after next weeks assignment
 - Remember to update your README file - we will combine this week and next week so you can indicate that in your file

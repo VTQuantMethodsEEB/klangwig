@@ -54,6 +54,8 @@ res <- NA ## set aside space for results
 comb_ff = c(field,forest)
 sample(comb_ff,5, replace=T)
 
+#use jar example to illustrate sampling procedure
+
 for (i in 1:10000) {
   colonyboot <- sample(c(field,forest)) ## scramble
   ## pick out forest & field samples
@@ -130,6 +132,7 @@ ttp
 ttp<- t.test(colonies~trmt,data=forest_treat,var.equal=T)
 ttp
 
+##BACK TO LECTURE
 
 #####Shapiro-Wilk Test#######
 #Are our data normally distributed?##
@@ -144,6 +147,9 @@ swt_field
 
 swt_forest<-shapiro.test(forest)
 swt_forest
+
+
+#BACK TO LECTURE - 'POND NUTRIENTS'
 
 #####Correlation Tests#####
 #Pearsons - for linear data
@@ -161,6 +167,7 @@ pt_k
 
 #which correlation coefficient is higher?
 
+# Back to lecture - start at 'Mantel Test'
 
 #####Fisher Exact Test######
 east <- c(10,1)
@@ -177,6 +184,8 @@ pin=rbind(east,west)
 colnames(pin)=c("condor","no.condor")
 pin
 fisher.test(pin)
+
+#Back to Lecture - Rank Tests
 
 ###wilcoxon signed-rank test####
 forest_pre=forest
