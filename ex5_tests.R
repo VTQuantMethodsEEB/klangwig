@@ -27,7 +27,8 @@ theme_set(theme_bw())
 #jittering is also a possibility, but stat_sum() is prettier).  
 ggplot(ants,aes(x = place,y = colonies))+
   stat_sum(aes(size=..n..),colour="darkgray")+
-  #aes(size=..n..) tells stat_sum() to use the number of overlapping points, not the proportion of points within a category, as the summary statistic
+  #aes(size=..n..) tells stat_sum() to use the number of overlapping points, 
+  #not the proportion of points within a category, as the summary statistic
   scale_size_area(breaks=1:2,max_size=4)+
   #scale_size_area() tells ggplot to scale the area of the points proportional to the size 
   #(breaks=1:2 tells it what values to show in the legend). 
@@ -207,4 +208,4 @@ oneway_test(colonies~place,data=ants)
 
 oneway_test(colonies~place,data=ants,distribution="exact")
 
-oneway_test(colonies~place,data=ants,distribution=approximate(B=9999))
+oneway_test(colonies~place,data=ants,distribution=approximate(nresample=9999))

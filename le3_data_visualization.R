@@ -43,8 +43,8 @@ g1
 
 g1=ggplot(data=batdat,aes(x=species,y=lgdL))+
   geom_boxplot()+
-  #geom_jitter(aes(shape=site))#+
-  geom_point(aes(color=site), alpha = 0.2) #now assign color here so we don't have seperate boxes
+  geom_jitter(aes(shape=site))#+
+  #geom_point(aes(color=site), alpha = 0.2) #now assign color here so we don't have seperate boxes
 g1
 #now we can look at it in more compact form, but still see the data come from multiple sites
 
@@ -97,7 +97,7 @@ g1
 #save the file
 ggsave(file="/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/loads_by_spp.pdf", 
        plot=g1,
-       width=7,height=7,units="in",
+       width=7,height=7,units="in",dpi=300,
        useDingbats=FALSE) #use Dingbats is surprisingly useful because it prevents points from being turned in o's in some programs
 
 
