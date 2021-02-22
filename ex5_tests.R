@@ -52,7 +52,7 @@ res <- NA ## set aside space for results
 #you could also write res <- numeric(1000), which would give you a list of 1000 0's
 #the important thing to have a vector already named "res"
 comb_ff = c(field,forest)
-sample(comb_ff,5, replace=T)
+sample(comb_ff,4, replace=F)
 
 #use jar example to illustrate sampling procedure
 
@@ -61,6 +61,11 @@ for (i in 1:10000) {
   ## pick out forest & field samples
   forestboot <- colonyboot[1:length(forest)] #this says assign the first six colonies to forest
   fieldboot <- colonyboot[(length(forest)+1):length(colonyboot)] #assign the rest of the colonies to field
+  
+  #if you had a dataframe it would look like
+  #forestboot <- colonyboot[1:length(ants$place[ants$place=="forest"])] #this says assign the first six colonies to forest
+  #fieldboot <- colonyboot[(length(ants$place[ants$place=="forest"])+1):length(ants$place)] #this says assign the rest of the observations to field
+  
   ## compute & store difference in means
   res[i] <- mean(fieldboot)-mean(forestboot) #calculate the difference in the field means and the forest means
   #[i] says "where i", and i is a counter, after running this loop, i should be 1000
@@ -70,13 +75,17 @@ for (i in 1:10000) {
 obs <- mean(field)-mean(forest)
 obs
 
+#if you have a dataframe
+#obs <- mean(ants$field[ants$place=="field"])-mean(ants$forest[ants$place=="forest"])
+
+
 hist(res,col="gray",las=1,main="")
 abline(v=obs,col="red")
 
 ##so how do we get our p-value?
 res[res>=obs]
 length(res[res>=obs])
-230/10000
+235/10000
 mean(res>=obs)        
 #using mean(permutations>=obs)) is a trick to calculate the proportion: 
 #the logical statement returns a logical (FALSE/TRUE) vector, which then gets converted to a 0/1 vector when you ask R to take the mean, 
@@ -153,12 +162,9 @@ swt_forest
 
 #####Correlation Tests#####
 #Pearsons - for linear data
-#use cor for unpaired, and cor.test for paired
+#use cor.test for testing correlations
 pt <- cor.test(forest_pre,forest_post)
 pt
-
-#below is incorrect - these samples are paired! 
-pt <- cor(forest_pre,forest_post)
 
 #Kendall - for non-linear data
 #use cor for unpaired, and cor.test for paired

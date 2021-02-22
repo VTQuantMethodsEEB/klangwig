@@ -34,16 +34,20 @@ par(mfrow=c(2,2))  # set 2 rows and 2 column plot layout
 mod_1 <- lm(mpg ~ disp, data=mtcars)  # linear model
 plot(mod_1)
 
+resid(mod_1)
 hist(resid(mod_1))
 shapiro.test(resid(mod_1))
 #null hypothesis is that the sample comes from a normally distributed population
 #p < 0.05 is not normal
 hist(mtcars$mpg)
 
+##back to presentation
+
 ## Correlation plots
 ##examine collinearity among variables
 ##which pairs are correlated?
-dev.off()
+dev.off() 
+
 library(car)
 mod2 <- lm(mpg ~ ., data=mtcars)
 summary(mod2)
@@ -62,6 +66,7 @@ corrplot(cor(mtcars[, -1])) #give me everything but what is being predicted (mpg
 #=> - gear, am
 #=> - hp, carb
 #- dark blue = bad
+
 #One way to measure multicollinearity is the variance inflation factor (VIF), 
 #assesses how much the variance of an estimated regression coefficient increases if your predictors are correlated. 
 #If no factors are correlated, the VIFs will all be 1
@@ -80,6 +85,9 @@ l2 <- lm(colonies~observers, data = ants)
 summary(l2)
 plot(l2)
 
+l3 <- lm(colonies~place, data = ants, subset = place!="playground")
+summary(l3)
+
 #coefplot(l2)
 
 ## Multiple comparisons
@@ -96,7 +104,6 @@ ants <- data.frame(
 
 ants
 
-##check car package##Anova###
 l2 = aov(colonies~place, data = ants);
 summary(l2)
 #aov fits an lm, but the main diff is the way summary prints out
@@ -111,10 +118,11 @@ summary(l2) #this is our bread and butter output
 #forest has -3.75 ant colonies on average less than field (we know this from permutations)
 #playground has - 9.35 fewer ant colonies than field
 #this does not tell us about the difference between forest and playground
-#although we can guestimate basedon the standard errors
+#although we can guestimate based on the standard errors
 anova(l2)
 #we can get the overall variable level effect
 #using 'anova()' on our model object gives the same output as 'aov'
+#in future lectures, we will use anova to compare two different models
 
 l2 = aov(colonies~place, data = ants);summary(l2)
 TukeyHSD(l2)
@@ -127,7 +135,7 @@ ga = glht(l2, linfct = mcp(place = "Tukey"))
 summary(ga)
 #this package gives us another way of analyzing this
 
-## Plotting
+## Plotting ##
 summary(l2)
 yhats=predict(l2,interval = "confidence")
 #note this gives a value for each value of your existing dataset
@@ -137,6 +145,7 @@ dat.new=expand.grid(place=c("playground","field","forest"))
 #dat.new=data.frame(observers=seq(1:10))
 
 yhats=predict(l2,newdata=dat.new,interval = "confidence")
+
 
 ##ggplot2##
 head(mtcars)
