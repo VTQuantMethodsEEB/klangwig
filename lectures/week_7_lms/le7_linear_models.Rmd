@@ -49,17 +49,20 @@ to distinguish it from the *generalized* linear model (`glm`)
 - Sensitive to some departures from the assumptions 
   - anomalous events tend to have a larger effect than they should
 
-## One-parameter variables
+## One-parameter variables - continuous
  
 - Continuous predictor variable: estimate a straight line with one parameter 
      - Also implies one *input variable*
-- $Y = a+bX$: $Y$ is the response, $X$ is the input variable   
-($b$ is the *slope* - expected change in $Y$ per unit change in $X$)
+- $Y = a+bX$
+- $Y$ is the response  
+- $X$ is the input variable   
+- $b$ is the *slope* and the expected change in Y per unit change in X
+
+## One-parameter variables - categorical
 - Categorical predictor variable with two categories: only one parameter
      - difference in predicted value between levels
 - Parameters are (usually) easy to interpret
-  - Can think in terms of *parameter value and associated error*
-  - see code
+  - Go to R example
  
 ## Multi-parameter variables
  
@@ -137,9 +140,17 @@ library(corrplot)
 corrplot(cor(mtcars[, -1]))
 ```
 
+##Deciding what is "too"" correlated
+- variance inflation factors give an estimate of the multicollinearity among variables
+- they assess how much the variance of an estimated regression coefficient increases if your predictors are correlated
+- > 4: investigate; >8-10 is cause for serious concern (sometimes ppl say even lower) 
+- if no factors are correlated, the VIFs will all be 1
+- any multicollinearity (even less than 8) can change regression coefs (try it!)
+- removing variables is necessary, and will depend on data
 
 ## Resources
 http://r-statistics.co/Assumptions-of-Linear-Regression.html
+ - Go to R
  
 ## Transformations
  

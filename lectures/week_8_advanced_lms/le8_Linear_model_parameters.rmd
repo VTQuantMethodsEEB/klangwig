@@ -95,7 +95,7 @@ summary(allEffects(lm1))
 
 ## Interpretation using `emmeans` package
 
-- Use the `lsmeans` package:
+- Use the `emmeans` package:
 ```{r emmeans,message=FALSE,warning=FALSE}
 library("emmeans")
 emmeans(lm1,specs=~place)
@@ -145,7 +145,9 @@ mliz <- lizards %>%
     select(grahami,height,diameter,light,time) %>%
     gather(variable,value,-grahami)
 
-ggplot(mliz,aes(x=value,y=grahami))+geom_boxplot(,fill="lightgray")+
+ggplot(mliz,aes(x=value,y=grahami))+
+  geom_boxplot(,fill="lightgray")+
+  geom_point()+
   facet_wrap(~variable,scale="free_x",nrow=1)+
   geom_hline(yintercept=mean(lizards$grahami),colour="red",lwd=1,alpha=0.4)
 ```
@@ -182,7 +184,7 @@ pr(lmTL1 <- lm(grahami~time+light,data=lizards))
 ```
 
 - $\beta_1$ is the intercept ("early","shady"); 
-- $\beta_2$ and $\beta_3$ are the differences from the baseline level ("early") of the *first* variable (`time`) in the *baseline* level of the other parameter(s) (`light`="shady"); 
+- $\beta_2$ and B_3 are the differences from the baseline level ("early") of the *first* variable (`time`) in the *baseline* level of the other parameter(s) (`light`="shady"); 
 - $\beta_4$ is the difference from the baseline level ("sunny") of the *second* variable (`light`) in the *baseline* level of `time` ("early").
 
 ## Graphical interpretation
@@ -214,12 +216,17 @@ pr(lmTL2 <- lm(grahami~time+light,data=lizards))
 ```
 The p-values tell us the difference from the baseline level, not from each other
 
-## Assessing differences among pairs of variable levels
+## Assessing differences among pairs of variable levels - load packages
 
 ```{r lizardlsmeansPvalues}
 library(emmeans)
 library(multcompView)
 library(multcomp)
+```
+
+## Assessing differences among pairs of variable levels
+
+```{r output emmeans}
 emmeans(lmTL1, specs = "time", contr = "pairwise")
 ```
 
@@ -241,11 +248,11 @@ cld(lsm1$emmeans,by = NULL, Letters = "ABCDEFGHIJ")
 relationship between another predictor and the response variable
 - Interpreting *main effects* in the presence
 of interactions is tricky
-- Your estimate of the effect of variable $B$ is no longer constant
+- Your estimate of the effect of variable *B* is no longer constant
 - You need to pick a fixed point, or average in some way
 - Example: $Y = a + b_1 X_1 + b_2 X_2 + b_{12} X_1*X_2$
-- The response to $X_1$ is $Y = (a+b_2 X_2) + (b_1+b_{12}X_2) X_1$  
-the response to $X_1$ *depends on* the value of $X_2$.
+- The response to *X_1* is $Y = (a+b_2 X_2) + (b_1+b_{12}X_2) X_1$  
+- The response to *X_1* *depends on* the value of *X_2*.
 
 
 ## An example
@@ -292,8 +299,8 @@ variables
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 ```
 
-- Parameters $\beta_1$ to $\beta_4$ have the same meanings as before.
-- $\beta_5$ and $\beta_6$, labelled "timemidday:lightsunny" and "timelate:lightsunny" describe the difference between the expected mean value of these treatment combinations based on the additive model 
+- Parameters $\beta_1$ to *B_4* have the same meanings as before.
+- $\beta_5$ and *B_6*, labelled "timemidday:lightsunny" and "timelate:lightsunny" describe the difference between the expected mean value of these treatment combinations based on the additive model 
 
 
 ## Interaction model cont
@@ -301,8 +308,8 @@ pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 ```{r lizardTL2_cont}
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 ```
-- num lizards when sunny at midday = $\beta_1 + \beta_2 + \beta_4$ + $\beta_5$
-- num lizards when sunny at late =  $\beta_1 + \beta_3 + \beta_4$ + $\beta_6$
+- num lizards when sunny at midday = $\beta_1 + \beta_2 + \beta_4 + \beta_5$
+- num lizards when sunny at late =  $\beta_1 + \beta_3 + \beta_4 + \beta_6$
 
 ## Graphical version
 
