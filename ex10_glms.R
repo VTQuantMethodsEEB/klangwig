@@ -78,6 +78,8 @@ plot1=ggplot(data=b1,aes(x=date,y=gd,color=species))+ #aggregated data file
   geom_line(data=dat.new, aes(x=date,y=yhat,col = species)) #plot smooth lines from dat.new
 plot1
 
+##back to powerpoint
+
 #ses and confidence intervals from binomial data
 
 #binomial proportion confidence interval
@@ -118,6 +120,8 @@ plot1=ggplot(data=bat,aes(x=date,y=gd,color=species))+
               fill = "steelblue2", alpha = 0.2) 
 plot1
 
+##back to powerpoint
+
 ###Gamma GLMs###
 set.seed(101)
 bat$gdL2 = rgamma(length(bat$gdL),shape=1,rate=1)
@@ -128,6 +132,8 @@ summary(g4)
 #MAYBE Better,
 g5 = glm(gdL2~date+species,data=bat, family=Gamma(link = log));
 summary(g5)
+
+#back to ppt##
 
 ##Poisson GLM##
 head(liz)
