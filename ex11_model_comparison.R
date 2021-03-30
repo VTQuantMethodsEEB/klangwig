@@ -1,4 +1,6 @@
 #ex11_model_comparison
+rm(list=ls())
+
 ##load important packages##
 library(ggplot2)
 library(MASS)
@@ -214,8 +216,12 @@ ROC<-roc(response = bat$gd, predictor = bat$Prob, plot=TRUE, ci=TRUE, legacy.axe
 ROC$auc
 #Area under the curve: 0.7275
 #95% CI: 0.6885-0.7664 (DeLong)
-# The AUC can be defined as the probability that the fit model will score a randomly drawn 
-#positive sample higher than a randomly drawn negative sample
+#ROC - receiver operating characteristic - used for binary information as a way of showing predictive accuracy
+#e.g. how well do species and site predict infection (0/1)?
+#False positive rate on x axis - true postive rate on y axis
+#1:1 line is no discimination (false positive = true positive)
+#being above the line means - you are better at predicting the right value with your variable!
+#AUC measures the full amount of space in which you are better than the 1:1 line
 
 hist(AUC, main = NA)
 mean(AUC) #0.73 
@@ -227,6 +233,7 @@ quantile(AUC, c(lil, big))
 #2.5%     97.5% 
 #0.72 0.74
 Data<-as.data.frame(AUC); head(Data)
+library(ggplot2)
 b=ggplot(data=Data, aes(AUC)) +
   geom_histogram(binwidth = 0.005) +
   geom_vline(xintercept = mean(AUC), linetype="dashed") +
@@ -249,3 +256,62 @@ a=ggroc(ROC, size=1, legacy.axes = TRUE) +
         axis.text=element_text(size=10), axis.line=element_line(),
         legend.position = "none", legend.text = element_text(size=20,face="italic"),strip.text = element_text(size=25,face="italic"))
 a
+
+##another example using caret##
+library(caret)
+library(psych)
+
+#from: https://quantdev.ssri.psu.edu/tutorials/cross-validation-tutorial
+
+data <- sat.act
+head(data)
+
+#models to compare
+
+mod_1 = lm(ACT ~ gender + age + SATV + SATQ,   data = data)
+summary(mod_1)
+
+mod_2 = lm(ACT ~  gender + age ,   data = data)
+summary(mod_2)
+
+data_ctrl <- trainControl(method = "cv", number = 5)
+#We first set up the number of folds for cross-validation by defining the training control. 
+#In this case, we chose 5 folds, but the choice is ulimately up to you.
+
+#run model with cross valdation
+mod_1_caret <- train(ACT ~ gender + age + SATV + SATQ,   # model to fit
+                     data = data,                        
+                     trControl = data_ctrl,              # folds
+                     method = "lm",                      # specifying regression model
+                     na.action = na.pass)                # pass missing data to model - some models will handle this
+
+mod_1_caret
+
+summary(mod_1_caret$finalModel)
+
+#We find that after using 5-fold cross-validation, 
+#our model accounts for 42% of the variance (R-squared = 0.418) in ACT scores for these participants.
+
+#We can also examine model predictions for each fold.
+mod_1_caret$resample
+
+#Furthermore, we can find the standard deviation around the 
+#Rsquared value by examining the R-squared from each fold.
+sd(mod_1_caret$resample$Rsquared)
+
+##now model 2
+#run model with cross valdation
+mod_2_caret <- train(ACT ~  gender + age,   # model to fit
+                     data = data,                        
+                     trControl = data_ctrl,              # folds
+                     method = "lm",                      # specifying regression model
+                     na.action = na.pass)                # pass missing data to model - some models will handle this
+
+mod_2_caret
+#We find that after using 5-fold cross-validation, 
+#our model also accounts for 1% of the variance (R-squared = 0.014) in ACT scores for these participants.
+
+#mod_1 is the better model
+
+#the accuracy of cross-validation and the parameters from the whole sample should be reported.
+
