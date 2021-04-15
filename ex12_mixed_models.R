@@ -69,7 +69,7 @@ bat = subset(bat, species!="MYSE")
 #and substrate
 bat = subset(bat, species!="SUBSTRATE")
 
-
+library(lme4)
 #glms - binomial
 gm1 = glmer(gd~species + (1|site),data=bat, family = "binomial")
 summary(gm1)
@@ -79,6 +79,8 @@ Anova(gm1)
 
 gm2 = glmer(gd~species*year + (1|site),data=bat, family = "binomial")
 summary(gm2)
+library(effects)
+plot(allEffects(gm2))
 
 anova(gm1,gm2)
 
