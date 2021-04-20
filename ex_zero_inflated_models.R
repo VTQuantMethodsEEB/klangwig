@@ -36,9 +36,9 @@ lrtest(g.pois,g.nb)
 #AIC tells us the same
 AIC(g.pois,g.nb)
 
-#let's us a zero-inflated model
+#let's use a zero-inflated model
 #question - do we think that is biologically appropriate?
-#we will use another lizard species that has zeroes
+#we will use a lizard species that has zeroes
 
 #hurdle model first
 g.hurd <- hurdle(opalinus ~ time,
@@ -55,4 +55,3 @@ summary(g.zinf)
 #we can compare this latter model to models with just Poisson or NB
 vuong(g.pois, g.zinf)
 vuong(g.nb, g.zinf)
-

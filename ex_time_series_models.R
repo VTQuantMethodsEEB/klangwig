@@ -1,4 +1,6 @@
 #ex_time_series_models
+
+library(nlme)
 ########TIME-SERIES MODELS########
 mos = read.csv("mosqtemp.csv")
 head(mos)
@@ -13,6 +15,15 @@ points(SppRichness~Temp,data=mos,subset=(Year<1960),col=1)#add older data in bla
 
 #but remember
 plot(Temp~Year,data=mos,ylab="Temp",xlab="Year",col=2) 
+dim(mos)
+
+library(dplyr)
+mos = mos %>% 
+  arrange(Year)
+
+mos.test = mos %>% 
+  arrange(Precip)
+
 
 f1 = lm(SppRichness ~ Temp, data = mos)
 summary(f1)
@@ -33,6 +44,8 @@ pacf(resid(f1))
 #the syntax of gls is like glm
 f1a = gls(SppRichness ~ Temp, data = mos, correlation = corAR1())
 summary(f1a)
+
+
 f1b = gls(SppRichness ~ Temp, data = mos, correlation = corARMA(p=1))
 summary(f1b)
 #these give identical outputs because we haven't specified q, the moving average part of the model
