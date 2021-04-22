@@ -94,7 +94,7 @@ rownames(expCoef) <- names(coef(hurdlePart))
 colnames(expCoef) <- c("Count_model","Zero_inflation_model")
 expCoef
 
-Interpretation: (Zero-inflation model) 
+#Interpretation: (Zero-inflation model) 
 #The baseline odds ofopalinus being present is is 0.102. 
 #The odds is increase by time late (0.00005) and time midday 0.44. 
 #(Count model) The baseline number of opalinus (including some 0s) is 5.10 early in the day. 
