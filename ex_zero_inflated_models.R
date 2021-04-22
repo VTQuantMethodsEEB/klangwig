@@ -52,11 +52,28 @@ g.hurd <- hurdle(opalinus ~ time,
                  data    = liz)
 summary(g.hurd)
 
+liz$yhat.hurd = predict(g.hurd, type = "response")
+
+
 #zero-inflated (mixture) model
 g.zinf <- zeroinfl(opalinus ~ time, 
                    dist = "negbin",
                    data = liz)
 summary(g.zinf)
+
+liz$yhat.zinf = predict(g.zinf, type = "response")
+##compare predictions##
+View(liz)
+library(tidyverse)
+liz %>%
+  group_by(time)%>%
+  summarise(hurd = mean(yhat.hurd),zinf = mean(yhat.zinf))
+#these are nearly the same because there actually aren't very many 0s in this dataset
+
+##another way
+library(emmeans)
+emmeans(g.zinf, specs = ~time)
+emmeans(g.hurd, specs = ~time)
 
 #we can compare this latter model to models with just Poisson or NB
 vuong(g.pois, g.zinf)
@@ -73,31 +90,31 @@ hurdlePart <- glm(formula = opalinus.p ~ time,
                   family  = binomial(link = "logit"))
 coef(summary(hurdlePart))
 
-## Exponentiated coefficients
-expCoef <- exp(coef((g.hurd)))
-expCoef <- matrix(expCoef, ncol = 2)
-rownames(expCoef) <- names(coef(hurdlePart))
-colnames(expCoef) <- c("Count_model","Zero_hurdle_model")
-expCoef
+##coefficients comparison
+Coef <- coef((g.hurd))
+Coef <- matrix(Coef, ncol = 2)
+rownames(Coef) <- names(coef(hurdlePart))
+colnames(Coef) <- c("Count_model","Zero_hurdle_model")
+Coef
 
-#Interpretation: (Hurdle model) The occurence of oplalinus early (baseline) odds of having a positive count vs zero is 3.00. 
-#This odds is increased by 2.33 times by late in the day, and 2 times by midday. 
+#Interpretation: (Hurdle model) The occurence of oplalinus early (baseline) odds of having a positive count vs zero is 1.09. 
+#These odds of a positive count are increased by 0.85 late in the day, and 0.69 times by midday. 
 #(Positive count model) Among occurences where opalinus occur, 
-#the average count is 4.6 early in the day. This is increased by late in the day by 0.71, and midday 1.9 
-#when opalinus is present.
+#the average count is 4.6 early in the day. This is decreased by late in the day by -0.34, and increase 
+#midday 0.63 when opalinus is present.
 
 
 ##Interepration of true zero-inflated model
-expCoef <- exp(coef((g.zinf)))
-expCoef <- matrix(expCoef, ncol = 2)
-rownames(expCoef) <- names(coef(hurdlePart))
-colnames(expCoef) <- c("Count_model","Zero_inflation_model")
-expCoef
+Coef <- coef((g.zinf))
+Coef <- matrix(Coef, ncol = 2)
+rownames(Coef) <- names(coef(hurdlePart))
+colnames(Coef) <- c("Count_model","Zero_inflation_model")
+Coef
 
 #Interpretation: (Zero-inflation model) 
-#The baseline odds ofopalinus being present is is 0.102. 
-#The odds is increase by time late (0.00005) and time midday 0.44. 
-#(Count model) The baseline number of opalinus (including some 0s) is 5.10 early in the day. 
-#this is increased late and midday. 
+#The baseline odds ofopalinus being ABSENT (early) is is -2.27. 
+#The odds of opalinus being absent by time late is lower (-7.62) and time midday (-0.81). 
+#(Count model) The baseline number of opalinus (including some 0s) is 1.63 early in the day.
+#this decreases slightly late and increases midday. 
 
 
