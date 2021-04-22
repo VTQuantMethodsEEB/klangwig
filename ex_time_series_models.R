@@ -21,8 +21,8 @@ library(dplyr)
 mos = mos %>% 
   arrange(Year)
 
-mos.test = mos %>% 
-  arrange(Precip)
+#mos.test = mos %>% 
+#  arrange(Precip)
 
 
 f1 = lm(SppRichness ~ Temp, data = mos)
