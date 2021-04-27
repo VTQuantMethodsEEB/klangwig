@@ -47,6 +47,17 @@ ftd=fitted(dose.nls)
 plot(ftd~log10(dose), pch=15) #fitted curve
 points(pi_o~log10(dose),col="red") #actual points
 
+dose.curve=ggplot(data=data, aes(x=log10(dose),y=pi_o))+ 
+  geom_point(color="blue")+
+  geom_line(aes(y=ftd), size=1)+
+  xlab(expression(log[10]~dose))+
+  ylab("Proportion infected")+
+  coord_cartesian(ylim=c(-0.1,1.1))+ #zoom in
+  theme_bw() + 
+  theme(axis.title=element_text(size=23),axis.text=element_text(size=15),panel.grid = element_blank(), axis.line=element_line(),legend.position=c(.9,.55),legend.text = element_text(size=12,face="italic"))
+print(dose.curve)
+
+
 ##calculate mean-squared error
 resid.sq = (resid(dose.nls)^2)
 mse = mean(resid.sq)
@@ -66,4 +77,16 @@ summary(a)
 #gam.check(a)
 plot(a,pages=1,seWithMean=TRUE) #
 pred <- predict.gam(a)
+pred.dat$yhat = pred
+
+library(ggplot2)
+r=ggplot(data=pred.dat, aes(x=pred.dens,y=rates))+ 
+  geom_point()+
+  geom_line(aes(y=yhat), size=1)+
+  ylab("Rate of prey capture")+
+  xlab("Predator density")+
+  #coord_cartesian(ylim=c(-0.1,1.1))+ #zoom in
+  theme_bw() + 
+  theme(axis.title=element_text(size=23),axis.text=element_text(size=15),panel.grid = element_blank(), axis.line=element_line(),legend.position=c(.9,.55),legend.text = element_text(size=12,face="italic"))
+print(r)
 
