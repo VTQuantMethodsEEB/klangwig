@@ -23,7 +23,7 @@ lecture: ex1_intro_to_R.pptx
 
 code: ex1_intro_to_R.R
 
-Task list for next week:
+#### Task list for next week:
 - Write paragraph about your data
 - Cleanup data
 - Install Git and register for GitHub using https://happygitwithr.com/
@@ -44,7 +44,7 @@ lecture: ex2_data_manipulation.pptx
 
 code: use code from Tuesday for example
 
-Task list for next week:
+#### Task list for next week:
 - Make sure that data is clean!
 - Complete Week 2 assignment, make sure to turn in code from Week 1 too
 
@@ -62,7 +62,7 @@ lecture: ex3_data_manipulation.pptx
 
 code: use code from Tuesday for example
 
-Task list for next week:
+#### Task list for next week:
 - Submit Week 3 assignment
 - Reading and discussion for next Thurs
 - Start thinking about those bad ggplot2s for the end of the semester!
@@ -101,6 +101,9 @@ code: ex5_tests
 
 code:ex5_tests
 
+#### Task List for Next Week
+- Complete Week 5 assignment
+
 Week 6
 ------------------------
 #### Tuesday:
@@ -109,8 +112,10 @@ lecture: le6_rev_distributions.pptx
 
 code: ex6_rev_distributions.R
 
-handout:Handout_Week6_Distributions.pdf (In "readings" folder")
+handout: [Handout_Week6_Distributions] (https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Handout_Week6_Distributions.pdf)
 
+#### Task List for Next Week
+- Complete Week 5 assignment
 
 #### Thursday: 
 - Problem set solutions; distribution fitting (no assignment)
