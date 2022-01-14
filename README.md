@@ -78,11 +78,11 @@ code: code just to make examples in lecture - none assigned
 #### Thursday: 
 - discussion on reading
 - Full article list:
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/1_Nuzzo%20Editorial.pdf
+  - [Nuzzo](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/1_Nuzzo%20Editorial.pdf)
   - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/2_FrankHarrellBlogIntro.pdf
   - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/3_Dushoff%20reinterpreting%20statistical%20difference.pdf
   - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/4_Comment%20on%20eroneous%20interactions.pdf
-  - Interesting optional articles to examine:
+- Interesting optional articles to examine:
   - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/5_Erroneous%20analyses%20of%20interactions.pdf
   - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/6_listening%20to%20music%20makes%20you%20younger.pdf
   - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/7_Gelman%20the%20difference%20is%20not%20significant.pdf
