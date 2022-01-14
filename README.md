@@ -11,14 +11,14 @@ This repository contains the course documents for Quantitative Methods in Ecolog
 
 Week 1
 -------------------
-Tuesday: 
+#### Tuesday: 
 
 lecture: lectures/le1_intro_to_R.pptx
 
 code: le_1_intro_to_R.R
 
 
-Thursday:
+#### Thursday:
 lecture: ex1_intro_to_R.pptx
 
 code: ex1_intro_to_R.R
@@ -26,13 +26,13 @@ code: ex1_intro_to_R.R
 
 Week 2
 -------------------
-Tuesday:
+#### Tuesday:
 
 lecture: le_2_managing_data
 
 code: le2_data_manipulation.R
 
-Thursday: 
+#### Thursday: 
 
 lecture: ex2_data_manipulation.pptx
 
@@ -41,13 +41,13 @@ code: use code from Tuesday for example
 
 Week 3
 -------------------
-Tuesday:
+#### Tuesday:
 
 lecture: le3_data_visualization
 
 code: le3_data_visualization.R
 
-Thursday: 
+#### Thursday: 
 
 lecture: ex3_data_manipulation.pptx
 
@@ -55,23 +55,23 @@ code: use code from Tuesday for example
 
 Week 4
 ------------------
-Tuesday: 
+#### Tuesday: 
 lecture: le4_statistical_philosphy
 
 code: code just to make examples in lecture - none assigned
 
 
-Thursday: discussion on reading
+#### Thursday: discussion on reading
 
 Week 5
 --------------------
-Tuesday: 
+#### Tuesday: 
 
 lecture: le_5_tests.ppt
 
 code: ex5_tests
 
-Thursday:
+#### Thursday:
 
 code:ex5_tests
 
@@ -86,24 +86,25 @@ code: ex6_rev_distributions.R
 handout:Handout_Week6_Distributions.pdf (In "readings" folder")
 
 
-Thursday: Problem set solutions; distribution fitting (no assignment)
+#### Thursday: 
+- Problem set solutions; distribution fitting (no assignment)
 
-lecture & solutions : ex6_solutions.pptx
+- lecture & solutions : ex6_solutions.pptx
 
-code: ex6_rev_distributions.R / ex6_rev_solutions.R
+- code: ex6_rev_distributions.R / ex6_rev_solutions.R
 
-FOR NEXT WEEK READING ASSIGNMENT & QUIZ: 
+##### FOR NEXT WEEK READING ASSIGNMENT & QUIZ: 
 
-(1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
+- (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
 
-(2) Week6_Felsenstein 1985 Am Nat
+- (2) Week6_Felsenstein 1985 Am Nat
 
 Week 7
 ------------------------
-Tuesday: Featuring **Dr. Josef Uyeda** on Phylogenetic Methods
+#### Tuesday: Featuring **Dr. Josef Uyeda** on Phylogenetic Methods
 
 
-Thursday: No class
+#### Thursday: No class
 
 - Use this time to:
 
@@ -116,13 +117,16 @@ Thursday: No class
 
 Week 8
 ---------------------
-Tuesday: 
+#### Tuesday: 
+
 lecture: le_7_linear_models
-(2021 lecture will be recorded in advance. No need to login for class.)
+- (2021 lecture will be recorded in advance. *No in person class.*)
+
 code: ex7_linear_models
 
-Thursday:
+#### Thursday:
 lecture: ex7_assignment
+
 code: use code from Tuesday
 
 Week 9
