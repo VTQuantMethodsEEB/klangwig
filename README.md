@@ -77,7 +77,7 @@ code:ex5_tests
 
 Week 6
 ------------------------
-# Tuesday:
+#### Tuesday:
 
 lecture: le6_rev_distributions.pptx
 
