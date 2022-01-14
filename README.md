@@ -101,7 +101,8 @@ handout:Handout_Week6_Distributions.pdf (In "readings" folder")
 
 Week 7
 ------------------------
-#### Tuesday: Featuring **Dr. Josef Uyeda** on Phylogenetic Methods
+#### Tuesday: 
+- Featuring **Dr. Josef Uyeda** on Phylogenetic Methods
 
 
 #### Thursday: No class
@@ -222,7 +223,7 @@ code:
 #### Thurs
 - Project Assistance
 
-#Week 14
+Week 14
 --------------------------
 #### Tues: Extended Topics
 lecture:
@@ -234,7 +235,7 @@ code:
 #### Thurs: PEER REVIEW
 - have assignment turned in peer review!
 
-#Week 15
+Week 15
 --------------------------
 #### Tues
 - Bad ggplots contest!
