@@ -112,7 +112,7 @@ lecture: le6_rev_distributions.pptx
 
 code: ex6_rev_distributions.R
 
-handout: [Handout_Week6_Distributions] (https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Handout_Week6_Distributions.pdf)
+handout: [Handout_Week6_Distributions](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Handout_Week6_Distributions.pdf)
 
 #### Task List for Next Week
 - Complete Week 5 assignment
