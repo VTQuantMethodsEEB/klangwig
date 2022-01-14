@@ -1,5 +1,6 @@
 #ex_nls_models
 
+rm(list=ls()) # clears workspace
 
 ##nls models - Michaelis-Menten
 pred.dens = seq(1,10, length.out=10) #create prey density
@@ -7,12 +8,12 @@ rates = c(.1,0.4,.5,.6,.5,.7,.8,.82,.825,.8257) #make up some capture rates
 pred.dat = data.frame(pred.dens,rates) 
 
 a = 1
-b = 3
+b = 5
 preds = (a*(pred.dens))/((b)+(pred.dens))
 
 pred.mod<-nls(rates~((a*(pred.dens))/((b)+(pred.dens))),
               data=pred.dat, 
-              start=list(a=1.36,b=5.87), #need to supply starting values
+              start=list(a=1,b=5), #need to supply starting values #a=1.36,b=5.87
               trace = TRUE)
 
 summary(pred.mod)
