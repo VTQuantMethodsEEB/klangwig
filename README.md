@@ -120,7 +120,7 @@ Week 8
 #### Tuesday: 
 
 lecture: le_7_linear_models
-- (2021 lecture will be recorded in advance. *No in person class.*)
+- Lecture will be recorded in advance. *No in person class.*
 
 code: ex7_linear_models
 
@@ -131,91 +131,115 @@ code: use code from Tuesday
 
 Week 9
 ----------------------
-Tuesday: 
+#### Tuesday: 
+
 lecture: le8_Linear_model_parameters
+
 code: ex8_linear_model_parameters
 
-Thursday:
+#### Thursday:
+
 lecture: le8_Linear_model_parameters (last slide has assignment)
+
 code: use code from Tuesday
 
 Week 10
 -----------------------
-Tuesday:
+#### Tuesday:
 lecture: le10_glms.pptx
+
 code: ex10_glms.R
 
 datasets: bat_data.csv; lizards.csv
 
-Thursday:
+#### Thursday:
 lecture: ex10_glm_assignment.pptx
+
 code: use code from Tuesday
 
 
-Week 11 - part 1
+Week 11
 -----------------------
-Tuesday: 
+#### Tuesday: 
+
 lecture: le111_model_selection.pptx
+
 code: ex11_model_comparison.R
 
 reading: Week11_Bolker et al ms information theoretic.pdf
 
-Thursday:
+#### Thursday:
 lecture: le11_assignment.pptx
+
 code: Use code from Tuesday
 
-Week 11 - part 2
------------------------
-Tuesday: Spring Break Day, No class!
-Thursday: Discussion
-Readings: 
-Week11_Bolker et al ms information theoretic.pdf
-Week11_Cade_2015_MultiModelAveraging.pdf
 
 Week 12
 ------------------------
-Tuesday:
+#### Tuesday:
+
 lecture: le12_mixed_models.pptx
+
 code: ex12_mixed_models.R
 
 reading: Week12_Bolker 2008 TREE.pdf
 
-Thursday:
+#### Thursday:
+
 lecture: assignment at end of Tuesday lecture
+
 code: use same as Tuesday for example
 
 Week 13
 --------------------------
 Extended topics week!
-
+#### Tues: Extended Topics
 lecture:
-le13_advanced_models_combined.pptx
+- le13_advanced_models_combined.pptx
 
 code:
-zero-inflated models
+
+*zero-inflated models*
+
 - ex_zero_inflated_models.R
 
-power analyses
+*power analyses*
+
 - ex_power_analyses.R 
 
-time-series models
+*time-series models*
+
 - ex_time_series_models.R
 
-non-linear models (mainly least squares examples)
+*non-linear models* (mainly least squares examples)
+
 - ex_nls_models
 
-phylogenetic models using gls
+*phylogenetic models using gls*
+
 - ex_phylogenetic_gls_models
+
+#### Thurs
+- Project Assistance
 
 #Week 14
 --------------------------
-- extended topics
-- project assistance
+#### Tues: Extended Topics
+lecture:
+- le13_advanced_models_combined.pptx
 
+code: 
+- see previous week
+
+#### Thurs: PEER REVIEW
+- have assignment turned in peer review!
 
 #Week 15
 --------------------------
-- peer review 
+#### Tues
+- Bad ggplots contest!
+- You should have previously submitted some of your worst plots of the semester
+- Bonus points and prizes will be awarded
 
 
 
