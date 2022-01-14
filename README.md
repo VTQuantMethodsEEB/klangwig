@@ -124,11 +124,12 @@ handout: [Handout_Week6_Distributions](https://github.com/VTQuantMethodsEEB/klan
 
 - code: ex6_rev_distributions.R / ex6_rev_solutions.R
 
-##### FOR NEXT WEEK READING ASSIGNMENT & QUIZ: 
+##### Task List for Next Week: 
 
-- (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
+- (1) [Week6_Distributions_Bolker_chap4A.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week6_Distributions_Bolker_chap4A.pdf) - quiz is on this
 
-- (2) Week6_Felsenstein 1985 Am Nat
+- (2) [Week6_Felsenstein 1985 Am Nat](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week6_Felsenstein%201985%20Am%20Nat.pdf)
+- (3) Take quiz
 
 Week 7
 ------------------------
@@ -146,6 +147,8 @@ Week 7
 
 - (3) Catch up on other assigned reading
 
+##### Task List for Next Week: 
+- None! Enjoy Spring Break. 
 
 Week 8
 ---------------------
@@ -161,6 +164,10 @@ lecture: ex7_assignment
 
 code: use code from Tuesday
 
+##### Task List for Next Week: 
+- Work on part 1 of linear models assignment. Due date is in two weeks.
+- Keep bad ggplot2 in mind here. Lots of potential this week!
+
 Week 9
 ----------------------
 #### Tuesday: 
@@ -169,11 +176,17 @@ lecture: le8_Linear_model_parameters
 
 code: ex8_linear_model_parameters
 
+
 #### Thursday:
 
 lecture: le8_Linear_model_parameters (last slide has assignment)
 
 code: use code from Tuesday
+
+##### Task List for Next Week: 
+- Hand in linear models (part 1 & 2).
+- Start thinking about final project
+- Any bad ggplots2?
 
 Week 10
 -----------------------
@@ -189,6 +202,12 @@ lecture: ex10_glm_assignment.pptx
 
 code: use code from Tuesday
 
+##### Task List for Next Week: 
+- Work on glms - due date in 2 weeks.
+- Start crafting analyses for final project
+- Reading assignment next week
+- Any bad ggplots2?
+
 
 Week 11
 -----------------------
@@ -198,13 +217,18 @@ lecture: le111_model_selection.pptx
 
 code: ex11_model_comparison.R
 
-reading: Week11_Bolker et al ms information theoretic.pdf
+reading: [Week11_Bolker et al ms information theoretic.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week11_Bolker%20et%20al%20ms%20information%20theoretic.pdf)
 
 #### Thursday:
 lecture: le11_assignment.pptx
 
 code: Use code from Tuesday
 
+##### Task List for Next Week: 
+- Hand in 10 & 11 assignment.
+- Work on project results section, outline text in all sections
+- Vote on extended projects
+- Any bad ggplots2?
 
 Week 12
 ------------------------
@@ -221,6 +245,13 @@ reading: Week12_Bolker 2008 TREE.pdf
 lecture: assignment at end of Tuesday lecture
 
 code: use same as Tuesday for example
+
+##### Task List for Next Week: 
+- Hand in Week 12 assignment.
+- Final project: Finish graphs and analyses and draft abstract
+- Do you have final project questions for Kate? Share those with her next week!
+- Any bad ggplots2?
+
 
 Week 13
 --------------------------
@@ -254,6 +285,11 @@ code:
 #### Thurs
 - Project Assistance
 
+##### Task List for Next Week: 
+- Finalize content for final project for peer review
+- Reach out to Kate for feedback if needed
+
+
 Week 14
 --------------------------
 #### Tues: Extended Topics
@@ -264,7 +300,13 @@ code:
 - see previous week
 
 #### Thurs: PEER REVIEW
-- have assignment turned in peer review!
+- have assignment turned in for peer review!
+- finalize peer review comments by Friday evening
+
+##### Task List for Next Week: 
+- Integrate comments from peer review
+- finalize draft
+- Last chance for bad ggplots!
 
 Week 15
 --------------------------
@@ -273,6 +315,8 @@ Week 15
 - You should have previously submitted some of your worst plots of the semester
 - Bonus points and prizes will be awarded
 
+##### Task List for THIS Week: 
+- Hand in final project on Wed!
 
 
 
