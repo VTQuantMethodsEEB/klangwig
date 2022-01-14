@@ -151,7 +151,7 @@ InsectSprays[InsectSprays$spray=="A" | InsectSprays$count<10,]
 
 
 #example of read.csv with directory
-r2<-read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/github/klangwig/bat_data.csv")
+r2<-read.csv("Users/klangwig/Desktop/VT/teaching/quant grad course/github/klangwig/bat_data.csv")
 #this file is in my project folder so I can read it in without calling the directory
 r2=read.csv("bat_data.csv")
 #you will need to change this to match your directory

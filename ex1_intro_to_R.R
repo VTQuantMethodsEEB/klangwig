@@ -38,8 +38,6 @@ b1<-aggregate(Sepal.Length~Species,FUN=mean, data=iris.sub)
 
 #play data
 #example with directory
-dm<-read.csv("/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/bat_data.csv")
-#this file is in my project folder so I can read it in without calling the directory
 dm<-read.csv("bat_data.csv")
 
 #this file is in the datasets folder on canvas
