@@ -23,6 +23,11 @@ lecture: ex1_intro_to_R.pptx
 
 code: ex1_intro_to_R.R
 
+Task list for next week:
+- Write paragraph about your data
+- Cleanup data
+- Install Git and register for GitHub using https://happygitwithr.com/
+
 
 Week 2
 -------------------
@@ -32,12 +37,16 @@ lecture: le_2_managing_data
 
 code: le2_data_manipulation.R
 
+
 #### Thursday: 
 
 lecture: ex2_data_manipulation.pptx
 
 code: use code from Tuesday for example
 
+Task list for next week:
+- Make sure that data is clean!
+- Complete Week 2 assignment, make sure to turn in code from Week 1 too
 
 Week 3
 -------------------
@@ -53,6 +62,11 @@ lecture: ex3_data_manipulation.pptx
 
 code: use code from Tuesday for example
 
+Task list for next week:
+- Submit Week 3 assignment
+- Reading and discussion for next Thurs
+- Start thinking about those bad ggplot2s for the end of the semester!
+
 Week 4
 ------------------
 #### Tuesday: 
@@ -61,7 +75,11 @@ lecture: le4_statistical_philosphy
 code: code just to make examples in lecture - none assigned
 
 
-#### Thursday: discussion on reading
+#### Thursday: 
+- discussion on reading
+- Full article list:
+-- https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/1_Nuzzo%20Editorial.pdf
+--https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/2_FrankHarrellBlogIntro.pdf
 
 Week 5
 --------------------
