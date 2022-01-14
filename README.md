@@ -79,14 +79,14 @@ code: code just to make examples in lecture - none assigned
 - discussion on reading
 - Full article list:
   - [Nuzzo](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/1_Nuzzo%20Editorial.pdf)
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/2_FrankHarrellBlogIntro.pdf
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/3_Dushoff%20reinterpreting%20statistical%20difference.pdf
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/4_Comment%20on%20eroneous%20interactions.pdf
+  - [Harrell](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/2_FrankHarrellBlogIntro.pdf)
+  - [Reinterpreting](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/3_Dushoff%20reinterpreting%20statistical%20difference.pdf)
+  - [Erroneous interactions](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/4_Comment%20on%20eroneous%20interactions.pdf)
 - Interesting optional articles to examine:
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/5_Erroneous%20analyses%20of%20interactions.pdf
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/6_listening%20to%20music%20makes%20you%20younger.pdf
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/7_Gelman%20the%20difference%20is%20not%20significant.pdf
-  - https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/8_Fisher%20Newyman%20Agreement.pdf
+  - [Erroneous interactions full](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/5_Erroneous%20analyses%20of%20interactions.pdf)
+  - [Listening to music makes you younger](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/6_listening%20to%20music%20makes%20you%20younger.pdf)
+  - [The difference is not different](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/7_Gelman%20the%20difference%20is%20not%20significant.pdf)
+  - [Can statisticians agree?](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/8_Fisher%20Newyman%20Agreement.pdf)
   
 
 Week 5
