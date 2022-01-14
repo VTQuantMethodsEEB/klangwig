@@ -174,9 +174,9 @@ Week 9
 ----------------------
 #### Tuesday: 
 
-lecture: le8_Linear_model_parameters
+lecture: [le8_Linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_8_advanced_lms)
 
-code: ex8_linear_model_parameters
+code: [ex8_linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex8_linear_model_parameters.R)
 
 
 #### Thursday:
@@ -193,11 +193,11 @@ code: use code from Tuesday
 Week 10
 -----------------------
 #### Tuesday:
-lecture: le10_glms.pptx
+lecture: [le10_glms.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_10_glms)
 
-code: ex10_glms.R
+code: [ex10_glms.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex10_glms.R)
 
-datasets: bat_data.csv; lizards.csv
+datasets: [bat_data.csv](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/bat_data.csv); [lizards.csv](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lizards.csv)
 
 #### Thursday:
 lecture: ex10_glm_assignment.pptx
@@ -215,9 +215,9 @@ Week 11
 -----------------------
 #### Tuesday: 
 
-lecture: le111_model_selection.pptx
+lecture: [le111_model_selection.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_11_model_selection)
 
-code: ex11_model_comparison.R
+code: [ex11_model_comparison.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex11_model_comparison.R)
 
 reading: [Week11_Bolker et al ms information theoretic.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week11_Bolker%20et%20al%20ms%20information%20theoretic.pdf)
 
@@ -236,11 +236,11 @@ Week 12
 ------------------------
 #### Tuesday:
 
-lecture: le12_mixed_models.pptx
+lecture: [le12_mixed_models.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_12_mixed_models)
 
-code: ex12_mixed_models.R
+code: [ex12_mixed_models.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex12_mixed_models.R)
 
-reading: Week12_Bolker 2008 TREE.pdf
+reading: [Week12_Bolker 2008 TREE.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week12_Bolker%202008%20TREE.pdf)
 
 #### Thursday:
 
