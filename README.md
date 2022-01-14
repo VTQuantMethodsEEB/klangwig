@@ -78,7 +78,7 @@ code: code just to make examples in lecture - none assigned
 #### Thursday: 
 - discussion on reading
 - Full article list:
--- https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/1_Nuzzo%20Editorial.pdf
+ -  https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/1_Nuzzo%20Editorial.pdf
 --https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/2_FrankHarrellBlogIntro.pdf
 
 Week 5
