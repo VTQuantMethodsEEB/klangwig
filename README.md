@@ -13,9 +13,9 @@ Week 1
 -------------------
 #### Tuesday: 
 
-lecture: lectures/le1_intro_to_R.pptx
+lecture: [lectures/le1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_1_intro_to_R)
 
-code: le_1_intro_to_R.R
+code: [le_1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex1_intro_to_R.R)
 
 
 #### Thursday:
@@ -23,19 +23,20 @@ lecture: ex1_intro_to_R.pptx
 
 code: ex1_intro_to_R.R
 
-#### Task list for next week:
+##### Task list for next week:
 - Write paragraph about your data
 - Cleanup data
 - Install Git and register for GitHub using https://happygitwithr.com/
+- Read [Tips for turning in assignments](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/Tips%20for%20turning%20in%20assignments.docx)
 
 
 Week 2
 -------------------
 #### Tuesday:
 
-lecture: le_2_managing_data
+lecture: [le_2_managing_data](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_2_managing_data)
 
-code: le2_data_manipulation.R
+code: [le2_data_manipulation.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/le2_data_manipulation.R)
 
 
 #### Thursday: 
@@ -44,7 +45,7 @@ lecture: ex2_data_manipulation.pptx
 
 code: use code from Tuesday for example
 
-#### Task list for next week:
+##### Task list for next week:
 - Make sure that data is clean!
 - Complete Week 2 assignment, make sure to turn in code from Week 1 too
 
@@ -52,9 +53,9 @@ Week 3
 -------------------
 #### Tuesday:
 
-lecture: le3_data_visualization
+lecture: [le3_data_visualization](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_3_graphs)
 
-code: le3_data_visualization.R
+code: [le3_data_visualization.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/le3_data_visualization.R)
 
 #### Thursday: 
 
@@ -62,7 +63,7 @@ lecture: ex3_data_manipulation.pptx
 
 code: use code from Tuesday for example
 
-#### Task list for next week:
+##### Task list for next week:
 - Submit Week 3 assignment
 - Reading and discussion for next Thurs
 - Start thinking about those bad ggplot2s for the end of the semester!
@@ -70,7 +71,7 @@ code: use code from Tuesday for example
 Week 4
 ------------------
 #### Tuesday: 
-lecture: le4_statistical_philosphy
+lecture: [le4_statistical_philosphy](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_4_philosophy)
 
 code: code just to make examples in lecture - none assigned
 
@@ -87,35 +88,36 @@ code: code just to make examples in lecture - none assigned
   - [Listening to music makes you younger](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/6_listening%20to%20music%20makes%20you%20younger.pdf)
   - [The difference is not different](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/7_Gelman%20the%20difference%20is%20not%20significant.pdf)
   - [Can statisticians agree?](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/8_Fisher%20Newyman%20Agreement.pdf)
+
+##### Task List for Next Week
+- Ensure you are caught up on assignments and data is clean!
   
 
 Week 5
 --------------------
 #### Tuesday: 
 
-lecture: le_5_tests.ppt
+lecture: [le_5_tests.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_5_tests)
 
-code: ex5_tests
+code: [ex5_tests](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex5_tests.R)
 
 #### Thursday:
 
-code:ex5_tests
+code: [ex5_tests](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex5_tests.R)
 
-#### Task List for Next Week
+##### Task List for Next Week
 - Complete Week 5 assignment
 
 Week 6
 ------------------------
 #### Tuesday:
 
-lecture: le6_rev_distributions.pptx
+lecture: [le6_rev_distributions.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_6_distributions)
 
-code: ex6_rev_distributions.R
+code: [ex6_rev_distributions.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex6_rev_distributions.R)
 
 handout: [Handout_Week6_Distributions](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Handout_Week6_Distributions.pdf)
 
-#### Task List for Next Week
-- Complete Week 5 assignment
 
 #### Thursday: 
 - Problem set solutions; distribution fitting (no assignment)
@@ -154,10 +156,10 @@ Week 8
 ---------------------
 #### Tuesday: 
 
-lecture: le_7_linear_models
+lecture: [le_7_linear_models](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_7_lms)
 - Lecture will be recorded in advance. *No in person class.*
 
-code: ex7_linear_models
+code: [ex7_linear_models](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex7_linear_models.R)
 
 #### Thursday:
 lecture: ex7_assignment
