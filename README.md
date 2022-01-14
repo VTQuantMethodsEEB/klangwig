@@ -12,76 +12,106 @@ This repository contains the course documents for Quantitative Methods in Ecolog
 Week 1
 -------------------
 Tuesday: 
+
 lecture: lectures/le1_intro_to_R.pptx
+
 code: le_1_intro_to_R.R
+
 
 Thursday:
 lecture: ex1_intro_to_R.pptx
+
 code: ex1_intro_to_R.R
+
 
 Week 2
 -------------------
 Tuesday:
+
 lecture: le_2_managing_data
+
 code: le2_data_manipulation.R
 
 Thursday: 
+
 lecture: ex2_data_manipulation.pptx
+
 code: use code from Tuesday for example
+
 
 Week 3
 -------------------
 Tuesday:
+
 lecture: le3_data_visualization
+
 code: le3_data_visualization.R
 
 Thursday: 
+
 lecture: ex3_data_manipulation.pptx
+
 code: use code from Tuesday for example
 
 Week 4
 ------------------
 Tuesday: 
 lecture: le4_statistical_philosphy
+
 code: code just to make examples in lecture - none assigned
+
 
 Thursday: discussion on reading
 
 Week 5
 --------------------
 Tuesday: 
+
 lecture: le_5_tests.ppt
+
 code: ex5_tests
 
 Thursday:
+
 code:ex5_tests
 
 Week 6
 ------------------------
 Tuesday:
+
 lecture: le6_rev_distributions.pptx
+
 code: ex6_rev_distributions.R
+
 handout:Handout_Week6_Distributions.pdf (In "readings" folder")
 
 
-Thursday: No class Feb 2021!
+Thursday: Problem set solutions; distribution fitting (no assignment)
+
 lecture & solutions : ex6_solutions.pptx
+
 code: ex6_rev_distributions.R / ex6_rev_solutions.R
 
-READING ASSIGNMENT & QUIZ: 
+FOR NEXT WEEK READING ASSIGNMENT & QUIZ: 
+
 (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
+
 (2) Week6_Felsenstein 1985 Am Nat
 
 Week 7
 ------------------------
-Tuesday: No class
-- Use this time to read
-- (1) Week6_Distributions_Bolker_chap4A.pdf - quiz is on this
-- (2) Week6_Felsenstein 1985 Am Nat
+Tuesday: Featuring **Dr. Josef Uyeda** on Phylogenetic Methods
 
--Make sure to complete quiz!
 
-Thursday: Phylogenies with Dr. Uyeda
+Thursday: No class
+
+- Use this time to:
+
+- (1) Make sure you have read Week6_Distributions_Bolker_chap4A.pdf
+
+- (2) Take the distributions quiz
+
+- (3) Catch up on other assigned reading
 
 
 Week 8
