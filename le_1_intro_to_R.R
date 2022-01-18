@@ -18,6 +18,7 @@ y
 
 #[switch to lecture]
 #exploring values
+
 num <- 3
 str(num) 
 
@@ -51,6 +52,8 @@ str(words)
 
 print(v <- 1:5)  ## 'm:n' creates a sequence from m to n
 str(v)
+
+#[back to lecture]
 
 #vector math
 v <- 1:5
