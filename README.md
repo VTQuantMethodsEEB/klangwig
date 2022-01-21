@@ -15,13 +15,13 @@ Week 1
 
 lecture: [lectures/le1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_1_intro_to_R)
 
-code: [le_1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex1_intro_to_R.R)
+code: [le_1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/le_1_intro_to_R.R)
 
 
 #### Thursday:
-lecture: ex1_intro_to_R.pptx
+lecture: [ex1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lectures/week_1_intro_to_R/ex1_intro_to_R.pptx)
 
-code: ex1_intro_to_R.R
+code: [ex1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex1_intro_to_R.R)
 
 ##### Task list for next week:
 - Write paragraph about your data
