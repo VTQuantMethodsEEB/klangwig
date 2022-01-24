@@ -15,41 +15,39 @@ hist(batdat$gd)
 batdat$lgdL=log10(batdat$gdL)#log the amount of fungus
 batcounts<-aggregate(count~species+site+date,data=batdat, FUN=mean)  #make a df of bat counts
 
-#starting with the "old" way - using spread
-batcounts.wide<-spread(batcounts, species,count,convert=T) #spread the dataframe
 
-head(batcounts)
-head(batcounts.wide)
+##how to use base R's match##
+#imagine I want to match in average fungal loads to my batcounts dataframe
+batloads<-aggregate(lgdL~species+site+date,data=batdat, FUN=mean)  #make a df of bat loads
 
-batloads<-aggregate(lgdL~species+site+date,data=batdat, FUN=mean)
-head(batloads)
-
-batloads.wide<-spread(batloads, species,lgdL,convert=T)
-head(batloads.wide)
-
-#can merge together but duplicates columns
-batwide=merge(batloads.wide,batcounts.wide,by=c("site","date"))
-head(batwide)
-#now we have a dataframe with columns for counts and for loads
-
-# Or "match" and keep in long format
-batloads
-batcounts
 #create a unique row id - in this case it is the species, site, and date which denote the entries we want to match
 batloads$unique.row.id = paste(batloads$species,batloads$site,batloads$date)
 batcounts$unique.row.id = paste(batcounts$species,batcounts$site,batcounts$date)
 #dataframe you are bringing to first, and the one you matching from second
 batloads$count = batcounts$count[match(batloads$unique.row.id,batcounts$unique.row.id)]
 
+View(batloads)
+
+#can merge together but duplicates columns
+batwide=merge(batloads,batcounts,by=c("site","date"))
+head(batwide)
+#now we have a dataframe with columns for counts and for loads
+
 # Look at some example data that comes with the tidyr package
 # "New' way using 'pivot_wider'
+
+batcounts.wide<- batcounts %>% #this says - make a new df called batcounts.wide using bat counts
+  pivot_wider(names_from = species, values_from = count) 
+##make columns for each of the values in the species column and fill those columns with what is the count column
+
+
 fish_encounters
 
 #let's say we want a new df where each row is a station
 fish_encounters %>%
   pivot_wider(names_from = station, values_from = seen)
 
-#we didn't include 0's at statins where we didn't observe fish so we can substitute those in
+#we didn't include 0's at stations where we didn't observe fish so we can substitute those in
 # Fill in missing values
 fish_encounters %>%
   pivot_wider(
@@ -91,6 +89,9 @@ billboard %>%
 #we can also smush our bat data back together
 head(batcounts.wide)
 
+#remove the batcounts.wide unique row id column
+batcounts.wide$unique.row.id=NULL 
+
 #we want both site and date to be columns
 batcounts.wide %>%
   pivot_longer(-c(site,date), names_to = "species", values_to = "count")
@@ -126,3 +127,18 @@ batdat = batdat %>%
   mutate(sample.size=length(swab_id))
 #this adds a column to the dataframe
 batdat
+
+###some old code with spread and gather - ignore unless this speaks to you###
+#starting with the "old" way - using spread
+batcounts.wide<-spread(batcounts, species,count,convert=T) #spread the dataframe
+
+head(batcounts)
+head(batcounts.wide)
+
+batloads<-aggregate(lgdL~species+site+date,data=batdat, FUN=mean)
+head(batloads)
+
+batloads.wide<-spread(batloads, species,lgdL,convert=T)
+head(batloads.wide)
+
+

@@ -33,14 +33,14 @@ You should be able to
     - numbers, characters, factors, missing values
 - examine the data visually, numerically, textually, etc.
 
-##Getting Started with Data
+##  Getting Started with Data
 - Save files as .csv
 
 - IMPORTANT – saving an excel file as a CSV means that you will lose some data
 + For example, if you used excel to calculate a formula, the formula will be gone as R will just store this as plain text
 - DON’T USE EXCEL TO DO CALCULATIONS – JUST ADD THIS TO YOUR CODE IN R
 - Use smart column names. R can’t handle spaces in your column names, so get rid of those. Also don’t use a bunch of capitals unnecessarily because it slows down your coding. e.g. use “species” not “Species”
-- There are packages that allow you to read in .xls files (gdata in JD), but I think using .csv is easier
+
 
 ## Making your excel file
 - Excel files should have a list of column names at the top only and variable values
@@ -66,7 +66,7 @@ have to worry about when and whether R represents things as integers or *floatin
 You do need to know about **factors**, and to be aware when your
 variables are being treated as such. See lecture 1 for more about factors.
 
-## Dates
+## Date reminder
 
 Working with dates can be a bit frustrating because as time units get larger, they become more variable. For example, at what day does the 75th percentile of the month fall?
 
@@ -74,7 +74,6 @@ An important note – macs and windows machines often handle dates differently a
 
 One a mac the default is mo/day/two digit year – e.g. 01/13/18 is January 13, 2018, but on a PC the default is “01/13/2018”. This can result in some frustration between people sharing scripts!
 
-Typically, dates will be loaded in as factors. If you want them to be dates, you need to tell R this. 
 
 
 ## Missing values
@@ -85,6 +84,7 @@ communicate between R and your CSV files, for example. You need to know
 that
 
 - use `is.na()` to test for `NA` values, `na.omit()` to drop them, and the optional `na.rm` argument in some functions (`mean`, `sum`, `median` ...)
+- in the tidyverse, you can use `drop_na()` to remove `NA`
 
 ## Changing representations
 
@@ -110,6 +110,12 @@ An American Airlines memo about fuel reporting from the 1980s complained of mult
 You should think about what you can test, and what you can fix if it's
 broken.
 
+## Things to fix in excel
+- naming inconsistencies (see maple example last lecture)
+- column name issues (spaces)
+- use excel's find and replace and filter function to find these
+
+
 ## Visualizing data with graphs
 Graphical approaches are really useful for data cleaning; we will
 discuss this more later on.
@@ -120,7 +126,8 @@ To get you started here are just a few:
 
 ## Example
 ```{r batdat, echo=TRUE}
-batdat=read.csv("~/Dropbox/teaching/quant grad course/github/klangwig/bat_data.csv")
+batdat=read.csv("/Users/klangwig/Desktop/VT/teaching/quant grad course/github/klangwig/bat_data.csv")
+
 head(batdat)  
 
 ```
@@ -141,6 +148,51 @@ hist(batdat$gd)
 - `glimpse`: a dyplr function, that allows for preview as much of each column as possible
 - `head`: get the first 6 rows
 - `tail`: get the last 6 rows
+
+## Some other useful base R tools
+- `aggregate`: creating summary dfs using various functions on a set of variables
+- `match`: match a value from one dataframe into another df given a common column. Only the value you want to copy is matched.
+- `merge`: merge two dataframes together based on some common columns, all columns are merged.
+- Note `merge` is made more versatile by the `join` functions in tidyverse
+
+## Example with bat data
+```{r counts1, echo=T}
+
+batdat=read.csv("/Users/klangwig/Desktop/VT/teaching/quant grad course/github/klangwig/bat_data.csv")
+head(batdat)
+
+```
+
+## Here, we will use aggregate
+```{r aggregate, echo=T}
+batcounts<-aggregate(count~species+site+date,data=batdat, FUN=mean) 
+#make a df of bat counts
+head(batcounts)
+```
+
+## We can make identical dataframes for loads
+```{r loads, echo=T}
+batdat$lgdL=log10(batdat$gdL)#log the amount of fungus
+batloads<-aggregate(lgdL~species+site+date,data=batdat, FUN=mean)
+head(batloads)
+```
+
+## We can "match" the loads column into our count df
+```{r match, echo=T}
+batloads$unique.row.id = paste(batloads$species,batloads$site,batloads$date)
+batcounts$unique.row.id = paste(batcounts$species,batcounts$site,batcounts$date)
+#dataframe you are bringing to first, and the one you matching from second
+batloads$count = batcounts$count[match(batloads$unique.row.id,batcounts$unique.row.id)]
+head(batloads)
+```
+
+
+## Alternatively, we can merge dataframes together for wide format
+```{r merging, echo=T}
+batwide=merge(batloads,batcounts,by=c("site","date"))
+#merge df together by site and date
+head(batwide)
+```
 
 
 ## How do you clean data? 
@@ -165,7 +217,7 @@ introduced the `tidyverse` package.
 knitr::include_graphics("tidy_pic.png")
 ```
 
-##Learning about the tidyverse
+## Learning about the tidyverse
 - https://www.tidyverse.org
 
 ## Putting your data in tidy format
@@ -173,78 +225,54 @@ knitr::include_graphics("tidy_pic.png")
 - For example, species in my bat dataset is usually a single variable
 - I usually also include a "count" column (the number of individuals at a site)
 - But what if I wanted to test the effect of the count of one species (e.g.MYSE)
-  on another? Now MYSE count is actually a variable.
+  on another? 
 
-##Example with bat data
-```{r counts, echo=F}
 
-batdat=read.csv("~/Dropbox/teaching/quant grad course/github/klangwig/bat_data.csv")
-
-```
-
-What if I wanted to test how the count of MYSE influenced infection in MYLU? I need to MYSE to be a variable
-
-## Spread and Gather - "Old"" way
-- `spread` and `gather` have now been replaced by the more intuitive `pivot`
-- These are in the notes as an example only
-- We won't go through them and I encourage you to switch to `pivot`
-- In the R file, go to line 44
-
-## Here, we will use spread and gather
-```{r spread, echo=T}
-library(tidyr)
-batdat$lgdL=log10(batdat$gdL)#log the amount of fungus
+## Example with bat count data
+```{r remove_unique.id, echo=T}
 batcounts<-aggregate(count~species+site+date,data=batdat, FUN=mean) 
-#make a df of bat counts
-batcounts.wide<-spread(batcounts, species,count,convert=T) 
-#spread that dataframe
+head(batcounts)
 ```
 
-## What do these look like?
-```{r examine,echo=FALSE}
-head(batcounts)
+
+## Testing the effect of one species on another
+ - What if I wanted to test how the count of MYSE influenced counts of MYLU? I need to MYSE to be a variable
+
+## Pivoting 
+- Here is a link to vignette: https://tidyr.tidyverse.org/articles/pivot.html
+
+- Using `pivot_wider()` and `pivot_longer()` we can specify how the metadata stored become data variables
+
+- This has replaced `spread` and `gather`
+
+
+## Let's 'pivot' (make wider)
+```{r pivoting,echo=TRUE}
+library(tidyr)
+batcounts.wide<- batcounts %>% #this says - make a new df called batcounts.wide using bat counts
+  pivot_wider(names_from = species, values_from = count) 
+##make columns for each of the values in the species column and fill those columns with what is the count column
+```
+
+
+
+## What does our new df look like?
+```{r examine,echo=TRUE}
 head(batcounts.wide)
 ```
 
-## We can make identical dataframes for loads
-```{r loads, echo=F}
-batloads<-aggregate(lgdL~species+site+date,data=batdat, FUN=mean)
-batloads.wide<-spread(batloads, species,lgdL,convert=T)
-head(batloads)
-head(batloads.wide)
-```
 
-## Now, merge dataframes together for wide format
-```{r merging, echo=T}
-batwide=merge(batloads.wide,batcounts.wide,by=c("site","date"))
-#merge df together by site and date
-head(batwide)
-```
-
-## Or "match" and keep in long format
-```{r match, echo=T}
-batloads$unique.row.id = paste(batloads$species,batloads$site,batloads$date)
-batcounts$unique.row.id = paste(batcounts$species,batcounts$site,batcounts$date)
-#dataframe you are bringing to first, and the one you matching from second
-batloads$count = batcounts$count[match(batloads$unique.row.id,batcounts$unique.row.id)]
-head(batloads)
-```
-
-
-## Here's another example using the newer and more intuitive "pivot"
+## Here's another example using "pivot"
  Look at some example data that comes with the tidyr package:
 
 ```{r view}
 fish_encounters
 ```
 
-## Here is a link to vignette
-- https://tidyr.tidyverse.org/articles/pivot.html
-- It seems SO much better than 'spread()' and 'gather()'
 
 ## Pivot_wider
 
-Using `pivot_wider()` we can specify how the metadata stored become data variables
+Using `pivot_wider()` 
 
 ```{r pivotwide}
 fish_encounters %>%
@@ -331,19 +359,18 @@ billboard %>%
 -   `subset`, `[`-indexing: select obs and vars
 -   `transform`: modify variables and create new ones
 -   `aggregate`: split-apply-summarize
--   `split`, `lapply`, `do.call(rbind())`: split-apply-combine
 -   `sort`
 
 ## The tidyverse
 
--   `tidyr` package: `pivot_longer`, `pivot_wider`
--   `dplyr` package:
-    -   `mutate`
-    -   `select`
-    -   `filter`
-    -   `group_by`
-    -   `summarise`
-    -   `arrange`
+- `pivot_longer`, `pivot_wider`
+- `mutate`: add a column
+- `select`: select columns
+- `filter`: select rows
+- `group_by`: group then do something (usually mutate or summarise)
+- `summarise`: make a summary table
+- `arrange`: sort
+- `left_join`: merge [see other `join` options](https://dplyr.tidyverse.org/reference/mutate-joins.html)
     
 ## Group by, Mutate, and Summarise
  - `group_by` is my favorite tidyverse command which has cut my need to write loops in half
@@ -356,12 +383,13 @@ library(tidyverse)
 
 ## Group by species
 ```{r group_by_example}
+batdat$lgdL = log10(batdat$gdL)
 batdat %>% 
   group_by(species) %>% 
     summarise(mean.fungal.loads=mean(lgdL,na.rm=TRUE))
 ```
 
-##Summarise versus Mutate
+## Summarise versus Mutate
  - `summarise` creates a new dataframe 
  - `mutate` does a calculation where it add a new column to your existing dataframe
  
@@ -373,9 +401,10 @@ batdat_with_sample_size = batdat %>%
     mutate(sample.size=n())
 #this adds a column to the dataframe
 ```
-##What does our dataframe look like now?
+
+## What does our dataframe look like now?
 ```{r looking at new dataframe}
-head(batdat_with_sample_size[c(1,6,7,8,12)])
+head(batdat_with_sample_size[c(1,6,7,8,12,13)])
 #this is just showing a few columns for effect
 ```
 
@@ -386,9 +415,9 @@ head(batdat_with_sample_size[c(1,6,7,8,12)])
 - The idea is that you should be able to delete any results of computer calculations and be able to quickly re-do them
 
 - Ideally your project will depend on:
-- Some data files
-- Some scripts
-- Something that tells you how these things go together (RMarkdown is helpful for this), at minimum a README file
+  -  Some data files
+  -  Some scripts
+  -  Something that tells you how these things go together (RMarkdown is helpful for this), at minimum a README file
 
 ## Advantages of this approach
  - Clarity: we aren't confused about the 600 pages of information stored with our projects
@@ -398,14 +427,13 @@ head(batdat_with_sample_size[c(1,6,7,8,12)])
  - Flexibility : we can use different data and re-create the same thing
  
 ## Spreadsheets
-- Spreadsheets are a useful (and obvious) tool for working with R
+- Spreadsheets are a useful tool for working with R
 - `read.csv` and `write.csv` are very useful commands for working with spreadsheets
 - when using `write.csv` use `row.names=F` to avoid line numbers
 - Importantly, spreadsheets are for storing data, NOT FOR MANIPULATING DATA
-
-- Your goal should be to take data from a spreadsheet and manipulate it entirely using scripts. 
-- Avoid spreadsheet addiction: http://www.burns-stat.com/documents/tutorials/spreadsheet-addiction/ 
-- The jist is: friends don't let friends use excel for statistics. 
+  -   Your goal should be to take data from a spreadsheet and manipulate it entirely using scripts. 
+  -   Avoid spreadsheet addiction: http://www.burns-stat.com/documents/tutorials/spreadsheet-addiction/ 
+  -   The jist is: friends don't let friends use excel for statistics. 
 
 ## Database
 - Your spreadsheet is a database (just because it isn't stored in microsoft access doesn't mean it isn't!)
@@ -420,7 +448,7 @@ head(batdat_with_sample_size[c(1,6,7,8,12)])
 - Version control works a bit like "Track Changes" in word, Git will track the changes we make to our code so we can return to previous versions
 - It also allows collaboration so I can look at your code and make changes - a bit like a more complicated version of Google Docs
 
-##Will this hurt?
+## Will this hurt?
 - Maybe! 
 
 - But, I think this important enough that we NEED exposure to this. This is the future! 
@@ -432,13 +460,13 @@ head(batdat_with_sample_size[c(1,6,7,8,12)])
 
 - Using Git has gotten easier. We used to have to use command line to communicate with Git, but now we can just use RStudio! 
 
-##Terminology
+## Terminology
 
 - repository: A directory or storage space where your projects can live. Sometimes GitHub users shorten this to “repo.” (If you're cool like that.) It is usually a local folder on your computer. You can keep code files, text files, image files, you name it, inside a repository.
 
 - commit: This is the command that gives Git its power. When you commit, you are taking a “snapshot” of your repository at that point in time, giving you a checkpoint to which you can reevaluate or restore your project to any previous state.When you first start "commiting", it is important to remember this is taking the picture, not SENDING the picture. (Sending is called "pushing")
 
-##Terminology cont.
+## Terminology cont.
 
 - branch: How do multiple people work on a project at the same time without Git getting them confused? Usually, they “branch off” of the main project with their own versions full of changes they themselves have made. After they’re done, it’s time to “merge” that branch back with the “master,” the main directory of the project. Because we'll be working within our own repos, we don't need to worry too much about branching but is good to know for future.
 
