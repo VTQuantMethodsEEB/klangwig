@@ -2,8 +2,8 @@
 title: "Managing Data in R"
 author: "KEL - Quantitative Methods"
 output:
-  ioslides_presentation: default
   beamer_presentation: default
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
