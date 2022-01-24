@@ -38,7 +38,7 @@ head(batwide)
 
 batcounts.wide<- batcounts %>% #this says - make a new df called batcounts.wide using bat counts
   pivot_wider(names_from = species, values_from = count) 
-##make columns for each of the values in the species column and fill those columns with what is the count column
+##make columns for each of the values in the species column and fill those columns with values from the count column
 
 
 fish_encounters
