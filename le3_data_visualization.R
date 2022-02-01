@@ -176,3 +176,4 @@ g3=ggplot(data=batdat,aes(x=date.new,y=count,color=nspecies,shape=site))+
     scale_x_date(date_breaks = "2 months", date_labels = "%m/%Y",limits = as.Date(c('2015-01-01','2016-05-01')) )
   g3
   
+  
