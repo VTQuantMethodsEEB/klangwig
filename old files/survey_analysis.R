@@ -1,12 +1,23 @@
 #survey analysis
+library(tidyverse)
 
-sur = read.csv("survey.csv")
+#sur = read.csv("survey.csv")
+sur = read.csv("survey_results.csv")
 head(sur)
+ncol(sur)
+sur = sur[-1]
+
+sur2 = sur %>%
+gather(key="key", value = "value")#, -Username
+
+head(sur2)
+#sur2 = subset(sur2,Username!="sbutton@vt.edu")
+sur = sur2
 
 #boxplot
-r=ggplot(data=sur, aes(x=topic,y=score))+ 
+r=ggplot(data=sur, aes(x=key,y=value))+ 
   geom_violin()+
-  geom_point()+
+  geom_point()+#aes(color=Username)
   ylab("Score")+
   xlab("")+
   theme_bw() + 
@@ -14,16 +25,17 @@ r=ggplot(data=sur, aes(x=topic,y=score))+
 print(r)
 
 
-tab = aggregate(score~topic,FUN=mean,data=sur)
-tab2 = aggregate(score~topic,FUN=sd,data=sur)
-tab$se = tab2$score / sqrt(14)
+tab = aggregate(value~key,FUN=mean,data=sur)
+tab2 = aggregate(value~key,FUN=sd,data=sur)
+tab$se = tab2$value / sqrt(10)
 head(tab)
-tab = tab[order(tab$score),]
+tab = tab[order(tab$value),]
+tab
 
 #point w/ se
-r=ggplot(data=tab, aes(x=topic,y=score))+ 
+r=ggplot(data=tab, aes(x=key,y=value))+ 
   geom_point()+
-  geom_errorbar(aes(ymin = score - se, ymax = score + se))+
+  geom_errorbar(aes(ymin = value - se, ymax = value + se))+
   ylab("Score")+
   xlab("")+
   theme_bw() + 
@@ -31,8 +43,8 @@ r=ggplot(data=tab, aes(x=topic,y=score))+
 print(r)
 
 #formal analyses
-l1 = lm(score~topic,data = sur)
+l1 = lm(value~key,data = sur)
 summary(l1)
 library(lsmeans)
-lsmeans(l1, specs = "topic", contr = "pairwise")
+lsmeans(l1, specs = "key", contr = "pairwise")
 
