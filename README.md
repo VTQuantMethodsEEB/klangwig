@@ -15,19 +15,19 @@ Week 1
 
 lecture: [lectures/le1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_1_intro_to_R)
 
-code: [le_1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/le_1_intro_to_R.R)
+code: [le_1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/le_1_intro_to_R.R)
 
 
 #### Thursday:
-lecture: [ex1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lectures/week_1_intro_to_R/ex1_intro_to_R.pptx)
+lecture: [ex1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_1_intro_to_R/ex1_intro_to_R.pptx)
 
-code: [ex1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex1_intro_to_R.R)
+code: [ex1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/ex1_intro_to_R.R)
 
 ##### Task list for next week:
 - Write paragraph about your data
 - Cleanup data
 - Install Git and register for GitHub using https://happygitwithr.com/
-- Read [Tips for turning in assignments](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/Tips%20for%20turning%20in%20assignments.docx)
+- Read [Tips for turning in assignments](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/advice/Tips%20for%20turning%20in%20assignments.docx)
 
 
 Week 2
@@ -36,7 +36,7 @@ Week 2
 
 lecture: [le_2_managing_data](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_2_managing_data)
 
-code: [le2_data_manipulation.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/le2_data_manipulation.R)
+code: [le2_data_manipulation.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/le2_data_manipulation.R)
 
 
 #### Thursday: 
