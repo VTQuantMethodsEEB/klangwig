@@ -182,7 +182,7 @@ code: [ex8_linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwi
 
 #### Thursday:
 
-lecture: [le8_Linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_8_advanced_lms) (last slide has assignment)
+lecture: [le8_Linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lectures/week_8_advanced_lms/le8_Linear%20model%20parameters.pdf) (last slide has assignment)
 
 code: use code from Tuesday
 
@@ -196,12 +196,12 @@ Week 10
 #### Tuesday:
 lecture: [le10_glms.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_10_glms)
 
-code: [ex10_glms.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex10_glms.R)
+code: [ex10_glms.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_10_glms/ex10_glms.R)
 
 datasets: [bat_data.csv](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/bat_data.csv); [lizards.csv](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lizards.csv)
 
 #### Thursday:
-lecture: ex10_glm_assignment.pptx
+lecture: [ex10_glm_assignment.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_10_glms)
 
 code: use code from Tuesday
 
@@ -209,6 +209,7 @@ code: use code from Tuesday
 - Work on glms - due date in 2 weeks.
 - Start crafting analyses for final project
 - Reading assignment next week
+- Read [General suggestions for writing statistical results](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/advice)
 - Any bad ggplots2?
 
 
@@ -218,12 +219,12 @@ Week 11
 
 lecture: [le111_model_selection.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_11_model_selection)
 
-code: [ex11_model_comparison.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex11_model_comparison.R)
+code: [ex11_model_comparison.R](ttps://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/ex11_model_comparison.R)
 
 reading: [Week11_Bolker et al ms information theoretic.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week11_Bolker%20et%20al%20ms%20information%20theoretic.pdf)
 
 #### Thursday:
-lecture: le11_assignment.pptx
+lecture: [le11_assignment.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_11_model_selection)
 
 code: Use code from Tuesday
 
@@ -239,7 +240,7 @@ Week 12
 
 lecture: [le12_mixed_models.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_12_mixed_models)
 
-code: [ex12_mixed_models.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex12_mixed_models.R)
+code: [ex12_mixed_models.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_12_mixed_models/ex12_mixed_models.R)
 
 reading: [Week12_Bolker 2008 TREE.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week12_Bolker%202008%20TREE.pdf)
 
