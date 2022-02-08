@@ -27,7 +27,7 @@ code: [ex1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/mast
 - Write paragraph about your data
 - Cleanup data
 - Install Git and register for GitHub using https://happygitwithr.com/
-- Read [Tips for turning in assignments](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/advice/Tips%20for%20turning%20in%20assignments.docx)
+- Read [Tips for turning in assignments](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/advice/Tips%20for%20turning%20in%20assignments%20in%20md.md)
 
 
 Week 2
@@ -36,12 +36,12 @@ Week 2
 
 lecture: [le_2_managing_data](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_2_managing_data)
 
-code: [le2_data_manipulation.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/le2_data_manipulation.R)
+code: [le2_data_manipulation.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_2_managing_data/le2_data_manipulation.R)
 
 
 #### Thursday: 
 
-lecture: ex2_data_manipulation.pptx
+lecture: [ex2_data_manipulation.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_2_managing_data)
 
 code: use code from Tuesday for example
 
@@ -55,11 +55,12 @@ Week 3
 
 lecture: [le3_data_visualization](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_3_graphs)
 
-code: [le3_data_visualization.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/le3_data_visualization.R)
+code: [le3_data_visualization.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_3_graphs/le3_data_visualization.R)
 
 #### Thursday: 
 
-lecture: ex3_data_manipulation.pptx
+lecture: [ex3_data_manipulation.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_3_graphs)
+
 
 code: use code from Tuesday for example
 
@@ -99,11 +100,11 @@ Week 5
 
 lecture: [le_5_tests.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_5_tests)
 
-code: [ex5_tests](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex5_tests.R)
+code: [ex5_tests](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_5_tests/ex5_tests.R)
 
 #### Thursday:
 
-code: [ex5_tests](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex5_tests.R)
+code: [ex5_tests](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_5_tests/ex5_tests.R)
 
 ##### Task List for Next Week
 - Complete Week 5 assignment
@@ -114,7 +115,7 @@ Week 6
 
 lecture: [le6_rev_distributions.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_6_distributions)
 
-code: [ex6_rev_distributions.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex6_rev_distributions.R)
+code: [ex6_rev_distributions.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_6_distributions/ex6_rev_distributions.R)
 
 handout: [Handout_Week6_Distributions](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Handout_Week6_Distributions.pdf)
 
@@ -159,7 +160,7 @@ Week 8
 lecture: [le_7_linear_models](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_7_lms)
 - Lecture will be recorded in advance. *No in person class.*
 
-code: [ex7_linear_models](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex7_linear_models.R)
+code: [ex7_linear_models](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_7_lms/ex7_linear_models.R)
 
 #### Thursday:
 lecture: ex7_assignment
@@ -176,12 +177,12 @@ Week 9
 
 lecture: [le8_Linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_8_advanced_lms)
 
-code: [ex8_linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/ex8_linear_model_parameters.R)
+code: [ex8_linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_8_advanced_lms/ex8_linear_model_parameters.R)
 
 
 #### Thursday:
 
-lecture: le8_Linear_model_parameters (last slide has assignment)
+lecture: [le8_Linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_8_advanced_lms) (last slide has assignment)
 
 code: use code from Tuesday
 
