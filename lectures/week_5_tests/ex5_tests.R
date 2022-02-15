@@ -85,7 +85,7 @@ abline(v=obs,col="red")
 ##so how do we get our p-value?
 res[res>=obs]
 length(res[res>=obs])
-235/10000
+240/10000
 mean(res>=obs)        
 #using mean(permutations>=obs)) is a trick to calculate the proportion: 
 #the logical statement returns a logical (FALSE/TRUE) vector, which then gets converted to a 0/1 vector when you ask R to take the mean, 
@@ -113,6 +113,7 @@ tt
 #welch's t-test
 tt <- t.test(colonies~place,data=ants)
 tt
+
 
 #a paired t-test doesn't make sense for this data because they aren't the same
 #imagine we did an experiment where we cut down the trees in the forest, and then re-surveyed our plots
