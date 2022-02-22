@@ -85,7 +85,7 @@ abline(v=obs,col="red")
 ##so how do we get our p-value?
 res[res>=obs]
 length(res[res>=obs])
-240/10000
+223/10000
 mean(res>=obs)        
 #using mean(permutations>=obs)) is a trick to calculate the proportion: 
 #the logical statement returns a logical (FALSE/TRUE) vector, which then gets converted to a 0/1 vector when you ask R to take the mean, 
