@@ -26,6 +26,18 @@ seeds.not.eaten = rbinom(1000,size=1,p = .98)
 seeds.sprouted = rbinom(n = seeds.not.eaten,size=1, p=.01 )
 sum(seeds.sprouted)
 
+sum.seeds.sprouted = NA
+##100 days
+for (i in 1:100) {
+  seeds.not.eaten[i] = rbinom(1000,size=1,p = .98)
+  sum.seeds.sprouted[i] = sum(rbinom(n = seeds.not.eaten,size=1, p=.01 ))
+  
+}
+sum(sum.seeds.sprouted)  
+
+##or 
+seeds.sprouted.100 = rbinom(n = seeds.not.eaten,size=100, p=.01 )
+sum(seeds.sprouted.100)
 
 #The number of eggs laid by squid varies dramatically 
 #among individuals. The mean number of eggs is 300, 
