@@ -131,6 +131,8 @@ TukeyHSD(l2)
 #it only works on aov objects
 
 library(multcomp)
+ants$place = as.factor(ants$place)
+l2 = aov(colonies~place, data = ants);summary(l2)
 ga = glht(l2, linfct = mcp(place = "Tukey"))
 summary(ga)
 #this package gives us another way of analyzing this
