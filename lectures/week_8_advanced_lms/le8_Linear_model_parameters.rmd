@@ -152,7 +152,7 @@ ggplot(mliz,aes(x=value,y=grahami))+
   geom_hline(yintercept=mean(lizards$grahami),colour="red",lwd=1,alpha=0.4)
 ```
 
-##What is the effect of time of day on lizard perching?
+## What is the effect of time of day on lizard perching?
 
 ```{r timeregress1}
 pr(lmX <- lm(grahami~time,data=lizards))
@@ -162,7 +162,7 @@ If we leave the factors alphabetical then $\beta_1$="early", $\beta_2$="late"-"e
 
 
 
-##Change the order of the levels:
+## Change the order of the levels:
 ```{r reordertime}
 lizards <- mutate(lizards,
         time=factor(time,
@@ -184,14 +184,14 @@ pr(lmTL1 <- lm(grahami~time+light,data=lizards))
 ```
 
 - $\beta_1$ is the intercept ("early","shady"); 
-- $\beta_2$ and B_3 are the differences from the baseline level ("early") of the *first* variable (`time`) in the *baseline* level of the other parameter(s) (`light`="shady"); 
+- $\beta_2$ and $\beta_3$ are the differences from the baseline level ("early") of the *first* variable (`time`) in the *baseline* level of the other parameter(s) (`light`="shady"); 
 - $\beta_4$ is the difference from the baseline level ("sunny") of the *second* variable (`light`) in the *baseline* level of `time` ("early").
 
 ## Graphical interpretation
 
 ```{r lizardcontrasts1,echo=FALSE}
-require("grid")
-pp <- with(lizards,expand.grid(time=levels(time),light=levels(light)))
+library("grid")
+pp <- with(lizards,expand.grid(time=unique(time),light=unique(light)))
 pp$grahami <- predict(lmTL1,newdata=pp)
 cc <- as.list(plyr::rename(coef(lmTL1),c(`(Intercept)`="int")))
 labelpos <- with(cc,
@@ -248,11 +248,11 @@ cld(lsm1$emmeans,by = NULL, Letters = "ABCDEFGHIJ")
 relationship between another predictor and the response variable
 - Interpreting *main effects* in the presence
 of interactions is tricky
-- Your estimate of the effect of variable *B* is no longer constant
+- Your estimate of the effect of variable $X_1$ is no longer constant
 - You need to pick a fixed point, or average in some way
 - Example: $Y = a + b_1 X_1 + b_2 X_2 + b_{12} X_1*X_2$
-- The response to *X_1* is $Y = (a+b_2 X_2) + (b_1+b_{12}X_2) X_1$  
-- The response to *X_1* *depends on* the value of *X_2*.
+- The response to $X_1$ is $Y = (a+b_2 X_2) + (b_1+b_{12}X_2) X_1$  
+- The response to $X_1$ *depends on* the value of $X_2$.
 
 
 ## An example
@@ -299,8 +299,8 @@ variables
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 ```
 
-- Parameters $\beta_1$ to *B_4* have the same meanings as before.
-- $\beta_5$ and *B_6*, labelled "timemidday:lightsunny" and "timelate:lightsunny" describe the difference between the expected mean value of these treatment combinations based on the additive model 
+- Parameters $\beta_1$ to $\beta_4$ have the same meanings as before.
+- $\beta_5$ and $\beta_6$, labelled "timemidday:lightsunny" and "timelate:lightsunny" describe the difference between the expected mean value of these treatment combinations based on the additive model 
 
 
 ## Interaction model cont
@@ -352,18 +352,18 @@ label=paste0("beta[",1:6,"]"),parse=TRUE)+
 plot(allEffects(lmTL2))
 ```
 
-##Other refs
+## Other refs
 - http://sas-and-r.blogspot.com/2010/10/example-89-contrasts.html
 - [`gmodels::fit.contrast()`](http://hosho.ees.hokudai.ac.jp/~kubo/Rdoc/library/gmodels/html/fit.contrast.html) (show parameter estimates based on re-fitting models with new contrasts), [`rms::contrast.rms()`](http://hosho.ees.hokudai.ac.jp/~kubo/Rdoc/library/rms/html/contrast.html) (ditto, for `rms`-based fits)
 - http://www.ats.ucla.edu/stat/r/library/contrast_coding.htm
 
 
-##Assignment - *PART 1*
+## Assignment - *PART 1*
 1. Make a univariate linear model for one of your hypotheses
 2. Examine the assumptions of linearity (using tests or diagnostic plots) and explain
 3. Plot the relationship in ggplot using stat_smooth (continuous) or stat_summary (discrete)
 
-##Assignment - *PART 2*
+## Assignment - *PART 2*
 1. Make a linear model (with more than one variable) for one of your hypotheses. Articulate which hypothesis you are testing.
 
 2. Use an interactive model and an additive model. Explain what hypothesis each of these is testing, and what the R output is telling you about your data.
