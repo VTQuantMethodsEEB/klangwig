@@ -204,7 +204,7 @@ ggplot(pp,aes(x=time,y=grahami,colour=light))+
 
 ###ADD RAW data to plot###
 ggplot(pp,aes(x=time,y=grahami,colour=light))+ #set up plot using predictions dataset
-  geom_point()+ #plot the prediction
+  geom_point(color="red")+ #plot the prediction
   geom_line(aes(group=light))+ #draw lines b/t predictions, group them by light conditions
   geom_point(data=lizards, aes(x=time,y=grahami,colour = light)) #add the observed data to the plot
 #note - I am calling the original dataframe - lizards
@@ -217,7 +217,7 @@ summary(lmLC)
 
 #make a new dataframe
 new.dat.combos <- with(lizards, #use lizards
-                       expand.grid(time=levels(time), #give me all the unique values of time
+                       expand.grid(time=unique(time), #give me all the unique values of time
                                    opalinus=seq(min(opalinus),max(opalinus), by=1)
                                    #give me a sequence of numbers from the min of opalinus to the max of opalinus, space the numbers "by 1"
                        ))
