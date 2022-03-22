@@ -27,6 +27,7 @@ summary(lm1)
 
 pr(lm1 <- lm(colonies~place,data=ants))
 #change level
+ants$place = as.factor(ants$place)
 ants$place = relevel(ants$place, ref="forest")
 
 #- The `(Intercept)` row refers to $\beta_1$, 
@@ -74,15 +75,15 @@ plot(em_lm1)
 #https://cran.r-project.org/web/packages/emmeans/vignettes/comparisons.html
 
 
-#emmeans
-em_lm3 = emmeans(lm3,specs = ~place*observers)
-em_lm3
-
 #plot the effects
 plot(allEffects(lm1))
 
 pr(lm3 <- lm(colonies~place*observers,data=ants))
 plot(allEffects(lm3))
+
+#emmeans
+em_lm3 = emmeans(lm3,specs = ~place*observers)
+em_lm3
 
 ##More than two levels
 lizards <- read.csv("lizards.csv")
@@ -138,7 +139,7 @@ pr(lmTL1 <- lm(grahami~time+light,data=lizards))
 
 ## we can plot this to make sure
 
-pp <- with(lizards,expand.grid(time=levels(time),light=levels(light)))
+pp <- with(lizards,expand.grid(time=unique(time),light=unique(light)))
 pp$grahami <- predict(lmTL1,newdata=pp)
 
 ggplot(pp,aes(x=time,y=grahami,colour=light))+
@@ -157,7 +158,6 @@ lsm1<-emmeans(lmTL1,pairwise~time)
 
 pairs(lsm1)
 cld(lsm1$emmeans)
-CLD(lsm1$emmeans, Letters = "ABCDEFGHIJ")
 cld(lsm1$emmeans, Letters = "ABCDEFGHIJ") 
 
 ## Interactive Models ##
@@ -182,8 +182,8 @@ lizards$yhat = predict(lmTL2)
 
 ##plotting the interactive model
 pp <- with(lizards,
-           expand.grid(time=levels(time),
-                       light=levels(light)))
+           expand.grid(time=unique(time),
+                       light=unique(light)))
 #make a new dataframe with all the unique values of time
 #and all the unique values light
 #expand.grid says "give me every combination possible"
@@ -258,24 +258,5 @@ new.bat.combos$lgdL <- predict(lmBAT,newdata=new.bat.combos)
 ggplot(new.bat.combos,aes(x=count,y=lgdL,colour=temp))+ #set up plot using predictions dataset
   geom_line(aes(group=temp))+ #draw lines that are predictions, group them by light conditions
   geom_point(data=bats, aes(x=count,y=lgdL,colour = temp)) #add the observed data to the plot
-
-
-##more graphics
-
-lizards <- mutate(lizards,
-                  time=factor(time,
-                              levels=c("early","midday","late")))
-
-pr(lmTL2 <- lm(grahami~time*light,data=lizards))
-
-library(dotwhisker)
-
-dwplot(list(additive=lmTL1,interaction=lmTL2))+
-  geom_vline(xintercept=0,lty=2)
-
-plot(allEffects(lmTL2))
-
-
-
 
 

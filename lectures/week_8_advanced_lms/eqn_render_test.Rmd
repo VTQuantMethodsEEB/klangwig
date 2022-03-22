@@ -1,0 +1,20 @@
+---
+title: "R Notebook" - get eqiations
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(equatiomatic)
+library(MASS)
+lmTL2 <- lm(grahami~time*light,data=lizards)
+```
+
+```{r}
+
+extract_eq(lmTL2)
+```
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
