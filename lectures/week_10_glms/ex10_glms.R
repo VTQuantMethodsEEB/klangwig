@@ -114,7 +114,7 @@ head(dat.new)
 #plot the output
 plot1=ggplot(data=bat,aes(x=date,y=gd,color=species))+
   geom_point(size=2,shape =1) +
-  facet_wrap(~species)+
+  facet_wrap(~species, nrow=1)+
   geom_line(data=dat.new, aes(x=date,y=yhat,col = species))+
   geom_ribbon(data = dat.new, aes(ymin = Lower, ymax = Upper, x = date,y=yhat),
               fill = "steelblue2", alpha = 0.2) 
