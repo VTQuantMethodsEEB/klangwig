@@ -42,7 +42,6 @@ AIC(g.pois,g.nb)
 
 ###how to interpret output
 #https://rpubs.com/kaz_yos/pscl-2
-#write this before next class!
 #also this
 #https://stats.idre.ucla.edu/r/dae/zip/
 
@@ -77,7 +76,9 @@ emmeans(g.hurd, specs = ~time)
 
 #we can compare this latter model to models with just Poisson or NB
 vuong(g.pois, g.zinf)
+#this says model 2 is better than model 1
 vuong(g.nb, g.zinf)
+#this says model 2 is not better than model 1
 
 
 ###INTERPRETATION##
@@ -100,7 +101,8 @@ Coef
 #Interpretation: (Hurdle model) The occurence of oplalinus early (baseline) odds of having a positive count vs zero is 1.09. 
 #These odds of a positive count are increased by 0.85 late in the day, and 0.69 times by midday. 
 #(Positive count model) Among occurences where opalinus occur, 
-#the average count is 4.6 early in the day. This is decreased by late in the day by -0.34, and increase 
+#the average count is 4.6 (coef 1.52), early in the day (See emmeans - coefs in Poisson space).
+#This is decreased by late in the day by -0.34, and increase 
 #midday 0.63 when opalinus is present.
 
 
@@ -112,9 +114,51 @@ colnames(Coef) <- c("Count_model","Zero_inflation_model")
 Coef
 
 #Interpretation: (Zero-inflation model) 
-#The baseline odds ofopalinus being ABSENT (early) is is -2.27. 
-#The odds of opalinus being absent by time late is lower (-7.62) and time midday (-0.81). 
+#The baseline odds of opalinus being ABSENT (early) is is -2.27. 
+#The odds of opalinus being absent by time late is lower (-8.04) and time midday (-0.81). 
 #(Count model) The baseline number of opalinus (including some 0s) is 1.63 early in the day.
 #this decreases slightly late and increases midday. 
 
+##How to run a zero-inflated mixed model
 
+#using lizards, but note that my random effect is actually inappropriate
+#not enough levels
+install.package("glmmTMB")
+
+library(glmmTMB)
+#https://cran.r-project.org/web/packages/glmmTMB/vignettes/glmmTMB.pdf
+#https://journal.r-project.org/archive/2017/RJ-2017-066/RJ-2017-066.pdf
+
+fit_zipoisson <- glmmTMB(opalinus~time+(1|height),
+                         data=liz,
+                         ziformula=~time,
+                         family=poisson)
+summary(fit_zipoisson)
+
+fit_zinbinom <- update(fit_zipoisson,family=nbinom2)
+
+summary(fit_zinbinom)
+
+library(bbmle)
+AICtab(fit_zipoisson,fit_zinbinom)
+
+##fit with a hurdle model
+fit_hnbinom1 <- update(fit_zinbinom,
+                       ziformula=~.,
+                       data=liz,
+                       family=truncated_nbinom1)
+
+summary(fit_hnbinom1 )
+
+
+Owls <- transform(Owls,
+                  Nest=reorder(Nest,NegPerChick),
+                  NCalls=SiblingNegotiation,
+                  FT=FoodTreatment)
+
+fit_zipoisson <- glmmTMB(NCalls~(FT+ArrivalTime)*SexParent+
+                           offset(log(BroodSize))+(1|Nest),
+                         data=Owls,
+                         ziformula=~1,
+                         family=poisson)
+summary(fit_zipoisson)
