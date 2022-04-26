@@ -48,7 +48,7 @@ newdat_l1<-data.frame(newdat_l)
 
 names(newdat_l1)
 
-###THIS MAKES FIGURE 1B###
+##make the figure##
 p1=ggplot(data=bat, aes(x=species, y=gd, color=species))+
   geom_jitter(height=0.1)+
   geom_point(data=newdat_l1, aes(x=species,y=Estimate), size=4, color="black")+#size=2.5
