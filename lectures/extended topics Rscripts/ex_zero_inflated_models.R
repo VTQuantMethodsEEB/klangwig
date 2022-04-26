@@ -23,7 +23,7 @@ g.pois = glm(opalinus~time,data=liz, family = "poisson")
 summary(g.pois)
 
 #nb model
-g.nb = glm.nb(opalinus~time,data=liz)
+g.nb = glm.nb(opalinus~time,data=liz)#this is negative binomial
 summary(g.nb)
 
 #lrt with p-value
