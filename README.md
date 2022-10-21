@@ -17,11 +17,15 @@ lecture: [lectures/le1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/kla
 
 code: [le_1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lectures/week_1_intro_to_R/le_1_intro_to_R.R)
 
+old video:[week_1_tues_lecture](https://video.vt.edu/media/Week+1+-+Lecture+1/1_hfxyrlcp)
+
 
 #### Thursday:
 lecture: [ex1_intro_to_R.pptx](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lectures/week_1_intro_to_R/ex1_intro_to_R.pptx)
 
 code: [ex1_intro_to_R.R](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lectures/week_1_intro_to_R/ex1_intro_to_R.R)
+
+old video: [week_2_thus_lecture](https://video.vt.edu/media/Week+1+-+Lecture+2/1_licz4tc0)
 
 ##### Task list for next week:
 - Write paragraph about your data
@@ -38,6 +42,7 @@ lecture: [le_2_managing_data](https://github.com/VTQuantMethodsEEB/klangwig/tree
 
 code: [le2_data_manipulation.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_2_managing_data/le2_data_manipulation.R)
 
+old video: [week_2_tues_lecture](https://video.vt.edu/media/Week+2A+Lecture+1+-+Tuesday/1_nvotrxbh)
 
 #### Thursday: 
 
@@ -57,12 +62,16 @@ lecture: [le3_data_visualization](https://github.com/VTQuantMethodsEEB/klangwig/
 
 code: [le3_data_visualization.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_3_graphs/le3_data_visualization.R)
 
+old video: [week_3_tues_lecture](https://video.vt.edu/media/Week+3A+Visualizing+Data+/1_vht8ff5l)
+
 #### Thursday: 
 
 lecture: [ex3_data_manipulation.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_3_graphs)
 
 
 code: use code from Tuesday for example
+
+old video: [week_3_thursday_lecture](https://video.vt.edu/media/Week+3A+Data+Visualization+-+Thursday+lecture/1_xoo8jnhe)
 
 ##### Task list for next week:
 - Submit Week 3 assignment
@@ -76,6 +85,7 @@ lecture: [le4_statistical_philosphy](https://github.com/VTQuantMethodsEEB/klangw
 
 code: code just to make examples in lecture - none assigned
 
+old video: [week_4_tues_lecture](https://video.vt.edu/media/Week+4A+Tuesday+Lecture+-+Statistical+Philosophy/1_0x83pgoc)
 
 #### Thursday: 
 - discussion on reading
@@ -101,6 +111,8 @@ Week 5
 lecture: [le_5_tests.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_5_tests)
 
 code: [ex5_tests](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_5_tests/ex5_tests.R)
+
+old video: [week_5_tues_lecture](https://video.vt.edu/media/Tuesday+Feb+16th+-+Statistical+Tests/1_6tdt8fmu)
 
 #### Thursday:
 
@@ -139,6 +151,8 @@ Week 7
 #### Tuesday: 
 - Featuring **Dr. Josef Uyeda** on Phylogenetic Methods
 
+- old video: [week_phylogenies](https://video.vt.edu/media/Week%206%3A%20Phylogenies%20-%20Dr.%20Josef%20Uyeda/1_s9njs0pg)
+
 
 #### Thursday: No class
 
@@ -162,6 +176,10 @@ lecture: [le_7_linear_models](https://github.com/VTQuantMethodsEEB/klangwig/tree
 
 code: [ex7_linear_models](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_7_lms/ex7_linear_models.R)
 
+
+pre-recorded video: [week_6_tuesday_lecture](https://video.vt.edu/media/March+15th+-+Linear+Models+Part+1+-+Pre-recorded+lecture/1_sxwf8lg7)
+
+
 #### Thursday:
 lecture: ex7_assignment
 
@@ -179,12 +197,16 @@ lecture: [le8_Linear_model_parameters](https://github.com/VTQuantMethodsEEB/klan
 
 code: [ex8_linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_8_advanced_lms/ex8_linear_model_parameters.R)
 
+video: [advanced_linear_models](https://video.vt.edu/media/March+16th+-+Advanced+Linear+Models+-+Week+8+-+Prerecorded+lecture/1_yabmoret)
+
 
 #### Thursday:
 
 lecture: [le8_Linear_model_parameters](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lectures/week_8_advanced_lms/le8_Linear%20model%20parameters.pdf) (last slide has assignment)
 
 code: use code from Tuesday
+
+video: [mini_lecture_advanced_models](https://video.vt.edu/media/Advanced+Linear+ModelsA+Thursday+Mini-lecture/1_9ma32zad)
 
 ##### Task List for Next Week: 
 - Hand in linear models (part 1 & 2).
@@ -200,10 +222,14 @@ code: [ex10_glms.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/le
 
 datasets: [bat_data.csv](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/bat_data.csv); [lizards.csv](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/lizards.csv)
 
+old video: [week_10_tues_lec_glms](https://video.vt.edu/media/Tuesday+lecture+March+23A+Generalized+Linear+Models/1_m61zgwgv)
+
 #### Thursday:
 lecture: [ex10_glm_assignment.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_10_glms)
 
 code: use code from Tuesday
+
+old video: [week_10_thurs_lecture](https://video.vt.edu/media/Thursday+mini-lecture+-+March+25thA+Generalized+Linear+Models/1_vh86lr4f)
 
 ##### Task List for Next Week: 
 - Work on glms - due date in 2 weeks.
@@ -222,6 +248,8 @@ lecture: [le111_model_selection.pptx](https://github.com/VTQuantMethodsEEB/klang
 code: [ex11_model_comparison.R](ttps://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/ex11_model_comparison.R)
 
 reading: [Week11_Bolker et al ms information theoretic.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week11_Bolker%20et%20al%20ms%20information%20theoretic.pdf)
+
+old video: [week_11_tues_model_comparison](https://video.vt.edu/media/Tuesday+Mar+30A+Model+Comparison/1_ija49g4c)
 
 #### Thursday:
 lecture: [le11_assignment.pptx](https://github.com/VTQuantMethodsEEB/klangwig/tree/master/lectures/week_11_model_selection)
@@ -244,11 +272,15 @@ code: [ex12_mixed_models.R](https://github.com/VTQuantMethodsEEB/klangwig/tree/m
 
 reading: [Week12_Bolker 2008 TREE.pdf](https://github.com/VTQuantMethodsEEB/klangwig/blob/master/reading/Week12_Bolker%202008%20TREE.pdf)
 
+old video: [week12_tues_lecture_mixed_models](https://video.vt.edu/media/TuesdayA+Mixed+Models+Lecture/1_n8q56n5x)
+
 #### Thursday:
 
 lecture: assignment at end of Tuesday lecture
 
 code: use same as Tuesday for example
+
+old video: [week_12_thurs_lecture_mixed_models](https://video.vt.edu/media/Thurs%20Apr%2015%3A%20Mini-lecture%20Mixed%20Models/1_5k3o92p8)
 
 ##### Task List for Next Week: 
 - Hand in Week 12 assignment.
