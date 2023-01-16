@@ -8,7 +8,7 @@ bat  = read.csv("bat_data.csv")
 head(bat)
 names(bat)
 
-prior=set_prior("normal(0,10)", class = "b")
+prior=set_prior("normal(0,5)", class = "b")
 #set_prior is used to define prior distributions for parameters in brms models. 
 #To put the same prior on all population-level effects at once, 
 #we may write as a shortcut set_prior("<prior>", class = "b")
