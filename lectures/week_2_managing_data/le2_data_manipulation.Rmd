@@ -205,10 +205,6 @@ knitr::include_graphics("tidy_pic.png")
 - `bind_rows`: combines dataframes by stacking them on top of each other - keeps all columns; will make duplicates if the columns don't match (e.g 'species', 'Species')
 - `left_join`: merge [see other `join` options](https://dplyr.tidyverse.org/reference/mutate-joins.html)
 
-## Group by, Mutate, and Summarise
- - `group_by` is my favorite tidyverse command which has cut my need to write loops in half
- - `group_by` allows you to do calculations on groups of things, for example, by species or year
- 
 ## First load the package
 ```{r load_tidyverse}
 library(tidyverse)
@@ -283,7 +279,8 @@ head(batdat %>%
 ## Joining actual datasets
 - We frequently have data coming from different sources (lab, field, etc.)
 - Let's join our infection data with our count data
-- We might want to do this to ask 'How does the count of one species influence another bat species at the same site?'
+- We might want to do this to ask 'How does the count of one species influence another infection in that species?'
+- A note - a previous merge I did added this to your data but let's pretend it isn't there...
 
 
 ## Example with bat count data
