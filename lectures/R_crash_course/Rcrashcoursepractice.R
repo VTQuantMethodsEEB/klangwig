@@ -1,9 +1,5 @@
-
-batdat$species01 = 0
-batdat$species01[batdat$species=="MYLU"] = 1
-
-birddat$inject01 = 0
-birddat$inject01[birdat$inject=="Yes"]=1
+#clear workspace
+rm(list=ls())
 
 #read in your data
 batdat = read.csv("bat_data.csv")
