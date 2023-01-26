@@ -422,13 +422,6 @@ head(batdat)  </pre>
 <li><code>left_join</code>: merge <a href='https://dplyr.tidyverse.org/reference/mutate-joins.html' title=''>see other <code>join</code> options</a></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Group by, Mutate, and Summarise</h2></hgroup><article  id="group-by-mutate-and-summarise">
-
-<ul>
-<li><code>group_by</code> is my favorite tidyverse command which has cut my need to write loops in half</li>
-<li><code>group_by</code> allows you to do calculations on groups of things, for example, by species or year</li>
-</ul>
-
 </article></slide><slide class=""><hgroup><h2>First load the package</h2></hgroup><article  id="first-load-the-package">
 
 <pre class = 'prettyprint lang-r'>library(tidyverse)</pre>
@@ -554,7 +547,8 @@ fungal.load.table</pre>
 <ul>
 <li>We frequently have data coming from different sources (lab, field, etc.)</li>
 <li>Let’s join our infection data with our count data</li>
-<li>We might want to do this to ask &lsquo;How does the count of one species influence another bat species at the same site?&rsquo;</li>
+<li>We might want to do this to ask &lsquo;How does the count of one species influence another infection in that species?&rsquo;</li>
+<li>A note - a previous merge I did added this to your data but let’s pretend it isn’t there…</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Example with bat count data</h2></hgroup><article  id="example-with-bat-count-data">
