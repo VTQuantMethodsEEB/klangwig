@@ -94,6 +94,7 @@ g1=ggplot(data=batdat,aes(x=nspecies,y=lgdL))+
       legend.background = element_blank(),
       legend.key=element_rect(fill="white",color="white"))
 g1
+
 #save the file
 ggsave(file="/Users/klangwig/Dropbox/teaching/quant grad course/lectures/examples/loads_by_spp.pdf", 
        plot=g1,
