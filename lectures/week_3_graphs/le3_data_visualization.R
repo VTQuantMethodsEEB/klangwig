@@ -176,5 +176,13 @@ g3=ggplot(data=batdat,aes(x=date.new,y=count,color=nspecies,shape=site))+
     geom_line()+
     scale_x_date(date_breaks = "2 months", date_labels = "%m/%Y",limits = as.Date(c('2015-01-01','2016-05-01')) )
   g3
-  
+
+  ##changing limits on x and y axis
+  g2=ggplot(data=batdat,aes(x=lgdL,y=temp,color=nspecies))+
+    geom_point(size=2)+
+    #ylim(0,10)#omitted (dropped observations above 10)
+    coord_cartesian(ylim = c(0,10))
+  #zoom in on your plot
+    
+  g2
   
