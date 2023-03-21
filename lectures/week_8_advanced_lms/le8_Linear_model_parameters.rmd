@@ -82,7 +82,7 @@ R's behaviour may seem annoying at first -- it seems like the estimated values o
 
 - `predict` (base R)
 - `emmeans` - package emmeans
-- `plot(allEffects)` - package effects
+- `plot(allEffects(mod1))` - package effects
 
 - For your assignment this week, you will can you use the others, but your final graph should use `predict`
 
