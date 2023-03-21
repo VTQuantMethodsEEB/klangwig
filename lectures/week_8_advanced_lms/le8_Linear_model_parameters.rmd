@@ -39,8 +39,16 @@ opts_chunk$set(fig.width=6,fig.height=4,fig.align="center",tidy=FALSE)
 
 ## Example
 
+- All model building is about hypothesis testing
 
-The previously explored ant-colony example:
+- It important to understand which variables go on the *x-axis* and might determine patterns in your *y* (response variable)
+
+- I want to test the hypothesis that the number of ant colonies (*y*) is higher in one place (*x*) than another. 
+
+- My *places* are field and forest - two categorical *parameters* of the *place* variable
+
+
+## The previously explored ant-colony example:
 
 Define data:
 
@@ -60,23 +68,24 @@ pr <- function(m) printCoefmat(coef(summary(m)),
 
 ---
 
+
 ```{r coefmat1}
 pr(lm1 <- lm(colonies~place,data=ants))
 ```
 
 - The `(Intercept)` row refers to $\beta_1$, which is the mean density in the "field" sites ("field" comes before "forest").
-- The `placeforest` row indicates we are looking at the effect of `forest` level of the `place` variable, i.e. the difference between "forest" and "field" sites.  (To know that "field" is the baseline level we must (1) remember, or look at `levels(ants$place)` or (2) notice which level is *missing* from the list of parameter estimates.)
+- The `placeforest` row indicates we are looking at the effect of `forest` level of the `place` variable, i.e. the difference between "forest" and "field" sites.  (To know that "field" is the baseline level we must (1) remember, or look at `unique(ants$place)` or (2) notice which level is *missing* from the list of parameter estimates.)
 
-***
+## Figuring out the estimated values, not the differences
 
 R's behaviour may seem annoying at first -- it seems like the estimated values of the groups are what we're really interested in -- but it is really designed for testing *differences among groups*. To get the estimates per group, you could:
 
-- use a regression formula `colonies~place-1`, or equivalently `colonies~place+0`, to suppress the implicit intercept term:
-```{r coefmat0,echo=FALSE}
-pr(lm0 <- lm(colonies~place-1,data=ants))
-```
+- `predict` (base R)
+- `emmeans` - package emmeans
+- `plot(allEffects)` - package effects
 
-When you use the `colonies~place-1` formula, the meanings of the parameters change: $\beta_1$ is the same (mean of "field"), but $\beta_2$ is 'mean of "forest"' rather than ("(field)-(forest)").
+- For your assignment this week, you will can you use the others, but your final graph should use `predict`
+
 
 ## Interpretation using `predict`
 
