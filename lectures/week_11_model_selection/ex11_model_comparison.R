@@ -22,11 +22,6 @@ head(bat)
 bat$date = as.Date(bat$date, "%m/%d/%y")
 
 #Forward step-wise selection
-g1 = glm (gd~species, data = bat, family = binomial)
-g2 = glm (gd~site, data = bat, family = binomial)
-g3 = glm (gd~date, data = bat, family = binomial)
-g4 = glm (gd~count, data = bat, family = binomial)
-g5 = glm (gd~temp, data = bat, family = binomial)
 
 #Car:Anova gives you the variable-level p-value that you would want to step-wise regression
 Anova(g1)
@@ -170,6 +165,29 @@ tabA
 #what else?
 pr(n2)
 #the best model has a p-value of 0.1!
+
+##you can not compare models with different numbers of observations!
+#using the bat data
+g1 = glm (gd~species, data = bat, family = binomial)
+g2 = glm (gd~site, data = bat, family = binomial)
+g3 = glm (gd~date, data = bat, family = binomial)
+g4 = glm (gd~count, data = bat, family = binomial)
+g5 = glm (gd~temp, data = bat, family = binomial)
+
+AIC(g1,g2,g3,g4,g5)
+#warning message
+dim(bat)
+bat.trim = bat %>%
+  drop_na(count, temp, date, site, species)
+dim(bat.trim)
+
+g1 = glm (gd~species, data = bat.trim, family = binomial)
+g2 = glm (gd~site, data = bat.trim, family = binomial)
+g3 = glm (gd~date, data = bat.trim, family = binomial)
+g4 = glm (gd~count, data = bat.trim, family = binomial)
+g5 = glm (gd~temp, data = bat.trim, family = binomial)
+
+AIC(g1,g2,g3,g4,g5)
 
 
 ###ADVANCED - K-FOLD CROSS-VALIDATION###

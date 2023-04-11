@@ -12,6 +12,9 @@ library(tidyverse)
 #install.packages("lme4")
 library(lme4)
 head(sleepstudy)
+#another package
+#install.packages("glmmTMB")
+library(glmmTMB)
 
 #lets take a look at the data
 library(ggplot2); theme_set(theme_bw())
@@ -150,4 +153,48 @@ library(lme4)
 m.nb <- glmer.nb(N ~ time*light + (1|height), data=liz)
 #look at mixed model
 summary(m.nb)
+
+#poisson version
+m.po <- glmer(N ~ time*light + (1|height), data=liz, family = poisson)
+#look at mixed model
+summary(m.po)
+
+AIC(m.po, m.nb)
+##glmmTMB
+
+#https://cran.r-project.org/web/packages/glmmTMB/vignettes/glmmTMB.pdf
+#Note - this package is rapidly being developed!
+
+head(liz)
+
+tmb.mod1 = glmmTMB(N ~ time*light + (1|height), data=liz, family=nbinom2)
+summary(tmb.mod1)
+#same result as above
+#look at weird way we coded family
+
+#specify zero inflated
+
+tmb.mod2 = glmmTMB(N ~ time*light + (1|height), data=liz, 
+                   ziformula = ~1,
+                   family=poisson)
+summary(tmb.mod2)
+#similar output
+
+
+tmb.mod3 = glmmTMB(N ~ time*light + (1|height), data=liz, 
+                   family=poisson)
+summary(tmb.mod3)
+
+AIC(tmb.mod1, tmb.mod2, tmb.mod3)
+
+#hurdle version
+
+hurdle.tmb = update(tmb.mod2,
+       ziformula=~.,
+       data=liz,
+       family=truncated_nbinom1)
+hurdle.tmb
+summary(hurdle.tmb)
+##this is not fitting friends! do not ignore!
+
 

@@ -39,7 +39,8 @@ g2 = glm(gd~date+species,data=bat, family="binomial");
 summary(g2)
 
 #What does this tell us?
-dat.new=expand.grid(date=seq(from = min(bat$date),to = max(bat$date),length.out = 100),
+dat.new=expand.grid(date=seq(from = min(bat$date),
+                             to = max(bat$date),length.out = 100),
                     species = unique(bat$species))
 
 #weird output if we don't use "response:
