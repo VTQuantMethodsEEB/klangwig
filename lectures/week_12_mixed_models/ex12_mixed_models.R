@@ -28,6 +28,7 @@ lm3 <- lmer(Reaction~Days + (Days|Subject),data=sleepstudy) ## rand slopes and i
 
 #lets look at the first model
 summary(lm2)
+summary(lm3)
 
 #we don't get a p-value, only a t value
 #this is because understanding the df with random effects is hard
@@ -78,7 +79,7 @@ gm1 = glmer(gd~species + (1|site),data=bat, family = "binomial")
 summary(gm1)
 #the GLM version of this will give us p-values
 library(car)
-Anova(gm1)
+Anova(gm1, type=3)
 
 gm2 = glmer(gd~species*year + (1|site),data=bat, family = "binomial")
 summary(gm2)
@@ -167,7 +168,7 @@ AIC(m.po, m.nb)
 
 head(liz)
 
-tmb.mod1 = glmmTMB(N ~ time*light + (1|height), data=liz, family=nbinom2)
+tmb.mod1 = glmmTMB(N ~ time*light + (1|height), data=liz, family=nbinom2())
 summary(tmb.mod1)
 #same result as above
 #look at weird way we coded family

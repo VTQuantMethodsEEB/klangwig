@@ -22,9 +22,17 @@ head(liz)
 g.pois = glm(opalinus~time,data=liz, family = "poisson")
 summary(g.pois)
 
+#overdispersed?
+159.26/20
+#probably
+library(AER)
+dispersiontest(g.pois)
+#okay definitely
+
 #nb model
 g.nb = glm.nb(opalinus~time,data=liz)#this is negative binomial
 summary(g.nb)
+
 
 #lrt with p-value
 #note - null first
@@ -86,6 +94,12 @@ vuong(g.nb, g.zinf)
 
 liz$opalinus.p = 1
 liz$opalinus.p[liz$opalinus<1] = 0
+
+liz %>%
+  group_by(time, opalinus.p)%>%
+  summarise(n.zeroes = n())
+
+
 hurdlePart <- glm(formula = opalinus.p ~ time,
                   data    = liz,
                   family  = binomial(link = "logit"))
@@ -129,18 +143,38 @@ library(glmmTMB)
 #https://cran.r-project.org/web/packages/glmmTMB/vignettes/glmmTMB.pdf
 #https://journal.r-project.org/archive/2017/RJ-2017-066/RJ-2017-066.pdf
 
+fit_poisson <- glmmTMB(opalinus~time+(1|height),
+                         data=liz,
+                         #ziformula=~1,#apply 0 inflation to all observations and account for it
+                         #ziformula=~time,#some 0 inflation is due to time
+                         family=poisson)
+summary(fit_poisson)
+
+#install.packages("DHARMa")
+library(DHARMa)
+res <- simulateResiduals(fit_poisson)
+plot(res)
+
+
 fit_zipoisson <- glmmTMB(opalinus~time+(1|height),
                          data=liz,
-                         ziformula=~time,
+                         #ziformula=~1,#apply 0 inflation to all observations and account for it
+                         ziformula=~time,#some 0 inflation is due to time
                          family=poisson)
 summary(fit_zipoisson)
+
+
+res <- simulateResiduals(fit_zipoisson)
+plot(res)
+
 
 fit_zinbinom <- update(fit_zipoisson,family=nbinom2)
 
 summary(fit_zinbinom)
 
 library(bbmle)
-AICtab(fit_zipoisson,fit_zinbinom)
+AICtab(fit_poisson,fit_zipoisson,fit_zinbinom)
+#note - slightly different answers here
 
 ##fit with a hurdle model
 fit_hnbinom1 <- update(fit_zinbinom,
@@ -151,14 +185,3 @@ fit_hnbinom1 <- update(fit_zinbinom,
 summary(fit_hnbinom1 )
 
 
-Owls <- transform(Owls,
-                  Nest=reorder(Nest,NegPerChick),
-                  NCalls=SiblingNegotiation,
-                  FT=FoodTreatment)
-
-fit_zipoisson <- glmmTMB(NCalls~(FT+ArrivalTime)*SexParent+
-                           offset(log(BroodSize))+(1|Nest),
-                         data=Owls,
-                         ziformula=~1,
-                         family=poisson)
-summary(fit_zipoisson)
