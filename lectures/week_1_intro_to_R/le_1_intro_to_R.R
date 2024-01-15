@@ -120,7 +120,6 @@ names(InsectSprays)
 head(InsectSprays)
 
 
-
 # Select a subset of InsectSprays containing only the first list element
 InsectSprays[1]
 #this gives you just the count column
@@ -143,6 +142,7 @@ InsectSprays[5,]
 
 #in practicality, we often don't know where a particular element is in the dataframe
 InsectSprays[InsectSprays$spray=="A",]
+
 #this gives you all the values where spray is A
 InsectSprays[InsectSprays$spray=="A"&InsectSprays$count<10,]
 #there is only one value where insect spray is less than 10
