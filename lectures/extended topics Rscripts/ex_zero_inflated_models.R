@@ -29,6 +29,8 @@ library(AER)
 dispersiontest(g.pois)
 #okay definitely
 
+hist(liz$opalinus)
+table(liz$opalinus)
 #nb model
 g.nb = glm.nb(opalinus~time,data=liz)#this is negative binomial
 summary(g.nb)
@@ -87,7 +89,7 @@ vuong(g.pois, g.zinf)
 #this says model 2 is better than model 1
 vuong(g.nb, g.zinf)
 #this says model 2 is not better than model 1
-
+AIC(g.nb, g.zinf)
 
 ###INTERPRETATION##
 ## The hurdle part can be fit as follows.
@@ -150,6 +152,7 @@ fit_poisson <- glmmTMB(opalinus~time+(1|height),
                          family=poisson)
 summary(fit_poisson)
 
+
 #install.packages("DHARMa")
 library(DHARMa)
 res <- simulateResiduals(fit_poisson)
@@ -170,10 +173,12 @@ plot(res)
 
 fit_zinbinom <- update(fit_zipoisson,family=nbinom2)
 
+modnb = update(fit_poisson, family=nbinom2)
 summary(fit_zinbinom)
 
 library(bbmle)
-AICtab(fit_poisson,fit_zipoisson,fit_zinbinom)
+AICtab(fit_poisson,fit_zipoisson,fit_zinbinom, modnb)
+AIC(fit_poisson,fit_zipoisson,fit_zinbinom,modnb)
 #note - slightly different answers here
 
 ##fit with a hurdle model
