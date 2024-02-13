@@ -220,6 +220,7 @@ ww2
 install.packages("coin")
 library(coin)
 
+ants$place = as.factor(ants$place)
 oneway_test(colonies~place,data=ants)
 
 oneway_test(colonies~place,data=ants,distribution="exact")
