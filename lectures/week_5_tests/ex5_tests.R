@@ -52,6 +52,7 @@ res <- NA ## set aside space for results
 #you could also write res <- numeric(1000), which would give you a list of 1000 0's
 #the important thing to have a vector already named "res"
 comb_ff = c(field,forest)
+comb_ff
 sample(comb_ff,4, replace=F)
 
 #use jar example to illustrate sampling procedure
@@ -168,7 +169,6 @@ pt <- cor.test(forest_pre,forest_post)
 pt
 
 #Kendall - for non-linear data
-#use cor for unpaired, and cor.test for paired
 pt_k <- cor.test(forest_pre,forest_post, method = "kendall")
 pt_k
 
