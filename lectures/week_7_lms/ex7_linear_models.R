@@ -173,3 +173,42 @@ r=ggplot(data=ants, aes(x=place, y=colonies))+
   theme_bw() + 
   theme(axis.title=element_text(size=20),axis.text=element_text(size=10),panel.grid = element_blank(), axis.line=element_line(),legend.position="top",legend.title=element_blank())
 print(r)
+
+
+#### using the performance package to check linear models ####
+library(performance)
+
+# read more about it here:
+# https://easystats.github.io/performance/
+# https://easystats.github.io/see/articles/performance.html
+
+###some data###
+forest <- c(9, 6, 4, 6, 7, 10)
+field  <- c(12, 9, 12, 10)
+ants <- data.frame(
+  place=rep(c("field","forest"),
+            c(length(field), length(forest))),
+  colonies=c(field,forest),
+  observers=c(1,3,2,1,5,2,1,2,1,1)
+)
+
+## One-parameter variables
+head(ants)
+
+l1 <- lm(colonies~observers, data = ants)
+
+# diagnostic plots in the performance package
+check_model(l1)
+# posterior predictive check - usually used for for Bayesian models but osterior predictive checks mean "simulating replicated data under the fitted model and 
+# then comparing these to the observed data" (Gelman and Hill, 2007, p. 158). 
+# Posterior predictive checks can be used to "look for systematic discrepancies between real and simulated data" (Gelman et al. 2014, p. 169).
+# top right - linearity: okay, probably can proceed
+# homogeneity of variance: definitely some areas where the variance isn't homogeneous across all values of x
+# influence ok
+# normality of residuals okay
+
+l2 <- lm(colonies~place, data = ants)
+# diagnostic plots in the performance package
+check_model(l2)
+# everything okay
+

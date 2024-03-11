@@ -2,8 +2,8 @@
 title: "Linear models lecture"
 author: "Kate Langwig (input from BB and JD)"
 output:
-  beamer_presentation: default
   ioslides_presentation: default
+  beamer_presentation: default
 ---
 # Introduction
  
@@ -224,11 +224,65 @@ more generally.
 	- [see code]
 
 
-## Assignment
-
+## Assignment - Thursday
+- Use ex7_linear_models.R as a guide
 - Make a univariate linear model for one of your hypotheses
 - Examine the assumptions of linearity (using tests and diagnostic plots)
 - Explain what these are telling you (it's okay if they aren't normal, but tell me why)
 - Plot the relationship in ggplot using stat_smooth or stat_summary
 - You can hold off on submitting this assignment (which will be done via github) until after next weeks assignment
 - Remember to update your README file - we will combine this week and next week so you can indicate that in your file
+
+## `Performance` package - Thursday
+
+- The performance package is a useful package for doing model checks and improves on some of the plots in base R
+- You can read more about it here:
+- https://easystats.github.io/performance/ 
+- https://easystats.github.io/see/articles/performance.html
+
+## Basic model diagnostic plots with `performance`
+- first you will need to install the package and run it
+```{r}
+#install.packages(performance)
+
+#load performance
+library(performance)
+
+```
+
+
+## Make the ants dataframe again and run simple model
+```{r}
+forest <- c(9, 6, 4, 6, 7, 10)
+field  <- c(12, 9, 12, 10)
+ants <- data.frame(
+  place=rep(c("field","forest"),
+            c(length(field), length(forest))),
+  colonies=c(field,forest),
+  observers=c(1,3,2,1,5,2,1,2,1,1)
+)
+
+l1 <- lm(colonies~observers, data = ants)
+
+```
+
+
+## Diagnostic plots using check_model in the performance package
+```{r}
+check_model(l1)
+```
+
+## What do these tell you?
+- The output is similar to base R but the annotation is better!
+- Posterior predictive checks (Bayesian) can be used to "look for systematic discrepancies between real and simulated data by seeing whether similating the regression coefs result in lines that look like our data
+- top right - linearity: okay, probably can proceed
+- homogeneity of variance: definitely some areas where the variance isn't homogeneous across all values of x
+- influence ok
+- normality of residuals okay
+
+## Extensions
+- The performance package is very powerful and has many uses beyond this simple checks
+- We'll talk more about these when we do glms, but it's worth familiarizing yourself with them now
+- For the assignment, you can use either base R or the performance package but you might at least consider selecting the performance package to prepare yourself for future weeks
+
+
