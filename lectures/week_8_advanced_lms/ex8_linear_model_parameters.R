@@ -94,7 +94,7 @@ library("ggplot2"); theme_set(theme_bw()+
 library(dplyr);library(tidyr)
 library(tidyverse)
 mliz <- lizards %>%
-  select(grahami,height,diameter,light,time) %>%
+  dplyr::select(grahami,height,diameter,light,time) %>%
   gather(variable,value,-grahami)
 mliz
 
@@ -166,7 +166,10 @@ lmTL2 <- lm(grahami~time*light,data=lizards)
 summary(lmTL2)
 
 ## Releveling interactive models
-lizards$time <- relevel(lizards$time, ref = "midday" )
+lizards$time <- relevel(lizards$time, ref = "early" )
+lizards$light = as.factor(lizards$light)
+lizards$light <- relevel(lizards$light, ref = "sunny" )
+
 pr(lmTL2 <- lm(grahami~time*light,data=lizards))
 
 ## Using emmeans

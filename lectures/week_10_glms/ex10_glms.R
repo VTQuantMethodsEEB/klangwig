@@ -159,7 +159,31 @@ library(MASS)
 g7 = glm.nb(N~time,data=liz)
 summary(g7)
 
-#quasi-poisson
-#g8 = glm(N~time,data=liz, family = "quasipoisson")
-#summary(g8)
+#diagnosing models with Dharma
+library(DHARMa)
 
+testDispersion(g6) #poisson model
+#definitely too much dispersion
+
+testDispersion(g7) #negbin model - much better!
+
+simulationOutput <- simulateResiduals(fittedModel = g6, plot = T) #poisson model
+simulationOutput
+# calculates calculates randomized quantile residuals
+#To interpret the residuals, a scaled residual value of 0.5 means that half of the simulated data
+#are higher than the observed value, and half of them lower. (This would be good)
+#A value of 0.99 would mean that nearly all simulated data are lower than the observed value.
+#The minimum/maximum values for the residuals are 0 and 1. 
+#For a correctly specified model we would expect a flat distribution of the scaled residuals
+
+##plot on the left 
+#this is interpreted like a qqPLOT 
+# this suggest that this model isn't fitting awesomely - the points are def. not falling on the line
+# plotResiduals (right panel) produces a plot of the residuals against the predicted value
+# outliers are shown as stars
+# many of the residuals appear to be larger or smaller than expected
+
+
+simulationOutput <- simulateResiduals(fittedModel = g7, plot = T)
+simulationOutput
+##much better diagnostics!!
