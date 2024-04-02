@@ -22,6 +22,11 @@ head(bat)
 bat$date = as.Date(bat$date, "%m/%d/%y")
 
 #Forward step-wise selection
+g1 = glm (gd~species, data = bat, family = binomial)
+g2 = glm (gd~site, data = bat, family = binomial)
+g3 = glm (gd~date, data = bat, family = binomial)
+g4 = glm (gd~count, data = bat, family = binomial)
+g5 = glm (gd~temp, data = bat, family = binomial)
 
 #Car:Anova gives you the variable-level p-value that you would want to step-wise regression
 Anova(g1)
