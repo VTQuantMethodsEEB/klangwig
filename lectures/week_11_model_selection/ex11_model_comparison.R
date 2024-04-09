@@ -135,7 +135,9 @@ n2 = glm.nb(grahami~diameter,data = liz)
 n3 = glm.nb(grahami~diameter+height,data = liz)
 n4 = glm.nb(grahami~diameter*height,data = liz)
 
+aictab(cand.set=list(n1,n2,n3,n4))
 #for AICc
+
 n=nrow(liz)#or whatever the length of your df is
 tabA = AIC(n1,n2,n3,n4)
 #it would be nice to have AICC for a dataset this small

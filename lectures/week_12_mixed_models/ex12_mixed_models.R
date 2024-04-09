@@ -99,7 +99,7 @@ newdat$yhat = predict(gm2,newdata= newdat,re.form=NA,type="response")
 
 #let's plot the prediction
 r=ggplot(data=newdat, aes(x=year,y=yhat,col=species))+ 
-  geom_line(size=1)+
+  geom_line(linewidth=1)+
   geom_point(data = bat, aes(x = jitter(year), y = gd),size=3, shape = 1)+
   ylab("Pd Prevalence")+
   xlab("Year")+
