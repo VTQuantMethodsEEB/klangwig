@@ -201,13 +201,13 @@ summary(hurdle.tmb)
 #diagnosing models with Dharma
 library(DHARMa)
 
-testDispersion(tmb.mod1) #poisson model
+testDispersion(tmb.mod1) #negbin model
 #p-value>0.05 - okay actually
 
-testDispersion(tmb.mod2) #also okay
-testDispersion(tmb.mod3) #also okay but moving towards not okay
+testDispersion(tmb.mod2) #zero inflated poisson
+testDispersion(tmb.mod3) #true poisson
 
-simulationOutput <- simulateResiduals(fittedModel = tmb.mod1, plot = T) #poisson model
+simulationOutput <- simulateResiduals(fittedModel = tmb.mod1, plot = T) #negbin model
 # calculates calculates randomized quantile residuals
 #To interpret the residuals, a scaled residual value of 0.5 means that half of the simulated data
 #are higher than the observed value, and half of them lower. (This would be good)
@@ -218,7 +218,7 @@ simulationOutput <- simulateResiduals(fittedModel = tmb.mod1, plot = T) #poisson
 ##plot on the left 
 #this is interpreted like a qqPLOT 
 
-simulationOutput <- simulateResiduals(fittedModel = tmb.mod2, plot = T) #poisson model
+simulationOutput <- simulateResiduals(fittedModel = tmb.mod2, plot = T) #poisson zero inf model
 
 simulationOutput <- simulateResiduals(fittedModel = tmb.mod3, plot = T) #poisson model
 #even though this doesn't fail - you can see from the qqPLOT it is worse
