@@ -136,7 +136,7 @@ r=ggplot(data=newdat2, aes(x=species,y=yhat))+
 geom_point(color="red")  +
 geom_point(data = bat, aes(x = species, y = gd),size=3, shape = 1)+
   ylab("Pd Prevalence")+
-  xlab("Year")+
+  xlab("Species")+
   coord_cartesian(ylim=c(-0.1,1.1))+
   theme_bw() + 
   theme(axis.title=element_text(size=23),axis.text=element_text(size=15),panel.grid = element_blank(), axis.line=element_line(),legend.position=c(.9,.55),legend.text = element_text(size=12,face="italic"))
@@ -198,4 +198,28 @@ hurdle.tmb
 summary(hurdle.tmb)
 ##this is not fitting friends! do not ignore!
 
+#diagnosing models with Dharma
+library(DHARMa)
+
+testDispersion(tmb.mod1) #poisson model
+#p-value>0.05 - okay actually
+
+testDispersion(tmb.mod2) #also okay
+testDispersion(tmb.mod3) #also okay but moving towards not okay
+
+simulationOutput <- simulateResiduals(fittedModel = tmb.mod1, plot = T) #poisson model
+# calculates calculates randomized quantile residuals
+#To interpret the residuals, a scaled residual value of 0.5 means that half of the simulated data
+#are higher than the observed value, and half of them lower. (This would be good)
+#A value of 0.99 would mean that nearly all simulated data are lower than the observed value.
+#The minimum/maximum values for the residuals are 0 and 1. 
+#For a correctly specified model we would expect a flat distribution of the scaled residuals
+
+##plot on the left 
+#this is interpreted like a qqPLOT 
+
+simulationOutput <- simulateResiduals(fittedModel = tmb.mod2, plot = T) #poisson model
+
+simulationOutput <- simulateResiduals(fittedModel = tmb.mod3, plot = T) #poisson model
+#even though this doesn't fail - you can see from the qqPLOT it is worse
 
