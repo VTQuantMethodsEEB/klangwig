@@ -194,8 +194,8 @@ ggplot(pp,aes(x=time,y=grahami,colour=light))+
 #but we need to add our actual data
 
 ###ADD RAW data to plot###
-ggplot(pp,aes(x=time,y=grahami,colour=light))+ #set up plot using predictions dataset
-  geom_point(color="red")+ #plot the prediction
+ggplot(data=pp,aes(x=time,y=grahami,colour=light))+ #set up plot using predictions dataset
+  geom_point(color="red", size=4)+ #plot the prediction
   geom_line(aes(group=light))+ #draw lines b/t predictions, group them by light conditions
   geom_point(data=lizards, aes(x=time,y=grahami,colour = light)) #add the observed data to the plot
 #note - I am calling the original dataframe - lizards

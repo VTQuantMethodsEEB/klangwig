@@ -83,8 +83,16 @@ plot1
 
 
 ##what if I had a continuous variable?
+#the number of opalinus lizards, which varies by time of day, influences the number of grahami
 mod3 <- lm(grahami~time*opalinus, data=lizards)
 summary(mod3)
+allEffects(mod3)
+plot(allEffects(mod3))
+#emmtrends()
+#kate will look up this code
+
+#
+lizards$yhat = predict(mod3)
 
 #make a new dataframe
 new.dat.combos <- with(lizards, #use lizards
@@ -98,7 +106,7 @@ new.dat.combos$grahami <- predict(mod3,newdata=new.dat.combos)
 
 
 ###plotting prediction + data with continuous example#
-ggplot(new.dat.combos,aes(x=opalinus,y=grahami,colour=time))+ #set up plot using predictions dataset
+ggplot(data=new.dat.combos,aes(x=opalinus,y=grahami,colour=time))+ #set up plot using predictions dataset
   geom_line(aes(group=time))+ #draw lines that are predictions, group them by light conditions
   geom_point(data=lizards, aes(x=opalinus,y=grahami,colour = time)) #add the observed data to the plot
 #note - I am calling the original dataframe - lizards
@@ -111,6 +119,7 @@ bats$lgdL = log10(bats$gdL)
 
 lmBAT <- lm(lgdL~count*temp, data= bats)
 summary(lmBAT)
+allEffects(lmBAT)
 plot(allEffects(lmBAT))
 #this knows to bin the temperature data
 
