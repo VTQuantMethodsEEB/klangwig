@@ -148,7 +148,7 @@ print(r)
 
 liz = read.csv("lizards.csv")
 
-library(lme4)
+library(glmmTMB)
 
 ## run mixed model
 m.nb <- glmer.nb(N ~ time*light + (1|height), data=liz)
@@ -196,6 +196,7 @@ hurdle.tmb = update(tmb.mod2,
        family=truncated_nbinom1)
 hurdle.tmb
 summary(hurdle.tmb)
+#yay - an error message, finally!
 ##this is not fitting friends! do not ignore!
 
 #diagnosing models with Dharma
