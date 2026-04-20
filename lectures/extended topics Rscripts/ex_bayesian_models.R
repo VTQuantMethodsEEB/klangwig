@@ -18,7 +18,8 @@ prior=set_prior("normal(0,5)", class = "b")
 bmod_inf=brm(gd~species+(1|site),family="bernoulli", 
              data=bat, prior = prior,chains = 4,
              control = list(adapt_delta = 0.95),cores=2,
-             save_all_pars = TRUE)
+             save_pars = save_pars(all = TRUE)
+)
 
 summary(bmod_inf, waic = TRUE)
 #interpretation: intercept is SPECIES: EPFU
