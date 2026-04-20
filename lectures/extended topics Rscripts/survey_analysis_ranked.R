@@ -13,7 +13,9 @@ library(clValid)
 
 #analyse survey data
 ###NOTE: BEFORE READING IN, REPLACE COLUMN HEADERS IN EXCEL WITH RANK!
-surv = read.csv("survey_2023.csv")
+
+
+surv = read.csv("/Users/klangwig/Desktop/VT/teaching/quant grad course/survey2026.csv")
 
 library(tidyverse)
 head(surv)
@@ -35,16 +37,22 @@ res = res %>%
   filter(year(Date)>2022)
 dim(res)  
 
-res %>%
+rank.tab = res %>%
   group_by(topic)%>%
   summarise(avg.rank = mean(rank, na.rm=T), 
             stdev = sd(rank, na.rm=T), 
             se = sd(rank, na.rm=T)/sqrt(n()))%>%
   arrange(avg.rank)
 
-
-ggplot(res, aes(topic, rank))+
+View(rank.tab)
+fig = ggplot(res, aes(topic, rank))+
   geom_point() +
   stat_summary()+
   theme(strip.background = element_rect(fill="gray97"),strip.text.x = element_text (size = 8,hjust = 0.5, vjust = 0.5,face="italic"),axis.title=element_text(size=12),axis.text=element_text(size=12, angle = 90),panel.grid = element_blank(), axis.line=element_line(),legend.position="top",legend.text = element_text(size=13,face="italic"),legend.title = element_blank(),legend.background = element_blank(),legend.key=element_rect(fill="white",color="white"))
+
+ggsave(file="survey_fig.pdf", 
+       plot=fig,
+       width=11,height=12,units="in",dpi=300,
+       useDingbats=FALSE) #use Dingbats is surprisingly useful because it prevents points from being turned in o's in some programs
+
 

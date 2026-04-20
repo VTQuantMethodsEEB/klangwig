@@ -28,7 +28,7 @@ phy <- pbtree(n=100)
 plot(phy)
 
 set.seed(101)
-#Liam's fastBM() creates continuous trait under the BM model (plus BM with trend, and bounded BM)
+# fastBM() creates continuous trait under the BM model (plus BM with trend, and bounded BM)
 # in BM the trait value changes randomly, in both direction and distance, over any time interval.
 x <- fastBM(phy, sig2=0.2) # sig2 is the the instantaneous rate variance of the BM process
 y0 <- fastBM(phy, sig2=0.2) # y is here simulated completely independent of x
@@ -56,13 +56,5 @@ anova(fit1, fit0)
 fitML <- gls(y ~ x, data=sim.data, correlation=corPagel(0.8, phy, fixed=FALSE,form = ~species), method="ML")
 summary(fitML)
 #here, we give 0.8 as a starting value, and say it isn't fixed
-#estimates lambda at 1.000189
-
-#we can also use other models of evolution - here is Brownian motion
-fit3 <- gls(y ~ x, correlation = corBrownian(phy = phy, form = ~species),
-                  data = sim.data, method = "ML")
-summary(fit3)
-anova(fit3)
-
-
+#estimates lambda at 0.9999715
 
